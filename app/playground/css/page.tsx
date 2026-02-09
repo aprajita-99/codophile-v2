@@ -15,6 +15,7 @@ import {
     ArrowLeft,
     Image as ImageIcon
 } from "lucide-react";
+import Image from 'next/image';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -22,77 +23,77 @@ const categories = [
     {
         title: "Borders & Radius",
         description: "Control border radius, width, style, and colors visually.",
-        icon: BoxSelect,
+        icon: "/icons/Borders-and-Radius.png",
         href: "/playground/css/border",
         color: "from-pink-500 to-rose-500"
     },
     {
         title: "3D Transforms",
         description: "Master perspective, rotateX/Y/Z, and translate3d in 3D space.",
-        icon: Move3d,
+        icon: "/icons/3D-transforms.png",
         href: "/playground/css/3d-transforms",
         color: "from-violet-500 to-purple-500"
     },
     {
         title: "2D Transforms",
         description: "Scale, rotate, skew, and translate elements on a 2D plane.",
-        icon: Scaling,
+        icon: "/icons/2D-transforms.png",
         href: "/playground/css/2d-transforms",
         color: "from-blue-500 to-cyan-500"
     },
     {
         title: "Flexbox Layout",
         description: "Visually manage flex direction, alignment, and wrapping.",
-        icon: LayoutGrid,
+        icon: "/icons/Flexbox-layout.png",
         href: "/playground/css/flexbox",
         color: "from-emerald-500 to-teal-500"
     },
     {
         title: "Typography",
         description: "Experiment with font weights, spacing, line heights, and families.",
-        icon: Type,
+        icon: "/icons/Typography.png",
         href: "/playground/css/typography",
         color: "from-amber-500 to-orange-500"
     },
     {
         title: "Backgrounds",
         description: "Master background images, gradients, blending, and clipping.",
-        icon: ImageIcon,
+        icon: "/icons/Backgrounds.png",
         href: "/playground/css/backgrounds",
         color: "from-teal-400 to-cyan-500"
     },
     {
         title: "Box Shadow",
         description: "Create depth with box-shadows, glow effects, and blurs.",
-        icon: Layers,
+        icon: "/icons/Box-shadow.png",
         href: "/playground/css/box-shadow",
         color: "from-fuchsia-500 to-pink-500"
     },
     {
         title: "Text Shadow",
         description: "Apply shadows to text with multiple layers and blur effects.",
-        icon: Type,
+        icon: "/icons/Text-shadow.png",
         href: "/playground/css/text-shadow",
         color: "from-red-500 to-orange-500"
     },
     {
         title: "Filters",
         description: "Apply brightness, contrast, blur, and hue-rotate filters.",
-        icon: Palette,
+        icon: "/icons/filters.png",
         href: "/playground/css/filters",
         color: "from-indigo-500 to-blue-500"
     },
     {
         title: "Backdrop Filter",
         description: "Create glassmorphism effects with blur, saturate, and color shifts.",
-        icon: Palette, // Reusing Palette or import Droplets/GlassWater if available, sticking to available imports for now or adding one.
+        icon: "/icons/Backdrop-filter.png",
         href: "/playground/css/backdrop-filter",
         color: "from-cyan-400 to-sky-500"
     },
     {
         title: "Transitions",
         description: "Smooth out property changes with duration and easing curves.",
-        icon: Zap,
+        icon: "/icons/Transitions.png",
         href: "/playground/css/transitions",
         color: "from-yellow-400 to-orange-500"
     }
@@ -124,20 +125,36 @@ export default function CSSPlaygroundPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {categories.map((item, idx) => (
-                        <Link key={idx} href={item.href} className="group relative">
-                            <div className={`absolute inset-0 bg-linear-to-br ${item.color} opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-500 blur-xl`} />
-                            <div className="relative h-full bg-[#0a0a0a]/60 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:border-white/20 transition-all hover:-translate-y-1 shadow-lg">
-                                <div className={`w-12 h-12 rounded-lg bg-linear-to-br ${item.color} flex items-center justify-center mb-4 text-white shadow-lg group-hover:scale-110 transition-transform`}>
-                                    <item.icon className="w-6 h-6" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-3 text-gray-100 group-hover:text-white transition-colors">{item.title}</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                                    {item.description}
-                                </p>
-                            </div>
-                        </Link>
-                    ))}
+                   {categories.map((item, idx) => (
+    <Link key={idx} href={item.href} className="group relative">
+        {/* Subtle Hover Glow - Keep this for that "SaaS" feel */}
+        <div className={`absolute inset-0 bg-linear-to-br ${item.color} opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-500 blur-xl`} />
+        
+        {/* Card Body - Removed visible border and background color */}
+        <div className="relative h-full bg-transparent p-6 transition-all hover:-translate-y-1">
+            
+            {/* Icon Container - No background or border */}
+            <div className="w-16 h-16 flex items-center justify-center mb-4 overflow-hidden rounded-lg group-hover:scale-110 transition-transform">
+                <Image
+                    src={item.icon}
+                    alt={item.title}
+                    width={80} 
+                    height={80}
+                    className="object-contain scale-[1.5]"
+                    priority={idx < 6}
+                />
+            </div>
+
+            <h3 className="text-xl font-bold mb-3 text-gray-100 group-hover:text-white transition-colors">
+                {item.title}
+            </h3>
+            
+            <p className="text-gray-400 text-sm leading-relaxed">
+                {item.description}
+            </p>
+        </div>
+    </Link>
+))}
                 </div>
             </main>
             <Footer />
