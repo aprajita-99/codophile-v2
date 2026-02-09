@@ -42,10 +42,10 @@ export default function Header() {
                 {/* Desktop Navigation & Actions */}
                 <div className="hidden lg:flex items-center gap-4 shrink-0">
                     <nav className="flex items-center gap-6 mr-4">
-                        {["Playground", "Templates", "Docs"].map((item) => (
+                        {["Playground", "Templates", "Effects", "Docs"].map((item) => (
                             <Link
                                 key={item}
-                                href={`/${item.toLowerCase()}`}
+                                href={`/${item.toLowerCase().replace(" ", "-")}`}
                                 className="text-sm font-medium text-gray-400 hover:text-white transition-colors relative group"
                             >
                                 {item}
@@ -92,10 +92,10 @@ export default function Header() {
                             className="absolute top-16 left-0 right-0 bg-[#030014] border-b border-white/10 p-6 shadow-2xl lg:hidden flex flex-col gap-6"
                         >
                             <nav className="flex flex-col gap-4">
-                                {["Playground", "Templates", "Docs"].map((item) => (
+                                {["Playground", "Templates", "Effects", "Docs"].map((item) => (
                                     <Link
                                         key={item}
-                                        href={`/${item.toLowerCase()}`}
+                                        href={`/${item.toLowerCase().replace(" ", "-")}`}
                                         onClick={() => setIsMenuOpen(false)}
                                         className="text-lg font-medium text-gray-300 hover:text-white py-2 border-b border-white/5"
                                     >
