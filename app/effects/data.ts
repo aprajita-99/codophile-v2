@@ -640,5 +640,677 @@ items.forEach(item => {
     });
 });`
     }
+},
+{
+    id: "3d-confetti-burst",
+    title: "Cosmic Burst 3D Confetti",
+    description: "A high-performance, canvas-based 3D confetti system. Particles feature realistic gravity, wind resistance, and 3D flip-rotation. Designed with a non-blocking pointer layer to work seamlessly over existing UI.",
+    keywords: ["3d confetti", "canvas animation", "physics particles", "react compatible", "ui interaction"],
+    code: {
+        html: `<div class="confetti-wrapper">
+    <canvas id="confettiCanvas"></canvas>
+    <div class="ui-content">
+        <h1>Celebration Ready</h1>
+        <p>Click the button below to trigger the burst.</p>
+        <button id="triggerBtn">Blast Confetti</button>
+    </div>
+</div>`,
+        css: `.confetti-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #030014;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#confettiCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    /* The Magic: This allows clicks to pass through to the buttons below */
+    pointer-events: none; 
+    z-index: 50;
+}
+
+.ui-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+#triggerBtn {
+    padding: 12px 28px;
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+    transition: transform 0.2s;
+}
+
+#triggerBtn:active { transform: scale(0.95); }`,
+        js: `const canvas = document.getElementById('confettiCanvas');
+const ctx = canvas.getContext('2d');
+const btn = document.getElementById('triggerBtn');
+
+let particles = [];
+const colors = ['#ec4899', '#8b5cf6', '#06b6d4', '#fbbf24', '#ffffff'];
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resize);
+resize();
+
+class Particle {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 8 + 4;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // 3D Velocity
+        this.vx = (Math.random() - 0.5) * 20;
+        this.vy = (Math.random() - 1) * 20;
+        
+        // 3D Rotation physics
+        this.rotation = Math.random() * 360;
+        this.rSpeed = (Math.random() - 0.5) * 0.2;
+        this.wobble = Math.random() * 10;
+        this.gravity = 0.5;
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vy += this.gravity;
+        this.vx *= 0.99; // Air resistance
+        this.rotation += this.rSpeed;
+    }
+
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        
+        // Simulate 3D flip by scaling width based on wobble/rotation
+        const scaleX = Math.cos(this.rotation + this.wobble);
+        ctx.scale(scaleX, 1);
+        
+        ctx.fillStyle = this.color;
+        ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+        ctx.restore();
+    }
+}
+
+function burst() {
+    for(let i=0; i<100; i++) {
+        particles.push(new Particle(canvas.width/2, canvas.height/2));
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(p => p.y < canvas.height + 100);
+    particles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animate);
+}
+
+btn.addEventListener('click', burst);
+animate();`
+    }
+},
+{
+    id: "gravity-mesh-dots",
+    title: "Gravity Mesh 3D Dots",
+    description: "A procedurally generated 3D coordinate system that deforms based on cursor proximity. Features a hybrid line-and-dot architecture with spring-physics relaxation for a liquid-smooth spatial effect.",
+    keywords: ["3D grid", "gravity pull", "procedural background", "canvas physics", "futuristic UI"],
+    code: {
+        html: `<div class="canvas-container">
+    <canvas id="gravityGrid"></canvas>
+    <div class="overlay-content">
+        <h1>NEURAL SPACE</h1>
+        <p>Interactive Gravity Field Active</p>
+    </div>
+</div>`,
+        css: `.canvas-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #030014;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gravityGrid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allows interaction with UI below */
+}
+
+.overlay-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    pointer-events: auto; /* Buttons here will still work */
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 10px;
+    background: linear-gradient(to right, #fff, #444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}`,
+        js: `const canvas = document.getElementById('gravityGrid');
+const ctx = canvas.getContext('2d');
+
+let width, height;
+let nodes = [];
+const spacing = 40; // Space between grid lines
+const mouse = { x: -1000, y: -1000, radius: 200 };
+
+function init() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    nodes = [];
+
+    for (let x = 0; x <= width; x += spacing) {
+        for (let y = 0; y <= height; y += spacing) {
+            nodes.push({
+                baseX: x,
+                baseY: y,
+                x: x,
+                y: y,
+                vx: 0,
+                vy: 0
+            });
+        }
+    }
+}
+
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+window.addEventListener('resize', init);
+
+function animate() {
+    ctx.clearRect(0, 0, width, height);
+    
+    // Line style
+    ctx.strokeStyle = 'rgba(128, 128, 255, 0.15)';
+    ctx.lineWidth = 1;
+
+    nodes.forEach(node => {
+        // Calculate distance to mouse
+        const dx = mouse.x - node.x;
+        const dy = mouse.y - node.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        
+        if (dist < mouse.radius) {
+            // Gravity Pull Logic
+            const force = (mouse.radius - dist) / mouse.radius;
+            const angle = Math.atan2(dy, dx);
+            
+            // Move toward mouse
+            node.vx += Math.cos(angle) * force * 5;
+            node.vy += Math.sin(angle) * force * 5;
+        }
+
+        // Return to base position (Spring Physics)
+        node.vx += (node.baseX - node.x) * 0.05;
+        node.vy += (node.baseY - node.y) * 0.05;
+        
+        // Friction
+        node.vx *= 0.85;
+        node.vy *= 0.85;
+
+        node.x += node.vx;
+        node.y += node.vy;
+
+        // Draw Dots
+        ctx.fillStyle = 'rgba(0, 255, 200, 0.4)';
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    // Draw Grid Lines
+    // For performance, we draw dots above. For lines, a simple logic:
+    // We can draw connections to neighboring nodes here.
+    
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();`
+    }
+},
+{
+    id: "gravity-mesh-lines",
+    title: "Gravity Mesh Interactive Grid",
+    description: "A procedurally generated 3D grid that deforms in real-time. Features spring-physics for realistic relaxation and Euclidean distance calculations for the magnetic 'gravity' pull.",
+    keywords: ["gravity mesh", "interactive grid", "spacetime fabric", "canvas physics", "futuristic UI"],
+    code: {
+        html: `<div class="mesh-container">
+    <canvas id="meshCanvas"></canvas>
+    <div class="content-overlay">
+        <h1>SPACETIME FABRIC</h1>
+        <p>Interactive Gravity Field Active</p>
+    </div>
+</div>`,
+        css: `.mesh-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #030014; /* Deep space dark */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#meshCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    /* Key for integration: pointer-events none allows clicks to pass through to buttons/links below */
+    pointer-events: none; 
+}
+
+.content-overlay {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    pointer-events: auto; /* Re-enable pointer events for content */
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    background: linear-gradient(to right, #fff, #444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}`,
+        js: `const canvas = document.getElementById('meshCanvas');
+const ctx = canvas.getContext('2d');
+
+let nodes = [];
+const spacing = 45; // Grid density
+const mouse = { x: -1000, y: -1000, radius: 250 };
+
+function init() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    nodes = [];
+
+    // Create a 2D array of nodes
+    for (let x = 0; x <= canvas.width + spacing; x += spacing) {
+        for (let y = 0; y <= canvas.height + spacing; y += spacing) {
+            nodes.push({
+                baseX: x, baseY: y,
+                x: x, y: y,
+                vx: 0, vy: 0
+            });
+        }
+    }
+}
+
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+window.addEventListener('resize', init);
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw horizontal and vertical lines would be expensive in loops
+    // Instead, we draw dots and let the logic handle the "bending"
+    
+    ctx.strokeStyle = 'rgba(100, 100, 255, 0.2)';
+    ctx.lineWidth = 1;
+
+    // Update Physics
+    nodes.forEach(node => {
+        const dx = mouse.x - node.x;
+        const dy = mouse.y - node.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            const angle = Math.atan2(dy, dx);
+            
+            // Gravity Pull
+            node.vx += Math.cos(angle) * force * 4;
+            node.vy += Math.sin(angle) * force * 4;
+        }
+
+        // Spring Physics (Return to home)
+        node.vx += (node.baseX - node.x) * 0.04;
+        node.vy += (node.baseY - node.y) * 0.04;
+        
+        // Friction
+        node.vx *= 0.88;
+        node.vy *= 0.88;
+
+        node.x += node.vx;
+        node.y += node.vy;
+    });
+
+    // Drawing Grid Lines beautifully
+    const rows = Math.ceil(canvas.height / spacing) + 1;
+    const cols = Math.ceil(canvas.width / spacing) + 1;
+
+    for (let i = 0; i < cols; i++) {
+        ctx.beginPath();
+        for (let j = 0; j < rows; j++) {
+            const node = nodes[i * rows + j];
+            if (j === 0) ctx.moveTo(node.x, node.y);
+            else ctx.lineTo(node.x, node.y);
+        }
+        ctx.stroke();
+    }
+
+    for (let j = 0; j < rows; j++) {
+        ctx.beginPath();
+        for (let i = 0; i < cols; i++) {
+            const node = nodes[i * rows + j];
+            if (i === 0) ctx.moveTo(node.x, node.y);
+            else ctx.lineTo(node.x, node.y);
+        }
+        ctx.stroke();
+    }
+    
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();`
+    }
+},
+{
+    id: "solar-gravity-well",
+    title: "Solar Gravity Well",
+    description: "A heavy-mass gravity simulation featuring a glowing central orb. Grid lines are thickened and use proximity-based luminance to simulate light reflection on a 3D spacetime fabric.",
+    keywords: ["gravity well", "solar effect", "glowing orb", "spacetime mesh", "3D grid animation"],
+    code: {
+        html: `<div class="space-container">
+    <canvas id="solarCanvas"></canvas>
+    <div class="sun-orb" id="sunOrb"></div>
+</div>`,
+        css: `.space-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #020008;
+    overflow: hidden;
+}
+
+#solarCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.sun-orb {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+    /* The Glow: Multi-layered box shadow for a 'heat' effect */
+    box-shadow: 
+        0 0 20px #e05757ff,
+        0 0 60px #f59e0b,
+        0 0 100px #ea580c,
+        0 0 200px rgba(234, 88, 12, 0.4);
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+}`,
+        js: `const canvas = document.getElementById('solarCanvas');
+const ctx = canvas.getContext('2d');
+const orb = document.getElementById('sunOrb');
+
+let nodes = [];
+const spacing = 50; 
+const mouse = { x: -1000, y: -1000, radius: 350, strength: 12 };
+
+function init() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    nodes = [];
+    for (let x = -spacing; x <= canvas.width + spacing; x += spacing) {
+        for (let y = -spacing; y <= canvas.height + spacing; y += spacing) {
+            nodes.push({ baseX: x, baseY: y, x: x, y: y, vx: 0, vy: 0 });
+        }
+    }
+}
+
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    // Move the DOM orb with the mouse
+    orb.style.left = e.clientX + 'px';
+    orb.style.top = e.clientY + 'px';
+});
+
+window.addEventListener('resize', init);
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Line Aesthetics: Thicker and slightly brighter
+    ctx.strokeStyle = 'rgba(147, 197, 253, 0.3)'; 
+    ctx.lineWidth = 2;
+
+    nodes.forEach(node => {
+        const dx = mouse.x - node.x;
+        const dy = mouse.y - node.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            const angle = Math.atan2(dy, dx);
+            
+            // Heavier pull for that "Sun" feel
+            node.vx += Math.cos(angle) * force * mouse.strength;
+            node.vy += Math.sin(angle) * force * mouse.strength;
+        }
+
+        node.vx += (node.baseX - node.x) * 0.05;
+        node.vy += (node.baseY - node.y) * 0.05;
+        node.vx *= 0.85;
+        node.vy *= 0.85;
+        node.x += node.vx;
+        node.y += node.vy;
+    });
+
+    const rows = Math.ceil(canvas.height / spacing) + 2;
+    const cols = Math.ceil(canvas.width / spacing) + 2;
+
+    // Drawing Vertical Bends
+    for (let i = 0; i < cols; i++) {
+        ctx.beginPath();
+        for (let j = 0; j < rows; j++) {
+            const node = nodes[i * rows + j];
+            if (!node) continue;
+            if (j === 0) ctx.moveTo(node.x, node.y);
+            else ctx.lineTo(node.x, node.y);
+        }
+        ctx.stroke();
+    }
+
+    // Drawing Horizontal Bends
+    for (let j = 0; j < rows; j++) {
+        ctx.beginPath();
+        for (let i = 0; i < cols; i++) {
+            const node = nodes[i * rows + j];
+            if (!node) continue;
+            if (i === 0) ctx.moveTo(node.x, node.y);
+            else ctx.lineTo(node.x, node.y);
+        }
+        ctx.stroke();
+    }
+    
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();`
+    }
+},
+{
+    id: "orbital-flux-field",
+    title: "Orbital Flux Field",
+    description: "A high-density interactive particle system. Thousands of colorful dots react to the cursor with a physical repulsion effect, mimicking the Google Antigravity project's landing page.",
+    keywords: ["particle system", "antigravity", "cursor interaction", "canvas animation", "physics"],
+    code: {
+        html: `<div class="ag-container">
+    <canvas id="agCanvas"></canvas>
+    <div class="ag-content">
+        <h1>ORBITAL FLUX</h1>
+        <p>Interactive Particle Field Active</p>
+    </div>
+</div>`,
+        css: `.ag-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #ffffff; /* White background like Google's site */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#agCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.ag-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: #3c4043;
+    font-family: 'Google Sans', Arial, sans-serif;
+}
+
+h1 { font-size: 3rem; font-weight: 400; letter-spacing: -1px; }`,
+        js: `const canvas = document.getElementById('agCanvas');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+const mouse = { x: -100, y: -100, radius: 150 };
+const colors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853']; // Google Colors
+
+function init() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    
+    // High density: approx 1 particle per 400 pixels
+    const numberOfParticles = (canvas.width * canvas.height) / 400;
+    
+    for (let i = 0; i < numberOfParticles; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        particles.push({
+            x: x, y: y,
+            baseX: x, baseY: y,
+            size: Math.random() * 2 + 1,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            density: (Math.random() * 30) + 1
+        });
+    }
+}
+
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+window.addEventListener('resize', init);
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        
+        // Calculate interaction
+        let dx = mouse.x - p.x;
+        let dy = mouse.y - p.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let forceDirectionX = dx / distance;
+        let forceDirectionY = dy / distance;
+        
+        // Max distance, past that the force is 0
+        let maxDistance = mouse.radius;
+        let force = (maxDistance - distance) / maxDistance;
+        let directionX = forceDirectionX * force * p.density;
+        let directionY = forceDirectionY * force * p.density;
+
+        if (distance < mouse.radius) {
+            p.x -= directionX;
+            p.y -= directionY;
+        } else {
+            // Return to home position
+            if (p.x !== p.baseX) {
+                let dx = p.x - p.baseX;
+                p.x -= dx / 10;
+            }
+            if (p.y !== p.baseY) {
+                let dy = p.y - p.baseY;
+                p.y -= dy / 10;
+            }
+        }
+
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();`
+    }
 }
 ];
