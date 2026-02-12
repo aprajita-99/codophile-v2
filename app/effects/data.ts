@@ -1436,5 +1436,572 @@ window.addEventListener('resize', init);
 init();
 animate();`
     }
+},
+{
+    id: "neural-3d-constellation",
+    title: "3D Neural Constellation",
+    description: "A localized 3D particle mesh that drifts autonomously. Features depth-based perspective projection and elastic cursor interaction where lines 'snap' based on proximity.",
+    keywords: ["3D mesh", "neural network", "kinetic geometry", "canvas 3d", "interactive constellation"],
+    code: {
+        html: `<div class="constellation-container">
+    <canvas id="neuralCanvas"></canvas>
+</div>`,
+        css: `.constellation-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #030014;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#neuralCanvas {
+    /* Ensures the canvas occupies the space provided by the flex container */
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    max-height: 600px;
+    display: block;
+    pointer-events: auto; 
+}`,
+        js: `const canvas = document.getElementById('neuralCanvas');
+const ctx = canvas.getContext('2d');
+
+let points = [];
+const numPoints = 50;
+const mouse = { x: 0, y: 0, active: false };
+const center = { x: 0, y: 0 };
+
+function init() {
+    // FIX: Using window dimensions or explicit parent client rect ensures rendering in previews
+    canvas.width = canvas.clientWidth || 800;
+    canvas.height = canvas.clientHeight || 600;
+    center.x = canvas.width / 2;
+    center.y = canvas.height / 2;
+    points = [];
+
+    for (let i = 0; i < numPoints; i++) {
+        points.push({
+            x: (Math.random() - 0.5) * 400,
+            y: (Math.random() - 0.5) * 400,
+            z: (Math.random() - 0.5) * 400,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            vz: (Math.random() - 0.5) * 0.5
+        });
+    }
+}
+
+canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left - center.x;
+    mouse.y = e.clientY - rect.top - center.y;
+    mouse.active = true;
+});
+
+canvas.addEventListener('mouseleave', () => { mouse.active = false; });
+
+function project(p) {
+    const focalLength = 400;
+    const scale = focalLength / (focalLength + p.z);
+    return {
+        x: p.x * scale + center.x,
+        y: p.y * scale + center.y,
+        scale: scale
+    };
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    const projected = points.map(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.z += p.vz;
+
+        if (Math.abs(p.x) > 200) p.vx *= -1;
+        if (Math.abs(p.y) > 200) p.vy *= -1;
+        if (Math.abs(p.z) > 200) p.vz *= -1;
+
+        if (mouse.active) {
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 150) {
+                p.x += dx * 0.02;
+                p.y += dy * 0.02;
+            }
+        }
+        return project(p);
+    });
+
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < projected.length; i++) {
+        for (let j = i + 1; j < projected.length; j++) {
+            const dx = projected[i].x - projected[j].x;
+            const dy = projected[i].y - projected[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 100) {
+                ctx.beginPath();
+                ctx.strokeStyle = \`rgba(99, 102, 241, \${1 - dist/100})\`;
+                ctx.moveTo(projected[i].x, projected[i].y);
+                ctx.lineTo(projected[j].x, projected[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    projected.forEach(p => {
+        ctx.fillStyle = p.scale > 1 ? '#fff' : '#bbbac5ff';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2 * p.scale, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+// Ensure init is called before animation starts
+init();
+animate();
+window.addEventListener('resize', init);`
+    }
+},
+{
+    id: "aether-core-elastic",
+    title: "Elastic Aether-Core",
+    description: "A stable 3D constellation that deforms under cursor pressure and elastically restores its shape. Features restorative vector physics and depth-sorted crystalline facets.",
+    keywords: ["restorative physics", "3D mesh", "elastic interaction", "holographic UI", "kinetic geometry"],
+    code: {
+        html: `<div class="aether-container">
+    <canvas id="elasticAetherCanvas"></canvas>
+</div>`,
+        css: `.aether-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle at center, #050510, #000);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#elasticAetherCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: crosshair;
+}`,
+        js: `const canvas = document.getElementById('elasticAetherCanvas');
+const ctx = canvas.getContext('2d');
+
+let points = [];
+const numPoints = 60;
+const mouse = { x: 0, y: 0, active: false };
+let rotationAngle = 0;
+
+function init() {
+    // Fix: Force window dimensions for preview rendering
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    points = [];
+    for (let i = 0; i < numPoints; i++) {
+        const x = (Math.random() - 0.5) * 450;
+        const y = (Math.random() - 0.5) * 450;
+        const z = (Math.random() - 0.5) * 450;
+        points.push({
+            x: x, y: y, z: z,
+            homeX: x, homeY: y, homeZ: z,
+            color: Math.random() > 0.8 ? '#06b6d4' : '#6366f1'
+        });
+    }
+}
+
+canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left - canvas.width/2;
+    mouse.y = e.clientY - rect.top - canvas.height/2;
+    mouse.active = true;
+});
+
+canvas.addEventListener('mouseleave', () => { mouse.active = false; });
+
+function project(p) {
+    const cos = Math.cos(rotationAngle);
+    const sin = Math.sin(rotationAngle);
+    const rx = p.x * cos - p.z * sin;
+    const rz = p.x * sin + p.z * cos;
+
+    const focalLength = 500;
+    const scale = focalLength / (focalLength + rz);
+    return {
+        x: rx * scale + canvas.width/2,
+        y: p.y * scale + canvas.height/2,
+        z: rz,
+        scale: scale,
+        baseColor: p.color
+    };
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    rotationAngle += 0.002; 
+
+    const projected = points.map(p => {
+        if (mouse.active) {
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 180) {
+                const force = (180 - dist) / 180;
+                p.x += dx * force * 0.1;
+                p.y += dy * force * 0.1;
+            }
+        }
+        p.x += (p.homeX - p.x) * 0.05;
+        p.y += (p.homeY - p.y) * 0.05;
+        p.z += (p.homeZ - p.z) * 0.05;
+        return project(p);
+    });
+
+    projected.sort((a, b) => b.z - a.z);
+
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < projected.length; i++) {
+        for (let j = i + 1; j < projected.length; j++) {
+            const dist = Math.hypot(projected[i].x - projected[j].x, projected[i].y - projected[j].y);
+            if (dist < 100) {
+                ctx.beginPath();
+                ctx.strokeStyle = \`rgba(99, 102, 241, \${(1 - dist/100) * 0.2})\`;
+                ctx.moveTo(projected[i].x, projected[i].y);
+                ctx.lineTo(projected[j].x, projected[j].y);
+                ctx.stroke();
+
+                for (let k = j + 1; k < projected.length; k++) {
+                    const dist2 = Math.hypot(projected[j].x - projected[k].x, projected[j].y - projected[k].y);
+                    if (dist2 < 70) {
+                        ctx.beginPath();
+                        ctx.fillStyle = \`rgba(6, 182, 212, \${(1 - dist/100) * 0.04})\`;
+                        ctx.moveTo(projected[i].x, projected[i].y);
+                        ctx.lineTo(projected[j].x, projected[j].y);
+                        ctx.lineTo(projected[k].x, projected[k].y);
+                        ctx.fill();
+                        break; 
+                    }
+                }
+            }
+        }
+    }
+
+    projected.forEach(p => {
+        ctx.fillStyle = p.scale > 1.1 ? '#fff' : p.baseColor;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2 * p.scale, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();
+window.addEventListener('resize', init);`
+    }
+},
+{
+    id: "Earth-rotation-dark-mode-toggle",
+    title: "Cinematic Earth - Dark Mode Toggle Button",
+    description: "A full-screen cinematic day-night simulation controlled by a compact Earth toggle. Features animated sky transitions, city skyline, starry night background and smooth planet rotation.",
+    keywords: ["dark mode toggle", "earth animation button", "cinematic theme switch", "starry night ui"],
+    code: {
+        html: `<div class="earth-wrapper">
+    <button class="earth-toggle" id="earthToggle">
+
+        <!-- SKY -->
+        <div class="sky">
+            <div class="day-sky"></div>
+            <div class="night-sky"></div>
+        </div>
+
+        <!-- GROUND -->
+        <div class="ground">
+            <div class="landscape"></div>
+            <div class="city">
+                <div class="building"></div>
+                <div class="building tall"></div>
+                <div class="building small"></div>
+            </div>
+        </div>
+
+        <!-- SUN + MOON -->
+        <div class="sun"></div>
+        <div class="moon"></div>
+
+        <!-- EARTH -->
+        <div class="earth">
+            <div class="earth-core"></div>
+            <div class="clouds"></div>
+            <div class="atmosphere"></div>
+        </div>
+
+    </button>
+</div>`,
+        css: `* { margin:0; padding:0; box-sizing:border-box; }
+
+/* ============================= */
+/* FULL SCREEN CONTAINER */
+/* ============================= */
+
+.earth-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 1.2s ease;
+}
+
+/* LIGHT MODE BACKGROUND */
+.earth-wrapper {
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4), transparent 40%),
+        linear-gradient(to top, #dbeafe, #93c5fd);
+}
+
+/* DARK MODE BACKGROUND */
+.earth-wrapper.active {
+    background:
+        radial-gradient(circle at 70% 20%, rgba(255,255,255,0.05), transparent 40%),
+        linear-gradient(to top, #020617, #000);
+}
+
+/* STAR FIELD (FULL SCREEN) */
+.earth-wrapper.active::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 70%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 80% 20%, #fff, transparent),
+        radial-gradient(1px 1px at 30% 80%, #fff, transparent);
+    opacity: 0.5;
+    animation: twinkle 4s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 0.7; }
+}
+
+/* ============================= */
+/* TOGGLE BUTTON */
+/* ============================= */
+
+.earth-toggle {
+    position: relative;
+    width: 140px;
+    height: 60px;
+    border-radius: 60px;
+    border: 2px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: border 0.6s ease, box-shadow 0.6s ease;
+}
+
+/* Dark glow border */
+.earth-wrapper.active .earth-toggle {
+    border: 2px solid rgba(255,255,255,0.15);
+    box-shadow:
+        0 0 15px rgba(56,189,248,0.5),
+        0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* ============================= */
+/* SKY INSIDE BUTTON */
+/* ============================= */
+
+.sky {
+    position: absolute;
+    inset: 0;
+}
+
+.day-sky {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #93c5fd, #e0f2fe);
+}
+
+.night-sky {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #020617, #000);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* ============================= */
+/* GROUND INSIDE BUTTON */
+/* ============================= */
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+}
+
+.landscape {
+    width: 100%;
+    height: 20px;
+    background: #166534;
+    clip-path: polygon(0% 100%, 15% 70%, 30% 85%, 50% 65%, 70% 80%, 85% 60%, 100% 100%);
+    transition: opacity 1s ease;
+}
+
+.city {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.building {
+    position: absolute;
+    bottom: 0;
+    width: 8px;
+    height: 16px;
+    background: #111827;
+}
+
+.building::after {
+    content:"";
+    position:absolute;
+    inset:2px;
+    background: repeating-linear-gradient(
+        to bottom,
+        #facc15 0px,
+        #facc15 2px,
+        transparent 2px,
+        transparent 4px
+    );
+}
+
+.tall { left: 50px; height: 20px; }
+.small { left: 80px; height: 12px; }
+
+/* ============================= */
+/* SUN & MOON */
+/* ============================= */
+
+.sun {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 16px;
+    left: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fde047, #f97316);
+    box-shadow: 0 0 20px #facc15;
+    transition: opacity 1s ease;
+}
+
+.moon {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 18px;
+    right: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff, #d1d5db);
+    box-shadow: inset -4px -4px 0 #9ca3af;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* ============================= */
+/* EARTH */
+/* ============================= */
+
+.earth {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    top: 9px;
+    left: 9px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 1.2s cubic-bezier(0.65,0,0.35,1);
+}
+
+.earth-core {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5), transparent 40%),
+        linear-gradient(180deg, #1e90ff, #0f172a);
+    animation: spin 25s linear infinite;
+}
+
+.clouds {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 40% 50%, rgba(255,255,255,0.5) 8%, transparent 20%);
+    animation: spinReverse 40s linear infinite;
+}
+
+.atmosphere {
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(56,189,248,0.8);
+}
+
+/* ============================= */
+/* ACTIVE STATES */
+/* ============================= */
+
+.earth-toggle.active .night-sky { opacity: 1; }
+.earth-toggle.active .city { opacity: 1; }
+.earth-toggle.active .landscape { opacity: 0; }
+.earth-toggle.active .sun { opacity: 0; }
+.earth-toggle.active .moon { opacity: 1; }
+
+.earth-toggle.active .earth {
+    transform: translateX(75px) rotate(360deg);
+}
+
+/* Animations */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes spinReverse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}`,
+        js: `const earthToggle = document.getElementById('earthToggle');
+const wrapper = document.querySelector('.earth-wrapper');
+
+earthToggle.addEventListener('click', () => {
+    earthToggle.classList.toggle('active');
+    wrapper.classList.toggle('active');
+});`
+    }
 }
 ];
