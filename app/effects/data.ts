@@ -2376,5 +2376,891 @@ function animate() {
 init();
 animate();`
         }
+    },
+{
+    id: "parallax-depth-card",
+    title: "Dimensional Depth 3D Card",
+    description: "A compact 3D parallax card with reactive lighting and premium skeleton-style placeholder content for futuristic UI loading states.",
+    tags: ["3D", "Parallax", "Skeleton", "Glass", "Depth", "Interactive", "Premium UI"],
+    keywords: ["3d loading card", "parallax skeleton ui", "glass depth card", "reactive glare card"],
+    code: {
+        html: `
+<div class="parallax-scene">
+    <div class="parallax-card" id="parallaxCard">
+        
+        <div class="layer layer-bg"></div>
+        <div class="layer layer-orb"></div>
+        
+        <div class="layer layer-content">
+            <div class="skeleton-icon"></div>
+            <div class="skeleton-line large"></div>
+            <div class="skeleton-line medium"></div>
+            <div class="skeleton-line small"></div>
+            <div class="skeleton-button"></div>
+        </div>
+
+        <div class="layer layer-glare"></div>
+        <div class="layer layer-glass"></div>
+    </div>
+</div>
+`,
+
+        css: `
+.parallax-scene {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #030014;
+    perspective: 1000px;
+}
+
+/* Smaller Card */
+.parallax-card {
+    position: relative;
+    width: 220px;
+    height: 320px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    overflow: visible;
+    will-change: transform;
+}
+
+/* Ambient glow */
+.parallax-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 22px;
+    background: linear-gradient(45deg, #8b5cf6, #ec4899);
+    opacity: 0.07;
+    filter: blur(25px);
+    animation: breathe 5s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes breathe {
+    from { opacity: 0.04; }
+    to { opacity: 0.1; }
+}
+
+.layer {
+    position: absolute;
+    inset: 0;
+    padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    pointer-events: none;
+}
+
+/* Depth layers */
+.layer-bg {
+    transform: translateZ(-25px);
+    background: radial-gradient(circle at 50% 50%, rgba(99,102,241,0.08), transparent 70%);
+}
+
+.layer-orb {
+    transform: translateZ(35px);
+}
+.layer-orb::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    filter: blur(30px);
+    opacity: 0.4;
+}
+
+/* Skeleton Content */
+.layer-content {
+    transform: translateZ(60px);
+    justify-content: center;
+    align-items: flex-start;
+    pointer-events: auto;
+}
+
+/* Skeleton animation */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton-icon,
+.skeleton-line,
+.skeleton-button {
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.05) 25%,
+        rgba(255,255,255,0.12) 50%,
+        rgba(255,255,255,0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.5s infinite linear;
+    border-radius: 8px;
+}
+
+.skeleton-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+}
+
+.skeleton-line.large {
+    width: 100%;
+    height: 14px;
+}
+
+.skeleton-line.medium {
+    width: 80%;
+    height: 12px;
+}
+
+.skeleton-line.small {
+    width: 60%;
+    height: 12px;
+}
+
+.skeleton-button {
+    width: 100%;
+    height: 36px;
+    border-radius: 12px;
+}
+
+/* Reactive glare */
+.layer-glare {
+    transform: translateZ(80px);
+    background: radial-gradient(circle at var(--x) var(--y),
+        rgba(255,255,255,0.25),
+        transparent 60%);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.layer-glass {
+    transform: translateZ(90px);
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0)
+    );
+    border: 1px solid rgba(255,255,255,0.08);
+}
+`,
+
+        js: `
+const card = document.getElementById("parallaxCard");
+
+let currentX = 0;
+let currentY = 0;
+let targetX = 0;
+let targetY = 0;
+
+function animate() {
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
+
+    card.style.transform = \`rotateX(\${currentY}deg) rotateY(\${currentX}deg)\`;
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    targetX = (centerX - x) / 18;
+    targetY = (y - centerY) / 18;
+
+    card.style.setProperty("--x", \`\${x}px\`);
+    card.style.setProperty("--y", \`\${y}px\`);
+});
+
+card.addEventListener("mouseleave", () => {
+    targetX = 0;
+    targetY = 0;
+});
+`
     }
+},
+{
+    id: "Holographic-obsidian-card",
+    title: "Holographic Obsidian Card",
+    description: "A refined, smaller holographic obsidian card with realistic silver diffraction, brushed metal depth, and restrained premium spectral physics.",
+    tags: ["Luxury", "Minimal", "Stealth", "Premium UI", "Holographic"],
+    keywords: ["premium holographic card", "stealth foil ui", "luxury metallic shimmer", "obsidian interface"],
+    code: {
+        html: `
+<div class="lux-container">
+    <div class="lux-card" id="luxCard">
+        <div class="metal-texture"></div>
+        <div class="spectral-layer" id="spectral"></div>
+        <div class="glare-layer"></div>
+
+        <div class="lux-content">
+            <div class="micro-logo"></div>
+            <div class="hud-block">
+                <div class="line l1"></div>
+                <div class="line l2"></div>
+                <div class="line l3"></div>
+            </div>
+            <div class="footer-tag"></div>
+        </div>
+
+        <div class="edge-fresnel"></div>
+    </div>
+</div>
+`,
+
+        css: `
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+.lux-container {
+    width: 100%;
+    height: 100vh;
+    background: #010101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1800px;
+}
+
+/* Smaller refined proportions */
+.lux-card {
+    position: relative;
+    width: 240px;
+    height: 360px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #0b0b0b, #121212);
+    border: 1px solid rgba(255,255,255,0.04);
+    transform-style: preserve-3d;
+    overflow: hidden;
+    box-shadow:
+        0 30px 60px rgba(0,0,0,0.85),
+        0 10px 20px rgba(0,0,0,0.6);
+}
+
+/* Realistic brushed metal */
+.metal-texture {
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,0.015) 0px,
+            rgba(255,255,255,0.015) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+    opacity: 0.4;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Controlled silver diffraction */
+.spectral-layer {
+    position: absolute;
+    inset: -120%;
+    z-index: 1;
+    opacity: 0;
+    background:
+        conic-gradient(
+            from 180deg,
+            rgba(200,220,255,0) 0%,
+            rgba(200,220,255,0.15) 25%,
+            rgba(255,255,255,0.25) 50%,
+            rgba(180,210,255,0.15) 75%,
+            rgba(200,220,255,0) 100%
+        );
+    mix-blend-mode: screen;
+    filter: blur(40px);
+    transition: opacity 0.6s ease;
+}
+
+/* Soft volumetric glare */
+.glare-layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: radial-gradient(
+        circle at var(--x) var(--y),
+        rgba(255,255,255,0.06),
+        transparent 65%
+    );
+    transition: opacity 0.4s ease;
+    z-index: 3;
+}
+
+.lux-card:hover .spectral-layer,
+.lux-card:hover .glare-layer {
+    opacity: 1;
+}
+
+/* Minimal skeleton HUD */
+.lux-content {
+    position: relative;
+    z-index: 4;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-family: 'Space Mono', monospace;
+}
+
+.micro-logo {
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(255,255,255,0.15);
+    transform: rotate(45deg);
+}
+
+.hud-block { margin-top: 20px; display: flex; flex-direction: column; gap: 6px; }
+
+.line {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+}
+
+.line.l1 { width: 100%; }
+.line.l2 { width: 70%; }
+.line.l3 { width: 40%; }
+
+.footer-tag {
+    margin-top: auto;
+    width: 80px;
+    height: 6px;
+    background: rgba(255,255,255,0.08);
+}
+
+/* Edge Fresnel Light */
+.edge-fresnel {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        inset 0 0 20px rgba(255,255,255,0.02);
+    pointer-events: none;
+    z-index: 10;
+}
+`,
+
+        js: `
+const card = document.getElementById("luxCard");
+const spectral = document.getElementById("spectral");
+
+let tx = 0, ty = 0;
+let cx = 0, cy = 0;
+
+card.addEventListener("mousemove", (e) => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+
+    tx = (r.width/2 - x) / 25;
+    ty = (y - r.height/2) / 25;
+
+    const px = (x / r.width) * 100;
+    const py = (y / r.height) * 100;
+
+    card.style.setProperty("--x", px + "%");
+    card.style.setProperty("--y", py + "%");
+
+    spectral.style.transform =
+        \`translate(\${px/15}%, \${py/15}%) rotate(\${px/10}deg)\`;
+});
+
+function animate(){
+    cx += (tx - cx) * 0.06;
+    cy += (ty - cy) * 0.06;
+    card.style.transform =
+        \`rotateX(\${cy}deg) rotateY(\${cx}deg)\`;
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+card.addEventListener("mouseleave", ()=>{
+    tx = 0;
+    ty = 0;
+});
+`
+    }
+},
+{
+    id: "neural-circuit-quantum-card",
+    title: "Quantum edition Card",
+    description: "A refined high-tech interface card featuring a traveling data pulse, precision circuitry, and stealth-grade reactive activation.",
+    tags: ["SVG", "Circuit", "Minimal", "Dark UI", "Tech Luxury"],
+    keywords: ["premium circuit ui", "dark tech card", "svg pulse animation", "futuristic interface"],
+    code: {
+        html: `
+<div class="quantum-container">
+    <div class="quantum-card">
+
+        <svg class="circuit-svg" viewBox="0 0 260 340" preserveAspectRatio="none">
+            <path class="trace-base" d="M15 15 L245 15 L245 80 L210 120 L210 320 L15 320 Z" />
+            <path class="trace-active" d="M15 15 L245 15 L245 80 L210 120 L210 320 L15 320 Z" />
+            <circle class="node n1" cx="245" cy="15" r="2"/>
+            <circle class="node n2" cx="210" cy="120" r="2"/>
+            <circle class="node n3" cx="15" cy="320" r="2"/>
+        </svg>
+
+        <div class="inner-content">
+            <div class="chip-icon"></div>
+
+            <div class="title-block">
+                <div class="status">OFFLINE</div>
+                <h3>NEURAL_CORE</h3>
+            </div>
+
+            <div class="spec-lines">
+                <div class="line l1"></div>
+                <div class="line l2"></div>
+                <div class="line l3"></div>
+            </div>
+        </div>
+
+        <div class="edge-glow"></div>
+
+    </div>
+</div>
+`,
+        css: `
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500&display=swap');
+
+.quantum-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #040404;
+}
+
+/* Smaller, tighter card */
+.quantum-card {
+    position: relative;
+    width: 260px;
+    height: 340px;
+    background: #0b0b0b;
+    clip-path: polygon(0 0, 100% 0, 100% 23%, 85% 35%, 85% 100%, 0 100%);
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.8),
+        inset 0 0 0 1px rgba(255,255,255,0.02);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Subtle micro grid */
+.quantum-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 25px 25px;
+    opacity: 0.4;
+}
+
+/* SVG Circuit */
+.circuit-svg {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.trace-base {
+    fill: none;
+    stroke: rgba(255,255,255,0.05);
+    stroke-width: 1;
+}
+
+.trace-active {
+    fill: none;
+    stroke: rgba(180,220,255,0.9);
+    stroke-width: 1.5;
+    stroke-dasharray: 50 800;
+    stroke-dashoffset: 800;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 6px rgba(180,220,255,0.6));
+    transition: stroke-dashoffset 1s cubic-bezier(.7,0,.2,1);
+}
+
+.node {
+    fill: rgba(180,220,255,0.9);
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+/* Hover Activation */
+.quantum-card:hover .trace-active {
+    stroke-dashoffset: 0;
+}
+
+.quantum-card:hover .node {
+    opacity: 1;
+}
+
+/* Content */
+.inner-content {
+    position: relative;
+    z-index: 3;
+    padding: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'JetBrains Mono', monospace;
+    color: #fff;
+}
+
+.chip-icon {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255,255,255,0.15);
+    position: relative;
+}
+
+.chip-icon::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    background: rgba(255,255,255,0.04);
+}
+
+.title-block {
+    margin-top: 30px;
+}
+
+.status {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.3);
+    transition: color .3s ease;
+}
+
+.quantum-card:hover .status {
+    color: rgba(180,220,255,0.9);
+}
+
+h3 {
+    margin-top: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: .5px;
+}
+
+/* Minimal skeleton specs */
+.spec-lines {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.line {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+}
+
+.line.l1 { width: 100%; }
+.line.l2 { width: 70%; }
+.line.l3 { width: 40%; }
+
+/* Subtle rim light */
+.edge-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        inset 0 0 25px rgba(180,220,255,0.03);
+    pointer-events: none;
+}
+`,
+        js: `
+// No JS needed — pure precision CSS + SVG
+`
+    }
+},
+{
+    id: "glass-stack-card",
+    title: "Architectural Glass Stack Card",
+    description: "A premium editorial glass card with magnetic tilt, ambient float, soft projected shadow, micro parallax typography and restrained glass refraction.",
+    tags: ["Luxury", "Glass", "Magnetic", "Editorial", "Premium UI" ,"Card"],
+    keywords: ["magnetic glass card", "luxury hover effect", "premium 3d card", "architectural ui"],
+    code: {
+        html: `
+<div class="magnetic-container">
+    <div class="shadow-projection"></div>
+
+    <div class="magnetic-card" id="magneticCard">
+
+        <div class="layer layer-image">
+            <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?q=80&w=600&auto=format&fit=crop" alt="Architecture">
+            <div class="img-overlay"></div>
+        </div>
+
+        <div class="layer layer-glass">
+            <div class="refraction"></div>
+            <div class="grain"></div>
+        </div>
+
+        <div class="layer layer-content">
+            <div class="meta">
+                <span class="meta-left">KRONOS_ARCH</span>
+                <span class="meta-right">2026</span>
+            </div>
+
+            <div class="body">
+                <h2 class="title">The Brutalist Edit</h2>
+                <div class="divider"></div>
+                <p class="desc">
+                    Exploration of concrete forms and negative space in modern residential structures.
+                </p>
+            </div>
+
+            <button class="cta">View Project</button>
+        </div>
+
+    </div>
+</div>
+`,
+        css: `
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;500&display=swap');
+
+.magnetic-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0b0b0b;
+    perspective: 1600px;
+    position: relative;
+}
+
+/* Soft projected shadow */
+.shadow-projection {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.6), transparent 70%);
+    filter: blur(20px);
+    transform: translateY(160px);
+    transition: transform 0.2s ease;
+}
+
+.magnetic-card {
+    position: relative;
+    width: 260px;
+    height: 380px;
+    transform-style: preserve-3d;
+    border-radius: 3px;
+    transition: transform 0.2s ease;
+    animation: float 6s ease-in-out infinite alternate;
+    cursor: pointer;
+}
+
+/* Ambient floating */
+@keyframes float {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-8px); }
+}
+
+.layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    transition: transform 0.4s cubic-bezier(.2,0,.2,1);
+}
+
+/* Image */
+.layer-image {
+    z-index: 1;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+.layer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(110%);
+    transition: transform 0.6s ease;
+}
+
+.img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%);
+}
+
+/* Glass */
+.layer-glass {
+    z-index: 2;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+}
+
+/* Subtle refraction shift */
+.refraction {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(255,255,255,0.1), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Content */
+.layer-content {
+    z-index: 3;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #e5e5e5;
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.5);
+}
+
+.title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.divider {
+    width: 30px;
+    height: 1px;
+    background: rgba(255,255,255,0.8);
+    margin-bottom: 16px;
+}
+
+.desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.65);
+}
+
+.cta {
+    align-self: flex-start;
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 8px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.cta:hover { background: #d6d6d6; }
+
+/* Hover separation */
+.magnetic-card:hover .layer-image {
+    transform: translateZ(-15px) translateY(-15px);
+}
+
+.magnetic-card:hover .layer-glass {
+    transform: translateZ(10px);
+}
+
+.magnetic-card:hover .layer-content {
+    transform: translateZ(25px) translateY(8px);
+}
+
+.magnetic-card:hover .refraction {
+    opacity: 0.6;
+}
+`,
+        js: `
+const card = document.getElementById("magneticCard");
+const shadow = document.querySelector(".shadow-projection");
+
+let targetX = 0, targetY = 0;
+let currentX = 0, currentY = 0;
+
+card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    targetX = (centerX - x) / 25;
+    targetY = (y - centerY) / 25;
+
+    // Micro parallax text shift
+    card.querySelector(".title").style.transform =
+        \`translateX(\${targetX * 2}px) translateY(\${targetY * 2}px)\`;
+
+    card.querySelector(".desc").style.transform =
+        \`translateX(\${targetX}px) translateY(\${targetY}px)\`;
+
+    shadow.style.transform =
+        \`translateY(160px) scale(\${1 + Math.abs(targetX)/20})\`;
+});
+
+function animate() {
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
+
+    card.style.transform =
+        \`rotateX(\${currentY}deg) rotateY(\${currentX}deg)\`;
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+card.addEventListener("mouseleave", () => {
+    targetX = 0;
+    targetY = 0;
+});
+`
+    }
+},
+
+
+
+
+
 ];
