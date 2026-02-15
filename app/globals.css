@@ -1,4 +1,5 @@
 @import "tailwindcss";
+/* proper rebuild trigger */
 
 :root {
   --background: #ffffff;

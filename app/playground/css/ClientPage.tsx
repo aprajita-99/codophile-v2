@@ -49,6 +49,13 @@ const categories = [
         color: "from-emerald-500 to-teal-500"
     },
     {
+        title: "Grid Layout",
+        description: "Master CSS Grid layout with interactive controls for columns, rows, gap, and item placement.",
+        icon: "/icons/Layout-utilities.png",
+        href: "/playground/css/grid",
+        color: "from-cyan-500 to-indigo-500"
+    },
+    {
         title: "Typography",
         description: "Experiment with font weights, spacing, line heights, and families.",
         icon: "/icons/Typography.png",

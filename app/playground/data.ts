@@ -58,6 +58,11 @@ export const playgroundData = {
                 title: "CSS Typography Playground - Font Properties Editor",
                 description: "Experiment with CSS typography properties including font-family, font-size, font-weight, line-height, letter-spacing, and text-transform.",
                 keywords: ["css typography", "font properties", "font-family", "font-size", "letter-spacing", "line-height"]
+            },
+            grid: {
+                title: "CSS Grid Layout Playground - Visual Grid Container Editor",
+                description: "Master CSS Grid layout with interactive controls for grid-template-columns, grid-template-rows, gap, and grid-item placement.",
+                keywords: ["css grid", "grid layout", "grid-template-columns", "grid-gap", "grid-area"]
             }
         }
     },
@@ -70,6 +75,11 @@ export const playgroundData = {
                 title: "Tailwind Layout Utilities Playground - Flex, Grid, Spacing",
                 description: "Master Tailwind layout utilities including flexbox, grid, spacing, sizing, and positioning classes. Visual playground for rapid prototyping.",
                 keywords: ["tailwind layout", "tailwind flexbox", "tailwind grid", "spacing utilities", "tailwind sizing"]
+            },
+            grid: {
+                title: "Tailwind Grid Layout Playground - Grid Template & Spacing",
+                description: "Master Tailwind Grid layout utilities including grid-cols, grid-rows, gap, and col/row spanning classes. Visual playground for rapid prototyping.",
+                keywords: ["tailwind grid", "grid-cols", "grid-rows", "gap", "col-span", "row-span"]
             },
             typography: {
                 title: "Tailwind Typography Playground - Font & Text Utilities",

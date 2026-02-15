@@ -26,6 +26,13 @@ const categories = [
         color: "from-cyan-500 to-blue-500"
     },
     {
+        title: "Grid Layout",
+        description: "Master grid layouts using Tailwind utility classes.",
+        icon: "/icons/Layout-utilities.png",
+        href: "/playground/tailwind/grid",
+        color: "from-cyan-400 to-purple-400"
+    },
+    {
         title: "Typography",
         description: "Control font-size, weight, leading, tracking, and colors.",
         icon: "/icons/Typography.png",
