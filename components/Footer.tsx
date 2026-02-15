@@ -29,10 +29,10 @@ export default function Footer() {
                         </p>
                         <div className="flex items-center gap-4">
                             {[
-                                { icon: Github, href: "https://github.com", label: "GitHub" },
+                                { icon: Github, href: "https://github.com/digicraft-one", label: "GitHub" },
                                 { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-                                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-                                { icon: Mail, href: "mailto:hello@codophile.com", label: "Email" },
+                                { icon: Linkedin, href: "https://www.linkedin.com/company/digicraft-tech/", label: "LinkedIn" },
+                                { icon: Mail, href: "mailto:hello@codophile.in", label: "Email" },
                             ].map((social, idx) => (
                                 <a
                                     key={idx}

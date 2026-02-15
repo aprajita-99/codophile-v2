@@ -59,7 +59,7 @@ export default function Header() {
 
                     <div className="flex items-center gap-3">
                         <a
-                            href="https://github.com"
+                            href="https://github.com/digicraft-one"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-2 text-gray-400 hover:text-white transition-colors hover:bg-white/5 rounded-md"
@@ -117,7 +117,7 @@ export default function Header() {
 
                                 <div className="flex gap-3">
                                     <a
-                                        href="https://github.com"
+                                        href="https://github.com/digicraft-one"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex-1 flex items-center justify-center gap-2 p-3 text-gray-400 bg-white/5 border border-white/10 rounded-sm hover:text-white transition-colors"
