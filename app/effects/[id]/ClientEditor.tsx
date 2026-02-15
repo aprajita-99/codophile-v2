@@ -102,15 +102,15 @@ export default function ClientEditor() {
 
 
     // Export Functionality
-   const generateCode = (format: "html" | "react" | "next") => {
-  try {
-    const componentName =
-      effectId
-        ?.replace(/-./g, x => x[1].toUpperCase())
-        .replace(/^./, x => x.toUpperCase()) || "EffectComponent";
+    const generateCode = (format: "html" | "react" | "next") => {
+        try {
+            const componentName =
+                effectId
+                    ?.replace(/-./g, x => x[1].toUpperCase())
+                    .replace(/^./, x => x.toUpperCase()) || "EffectComponent";
 
-    if (format === "html") {
-      return `<!DOCTYPE html>
+            if (format === "html") {
+                return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -135,29 +135,29 @@ ${jsCode}
 </script>
 </body>
 </html>`;
-    }
+            }
 
-    // ---- SANITIZE HTML TO JSX ----
-    let jsxHtml = htmlCode.replace(/class=/g, "className=");
+            // ---- SANITIZE HTML TO JSX ----
+            let jsxHtml = htmlCode.replace(/class=/g, "className=");
 
-    const voidTags = [
-      "area","base","br","col","embed","hr","img",
-      "input","link","meta","param","source","track","wbr"
-    ];
+            const voidTags = [
+                "area", "base", "br", "col", "embed", "hr", "img",
+                "input", "link", "meta", "param", "source", "track", "wbr"
+            ];
 
-    voidTags.forEach(tag => {
-      const regex = new RegExp(`<${tag}([^>]*?)(?<!/)>`, "gi");
-      jsxHtml = jsxHtml.replace(regex, `<${tag}$1 />`);
-    });
+            voidTags.forEach(tag => {
+                const regex = new RegExp(`<${tag}([^>]*?)(?<!/)>`, "gi");
+                jsxHtml = jsxHtml.replace(regex, `<${tag}$1 />`);
+            });
 
-    // ---- AUTO-SCOPE USER JS ----
-    let scopedJS = jsCode
-      .replace(/document\.getElementById/g, "container.querySelector")
-      .replace(/document\.querySelector/g, "container.querySelector")
-      .replace(/document\.querySelectorAll/g, "container.querySelectorAll");
+            // ---- AUTO-SCOPE USER JS ----
+            let scopedJS = jsCode
+                .replace(/document\.getElementById/g, "container.querySelector")
+                .replace(/document\.querySelector/g, "container.querySelector")
+                .replace(/document\.querySelectorAll/g, "container.querySelectorAll");
 
-    // ---- FULL REACT COMPONENT ----
-    const component = `
+            // ---- FULL REACT COMPONENT ----
+            const component = `
 import React, { useEffect, useRef } from "react";
 
 export default function ${componentName}() {
@@ -208,28 +208,28 @@ ${jsxHtml}
 }
 `;
 
-    if (format === "next") {
-      return `"use client";
+            if (format === "next") {
+                return `"use client";
 
 ${component}`;
-    }
+            }
 
-    return component;
-  } catch (err) {
-    console.error(err);
-    return "// Error generating component";
-  }
-};
+            return component;
+        } catch (err) {
+            console.error(err);
+            return "// Error generating component";
+        }
+    };
 
 
     const handleDownload = () => {
         const code = generateCode(exportFormat);
-       const extension =
-  exportFormat === "html"
-    ? "html"
-    : exportFormat === "react"
-    ? "jsx"
-    : "tsx";
+        const extension =
+            exportFormat === "html"
+                ? "html"
+                : exportFormat === "react"
+                    ? "jsx"
+                    : "tsx";
 
         const mime = exportFormat === 'html' ? 'text/html' : 'text/plain';
 
@@ -374,9 +374,13 @@ ${component}`;
                     {/* Toolbar */}
                     <div className="h-14 border-b border-white/5 bg-[#0a0a0a] flex items-center justify-between px-4 shrink-0">
                         <div className="flex items-center gap-4">
-                            <Link href="/effects" className="p-2 rounded-full hover:bg-white/5 text-gray-400 hover:text-white transition-colors">
+                            <button
+                                onClick={() => router.back()}
+                                className="p-2 rounded-full hover:bg-white/5 text-gray-400 hover:text-white transition-colors"
+                                title="Go Back"
+                            >
                                 <ArrowLeft className="w-4 h-4" />
-                            </Link>
+                            </button>
                             <span className="font-semibold text-sm hidden md:block">{effect.title}</span>
                         </div>
                         <div className="flex items-center gap-2">
