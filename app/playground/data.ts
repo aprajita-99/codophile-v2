@@ -68,6 +68,11 @@ export const playgroundData = {
                 title: "CSS Tooltip Playground - Positioning & Effects",
                 description: "Design and customize CSS tooltips. Experiment with positioning, arrows, colors, and animations for engaging user interfaces.",
                 keywords: ["css tooltip", "tooltip positioning", "css arrow", "tooltip animation", "hover effects"]
+            },
+            pagination: {
+                title: "CSS Pagination Playground - Navigation Styles",
+                description: "Design and customize CSS pagination links. Experiment with various styles like bordered, rounded, active states, and hover effects.",
+                keywords: ["css pagination", "pagination styles", "active state", "hover effects", "breadcrumb"]
             }
         }
     },
