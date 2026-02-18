@@ -54,7 +54,7 @@ export default function Header() {
 
                     {/* Desktop Search Bar - Command Palette Style */}
                     <div
-                        className="hidden md:flex flex-1 max-w-md relative group mx-4 cursor-pointer"
+                        className="flex md:flex flex-1 max-w-md relative group mx-2 md:mx-4 cursor-pointer"
                         onClick={() => setIsSearchOpen(true)}
                     >
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -67,7 +67,7 @@ export default function Header() {
                             className="cursor-pointer block w-full pl-10 pr-3 py-2 border border-white/10 rounded-md leading-5 bg-white/5 text-gray-300 placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 sm:text-sm transition-all"
                             placeholder="Search documentation, templates..."
                         />
-                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <div className="absolute inset-y-0 right-0 pr-3 hidden md:flex items-center pointer-events-none">
                             <span className="text-gray-600 text-xs border border-white/10 rounded px-1.5 py-0.5 flex items-center gap-1">
                                 <Command className="w-3 h-3" /> K
                             </span>
@@ -131,7 +131,7 @@ export default function Header() {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="absolute top-16 left-0 right-0 bg-[#030014] border-b border-white/10 p-6 shadow-2xl lg:hidden flex flex-col gap-6"
+                            className="absolute top-full left-0 right-0 h-[calc(100vh-100%)] bg-[#030014] border-b border-white/10 p-6 shadow-2xl lg:hidden flex flex-col gap-6 overflow-y-auto"
                         >
                             <nav className="flex flex-col gap-4">
                                 {["Playground", "Templates", "Effects", "Docs", "About"].map(

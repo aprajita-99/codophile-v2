@@ -83,10 +83,10 @@ export default function AboutPage() {
                         className="grid grid-cols-2 md:grid-cols-4 gap-8 border-y border-white/5 py-12"
                     >
                         {[
-                            { label: "Designers", value: "10K+", icon: Users },
-                            { label: "Components", value: "500+", icon: Code },
+                            { label: "Designers", value: "4", icon: Users },
+                            { label: "Components", value: "100+", icon: Code },
                             { label: "Templates", value: "50+", icon: Palette },
-                            { label: "Community", value: "25K+", icon: Trophy },
+                            { label: "Community", value: "10K+", icon: Trophy },
                         ].map((stat, idx) => (
                             <motion.div key={idx} variants={fadeIn} className="text-center">
                                 <div className="flex justify-center mb-4 text-indigo-400">
