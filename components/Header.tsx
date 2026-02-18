@@ -37,7 +37,7 @@ export default function Header() {
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Search className="h-4 w-4 text-gray-500 group-focus-within:text-violet-400 transition-colors" />
                     </div>
-                    <input
+                    <input suppressHydrationWarning
                         type="text"
                         className="block w-full pl-10 pr-3 py-2 border border-white/10 rounded-md leading-5 bg-white/5 text-gray-300 placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 sm:text-sm transition-all"
                         placeholder="Search documentation, templates..."

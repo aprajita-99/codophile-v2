@@ -237,6 +237,7 @@ export function ConstellationPagination({
 
           return (
             <motion.button
+              suppressHydrationWarning
               key={`page-${pageNum}`}
               onClick={() => onChange(pageNum)}
               className="relative z-10 flex flex-col items-center group outline-none"
