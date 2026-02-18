@@ -63,6 +63,16 @@ export const playgroundData = {
                 title: "CSS Grid Layout Playground - Visual Grid Container Editor",
                 description: "Master CSS Grid layout with interactive controls for grid-template-columns, grid-template-rows, gap, and grid-item placement.",
                 keywords: ["css grid", "grid layout", "grid-template-columns", "grid-gap", "grid-area"]
+            },
+            tooltip: {
+                title: "CSS Tooltip Playground - Positioning & Effects",
+                description: "Design and customize CSS tooltips. Experiment with positioning, arrows, colors, and animations for engaging user interfaces.",
+                keywords: ["css tooltip", "tooltip positioning", "css arrow", "tooltip animation", "hover effects"]
+            },
+            pagination: {
+                title: "CSS Pagination Playground - Navigation Styles",
+                description: "Design and customize CSS pagination links. Experiment with various styles like bordered, rounded, active states, and hover effects.",
+                keywords: ["css pagination", "pagination styles", "active state", "hover effects", "breadcrumb"]
             }
         }
     },
@@ -115,6 +125,16 @@ export const playgroundData = {
                 title: "Tailwind Animations Playground - Animate Utilities & Transitions",
                 description: "Experiment with Tailwind animation and transition utilities for creating smooth, engaging UI animations.",
                 keywords: ["tailwind animations", "animate utilities", "transition tailwind", "animation classes"]
+            },
+            tooltips: {
+                title: "Tailwind Tooltips - Position & Arrow Utilities",
+                description: "Create custom tooltips using Tailwind CSS positioning, visibility, and border utilities. Master the art of tooltip creation.",
+                keywords: ["tailwind tooltip", "tooltip positioning", "tailwind arrow", "hover effects", "group-hover"]
+            },
+            pagination: {
+                title: "Tailwind Pagination Playground - Navigation Components",
+                description: "Design and customize Tailwind CSS pagination links. Experiment with various styles like bordered, rounded, active states, and hover effects using utility classes.",
+                keywords: ["tailwind pagination", "pagination components", "active state tailwind", "hover effects tailwind", "breadcrumb tailwind"]
             }
         }
     }

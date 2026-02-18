@@ -10,6 +10,15 @@ export default function Header() {
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#030014]/80 backdrop-blur-xl">
+            {/* Dev Banner */}
+            <div className="bg-[#020204] border-b border-white/5 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent,rgba(124,58,237,0.1)_50%,transparent)] bg-[length:200%_100%] animate-shine opacity-60" />
+                <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3 text-xs font-medium text-gray-400 relative z-10">
+                    <span className="bg-violet-500/10 text-violet-400 border border-violet-500/20 px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider shadow-[0_0_10px_rgba(124,58,237,0.1)]">Beta</span>
+                    <span>Codophile is currently in active development. Features may change rapidly! 🚀</span>
+                </div>
+            </div>
+
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
 
                 {/* Logo */}
@@ -59,7 +68,7 @@ export default function Header() {
 
                     <div className="flex items-center gap-3">
                         <a
-                            href="https://github.com"
+                            href="https://github.com/digicraft-one"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-2 text-gray-400 hover:text-white transition-colors hover:bg-white/5 rounded-md"
@@ -117,7 +126,7 @@ export default function Header() {
 
                                 <div className="flex gap-3">
                                     <a
-                                        href="https://github.com"
+                                        href="https://github.com/digicraft-one"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex-1 flex items-center justify-center gap-2 p-3 text-gray-400 bg-white/5 border border-white/10 rounded-sm hover:text-white transition-colors"
