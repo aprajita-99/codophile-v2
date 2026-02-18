@@ -1,13 +1,21 @@
 "use client";
 
-import { InstantSearch, SearchBox, Hits } from "react-instantsearch";
 import Link from "next/link";
-import { searchClient } from "@/lib/algolia/searchClient";
+import { useEffect, useRef } from "react";
+import { InstantSearchNext } from "react-instantsearch-nextjs";
+import { SearchBox, Hits, Index } from "react-instantsearch";
+import { algoliasearch } from "algoliasearch";
 
-function Hit({ hit }: any) {
+const searchClient = algoliasearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY!
+);
+
+function Hit({ hit, onClose }: any) {
   return (
     <Link
-      href={hit.url}
+      href={`/effects/${hit.objectID}`}
+      onClick={onClose}
       className="block rounded-md px-4 py-3 hover:bg-white/5 transition"
     >
       <p className="text-xs text-violet-400 uppercase tracking-wide">
@@ -21,37 +29,51 @@ function Hit({ hit }: any) {
   );
 }
 
-export default function SearchModal({
-  onClose,
-}: {
-  onClose: () => void;
-}) {
+export default function SearchModal({ onClose }: { onClose: () => void }) {
+  const searchBoxWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      const input =
+        searchBoxWrapperRef.current?.querySelector("input");
+      input?.focus();
+    });
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-start justify-center pt-24">
-      <div className="w-full max-w-2xl bg-[#030014] border border-white/10 rounded-xl shadow-2xl relative">
-        <InstantSearch searchClient={searchClient} indexName="content">
-          <SearchBox
-            autoFocus
-            placeholder="Search Codophile…"
-            classNames={{
-              form: "border-b border-white/10",
-              input:
-                "w-full bg-transparent px-4 py-4 text-white outline-none",
-            }}
-          />
+    <div
+      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative mx-auto mt-24 max-w-2xl rounded-xl bg-[#050014] border border-white/10 shadow-2xl"
+      >
+        <InstantSearchNext searchClient={searchClient}>
+          <Index indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME!}>
+            <div
+              ref={searchBoxWrapperRef}
+              className="border-b border-white/10 px-4 py-3"
+            >
+              <SearchBox
+                placeholder="Search Codophile..."
+                classNames={{
+                  input:
+                    "w-full bg-transparent text-white outline-none placeholder-gray-500",
+                }}
+              />
+            </div>
 
-          <div className="max-h-[60vh] overflow-y-auto p-2">
-            <Hits hitComponent={Hit} />
-          </div>
-        </InstantSearch>
+            <div className="max-h-[60vh] overflow-y-auto p-2">
+              <Hits
+                hitComponent={(props) => (
+                  <Hit {...props} onClose={onClose} />
+                )}
+              />
+            </div>
+          </Index>
+        </InstantSearchNext>
       </div>
-
-      {/* click outside to close */}
-      <button
-        onClick={onClose}
-        className="absolute inset-0 cursor-default"
-        aria-label="Close search"
-      />
     </div>
   );
 }
