@@ -117,6 +117,13 @@ const categories = [
         icon: "/icons/Layout-utilities.png",
         href: "/playground/css/pagination",
         color: "from-sky-500 to-indigo-500"
+    },
+    {
+        title: "Buttons",
+        description: "Design custom buttons with colors, hover effects, and shadows.",
+        icon: "/icons/interactivity.png",
+        href: "/playground/css/buttons",
+        color: "from-orange-500 to-amber-500"
     }
 ];
 

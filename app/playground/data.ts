@@ -73,6 +73,11 @@ export const playgroundData = {
                 title: "CSS Pagination Playground - Navigation Styles",
                 description: "Design and customize CSS pagination links. Experiment with various styles like bordered, rounded, active states, and hover effects.",
                 keywords: ["css pagination", "pagination styles", "active state", "hover effects", "breadcrumb"]
+            },
+            buttons: {
+                title: "CSS Buttons Playground - Styling & Hover Effects",
+                description: "Design, style, and animate CSS buttons. Experiment with colors, borders, shadows, hover effects, and button groups.",
+                keywords: ["css buttons", "button styling", "button hover", "css button groups", "button animations"]
             }
         }
     },
