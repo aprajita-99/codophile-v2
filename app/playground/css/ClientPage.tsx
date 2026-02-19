@@ -124,6 +124,13 @@ const categories = [
         icon: "/icons/interactivity.png",
         href: "/playground/css/buttons",
         color: "from-orange-500 to-amber-500"
+    },
+    {
+        title: "Tables",
+        description: "Style tables with borders, striping, spacing, and responsive wrappers.",
+        icon: "/icons/Layout-utilities.png",
+        href: "/playground/css/table",
+        color: "from-blue-400 to-cyan-500"
     }
 ];
 
