@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { Suspense, useTransition } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { effectsData } from "./data";
 import { LivePreview } from "@/components/EffectsUI/LivePreview";
@@ -13,27 +13,40 @@ import { LivePreview } from "@/components/EffectsUI/LivePreview";
 const ITEMS_PER_PAGE = 9;
 
 export default function EffectsPage() {
-  return <EffectsContent />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#030014] text-white flex items-center justify-center">Loading...</div>}>
+      <EffectsContent />
+    </Suspense>
+  );
 }
 
 function EffectsContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [, startTransition] = useTransition(); // Using transition fixes the double-back-click bug
 
-  // URL is single source of truth
+  // 1. Single Source of Truth: Read directly from the URL. 
+  // Next.js will automatically re-render this component when the URL changes.
   const page = parseInt(searchParams.get("page") || "1", 10);
+  const totalPages = Math.ceil(effectsData.length / ITEMS_PER_PAGE);
 
+  // 2. Navigation Handler
   const handlePageChange = (newPage: number) => {
-    if (newPage === page) return;
+    if (newPage === page || newPage < 1 || newPage > totalPages) return;
 
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", newPage.toString());
 
-    router.push(`${pathname}?${params.toString()}`);
-  };
+    // Wrapping in startTransition prevents the Suspense boundary from creating 
+    // a duplicate history entry, which is what caused the double-click bug.
+    startTransition(() => {
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    });
 
-  const totalPages = Math.ceil(effectsData.length / ITEMS_PER_PAGE);
+    // Smooth scroll to top of the grid
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const paginatedData = effectsData.slice(
     (page - 1) * ITEMS_PER_PAGE,
@@ -100,7 +113,7 @@ function EffectsContent() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Pagination */}
+        {/* Orbital Pagination */}
         <ConstellationPagination
           totalPages={totalPages}
           currentPage={page}
@@ -194,7 +207,19 @@ export function ConstellationPagination({
   const visiblePages = getPages();
 
   return (
-    <div className="relative mt-32 mb-16 flex justify-center items-center">
+    <div className="relative mt-32 mb-16 flex justify-center items-center gap-6 md:gap-12">
+      
+      {/* Previous Button - Removed cursor-not-allowed, added disabled:cursor-default */}
+      <button
+        onClick={() => onChange(currentPage - 1)}
+        disabled={currentPage <= 1}
+        className="group flex items-center gap-2 text-sm font-mono text-gray-400 hover:text-pink-400 disabled:opacity-30 disabled:hover:text-gray-400 transition-colors outline-none cursor-pointer disabled:cursor-default"
+      >
+        <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 group-disabled:translate-x-0" />
+        <span className="hidden sm:inline tracking-widest">PREV</span>
+      </button>
+
+      {/* Constellation Nodes */}
       <div className="relative flex items-center gap-6 md:gap-10">
         <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-pink-500/30 to-transparent -translate-y-1/2" />
 
@@ -214,13 +239,23 @@ export function ConstellationPagination({
             <motion.button
               key={`page-${pageNum}`}
               onClick={() => onChange(pageNum)}
-              className="relative z-10 flex flex-col items-center group outline-none"
+              className="relative z-10 flex flex-col items-center group outline-none cursor-pointer"
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.9 }}
             >
-              <div className={`relative w-3.5 h-3.5 rounded-full transition-all duration-500 ease-out ${active ? "bg-pink-400 shadow-[0_0_15px_#22d3ee,0_0_30px_#22d3ee]" : "bg-white/20 group-hover:bg-white/70"}`}>
+              <div className={`relative w-3.5 h-3.5 rounded-full transition-all duration-500 ease-out ${active ? "bg-pink-400 shadow-[0_0_15px_#22d3ee,0_0_30px_#22d3ee]" : "bg-white/20 group-hover:bg-white/70 shadow-none"}`}>
                 {active && <div className="absolute inset-0 rounded-full bg-white blur-[1px] opacity-50" />}
               </div>
+              
+              {/* Preserved the animated glow from the original */}
+              <AnimatePresence>
+                {active && (
+                  <>
+                    <motion.div layoutId="activeGlow" className="absolute -inset-3 rounded-full bg-pink-500/20 blur-xl" transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
+                    <motion.div initial={{ scale: 0.5, opacity: 0.8 }} animate={{ scale: 2.5, opacity: 0 }} transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }} className="absolute inset-0 rounded-full bg-pink-400/40" />
+                  </>
+                )}
+              </AnimatePresence>
 
               <span className={`absolute top-8 font-mono text-[10px] tracking-[0.3em] transition-all duration-300 ${active ? "text-cyan-400 font-bold translate-y-1" : "text-gray-500 opacity-60"}`}>
                 {String(pageNum).padStart(2, "0")}
@@ -229,6 +264,17 @@ export function ConstellationPagination({
           );
         })}
       </div>
+
+      {/* Next Button - Removed cursor-not-allowed, added disabled:cursor-default */}
+      <button
+        onClick={() => onChange(currentPage + 1)}
+        disabled={currentPage >= totalPages}
+        className="group flex items-center gap-2 text-sm font-mono text-gray-400 hover:text-pink-400 disabled:opacity-30 disabled:hover:text-gray-400 transition-colors outline-none cursor-pointer disabled:cursor-default"
+      >
+        <span className="hidden sm:inline tracking-widest">NEXT</span>
+        <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-disabled:translate-x-0" />
+      </button>
+
     </div>
   );
 }
