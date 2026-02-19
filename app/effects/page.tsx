@@ -1,51 +1,36 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation"; // Import hooks
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { effectsData } from "./data";
 import { LivePreview } from "@/components/EffectsUI/LivePreview";
 
 const ITEMS_PER_PAGE = 9;
 
 export default function EffectsPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-[#030014] text-white flex items-center justify-center">Loading...</div>}>
-      <EffectsContent />
-    </Suspense>
-  );
+  return <EffectsContent />;
 }
 
 function EffectsContent() {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // 1. Read page from URL, default to 1 if missing or invalid
-  const pageParam = searchParams.get("page");
-  const initialPage = pageParam ? parseInt(pageParam, 10) : 1;
-  const [page, setPage] = useState(initialPage);
+  // URL is single source of truth
+  const page = parseInt(searchParams.get("page") || "1", 10);
 
-  // 2. Sync state when URL changes (e.g., browser back button)
-  useEffect(() => {
-    const p = searchParams.get("page");
-    if (p) {
-      setPage(parseInt(p, 10));
-    } else {
-      setPage(1);
-    }
-  }, [searchParams]);
-
-  // 3. Custom page setter that updates both State and URL
   const handlePageChange = (newPage: number) => {
-    setPage(newPage); // Optimistic UI update
-    // Scroll to top of grid smoothly
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Update URL without reloading the page
-    router.push(`?page=${newPage}`, { scroll: false });
+    if (newPage === page) return;
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", newPage.toString());
+
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   const totalPages = Math.ceil(effectsData.length / ITEMS_PER_PAGE);
@@ -83,7 +68,7 @@ function EffectsContent() {
             className="text-4xl md:text-7xl font-bold tracking-tight mb-6 flex flex-nowrap justify-center items-center whitespace-nowrap"
           >
             Cool CSS{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-pink-400 via-purple-400 to-indigo-400 animate-gradient-x">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 animate-gradient-x">
               Effects
             </span>
           </motion.h1>
@@ -115,11 +100,11 @@ function EffectsContent() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Orbital Pagination */}
+        {/* Pagination */}
         <ConstellationPagination
           totalPages={totalPages}
           currentPage={page}
-          onChange={handlePageChange} // Use the new handler
+          onChange={handlePageChange}
         />
 
       </main>
@@ -129,8 +114,7 @@ function EffectsContent() {
   );
 }
 
-function EffectCard({ effect, index }: { effect: any, index: number }) {
-  // ... (Keep existing EffectCard code exactly as is)
+function EffectCard({ effect, index }: { effect: any; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -166,7 +150,6 @@ function EffectCard({ effect, index }: { effect: any, index: number }) {
   );
 }
 
-// ... (Keep existing ConstellationPagination code exactly as is)
 export function ConstellationPagination({
   totalPages,
   currentPage,
@@ -176,14 +159,9 @@ export function ConstellationPagination({
   currentPage: number;
   onChange: (p: number) => void;
 }) {
-  /**
-   * Robust pagination logic:
-   * 1. Always show first and last.
-   * 2. Show a window (delta) around the current page.
-   * 3. Intelligently insert "..." or the missing number if the gap is only 1.
-   */
+
   const getPages = () => {
-    const delta = 2; // How many pages to show around current
+    const delta = 2;
     const range: number[] = [];
     const rangeWithDots: (number | string)[] = [];
     let prev: number | undefined;
@@ -218,15 +196,12 @@ export function ConstellationPagination({
   return (
     <div className="relative mt-32 mb-16 flex justify-center items-center">
       <div className="relative flex items-center gap-6 md:gap-10">
-
-        {/* The Constellation Path (Background Line) */}
         <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-pink-500/30 to-transparent -translate-y-1/2" />
 
         {visiblePages.map((page, index) => {
-          // Render the "..." Separator
           if (page === "...") {
             return (
-              <div key={`dots-${index}`} className="text-gray-600 tracking-tighter text-xl select-none px-1 translate-y-[-2px]">
+              <div key={`dots-${index}`} className="text-gray-600 text-xl select-none px-1">
                 ⋯
               </div>
             );
@@ -237,24 +212,16 @@ export function ConstellationPagination({
 
           return (
             <motion.button
-              suppressHydrationWarning
               key={`page-${pageNum}`}
               onClick={() => onChange(pageNum)}
               className="relative z-10 flex flex-col items-center group outline-none"
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.9 }}
             >
-              <div className={`relative w-3.5 h-3.5 rounded-full transition-all duration-500 ease-out ${active ? "bg-pink-400 shadow-[0_0_15px_#22d3ee,0_0_30px_#22d3ee]" : "bg-white/20 group-hover:bg-white/70 shadow-none"}`}>
+              <div className={`relative w-3.5 h-3.5 rounded-full transition-all duration-500 ease-out ${active ? "bg-pink-400 shadow-[0_0_15px_#22d3ee,0_0_30px_#22d3ee]" : "bg-white/20 group-hover:bg-white/70"}`}>
                 {active && <div className="absolute inset-0 rounded-full bg-white blur-[1px] opacity-50" />}
               </div>
-              <AnimatePresence>
-                {active && (
-                  <>
-                    <motion.div layoutId="activeGlow" className="absolute -inset-3 rounded-full bg-pink-500/20 blur-xl" transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
-                    <motion.div initial={{ scale: 0.5, opacity: 0.8 }} animate={{ scale: 2.5, opacity: 0 }} transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }} className="absolute inset-0 rounded-full bg-pink-400/40" />
-                  </>
-                )}
-              </AnimatePresence>
+
               <span className={`absolute top-8 font-mono text-[10px] tracking-[0.3em] transition-all duration-300 ${active ? "text-cyan-400 font-bold translate-y-1" : "text-gray-500 opacity-60"}`}>
                 {String(pageNum).padStart(2, "0")}
               </span>
@@ -265,5 +232,3 @@ export function ConstellationPagination({
     </div>
   );
 }
-
-

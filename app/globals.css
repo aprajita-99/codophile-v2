@@ -69,3 +69,7 @@ body {
 .animate-shine {
   animation: shine 8s linear infinite;
 }
+
+html {
+  scroll-behavior: smooth;
+}
