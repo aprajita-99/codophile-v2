@@ -9664,7 +9664,80 @@ window.swingToState = function(targetState) {
 }`
     }
 },
+{
+    // please ignore title, descriptions and keywords for now , ill reWrite  all of these 
+    // leave these on me.
+    // to add option to provide the spritesheet as well for use to the user.
+    // to see that this works without any issue in all devices , in all sizes.
+    id: "rocket-launch-frame-skip",
+    title: "Rocket Launch Get started button",
+    description: "A refined version that skips the corrupted first frame. It sets the static state to Frame 2 and uses a negative animation delay to seamlessly start the sequence from the second frame, ending at Frame 66.",
+    tags: ["Button", "Spritesheet", "Fixed", "Offset", "CSS"],
+    code: {
+        html: `
+<div class="rocket-wrapper">
+    <button class="rocket-btn" aria-label="Get Started"></button>
+</div>
+`,
+        css: `
+.rocket-wrapper {
+    -webkit-font-smoothing: antialiased;
+}
 
+.rocket-btn {
+    /* 1. DIMENSIONS */
+    width: 200px;
+    height: 167px;
 
+    /* 2. SPRITESHEET */
+    background-image: url('button_with_rocket.png');
+    background-repeat: no-repeat;
+    
+    /* Pixel-perfect size for 5 cols x 14 rows */
+    background-size: 1000px 2344px;
 
+    /* FIX #1: Start at Frame 2 (-200px) instead of Frame 1 (0px) */
+    background-position: -200px 0; 
+
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    transition: transform 0.1s;
+}
+
+.rocket-btn:active {
+    transform: scale(0.98);
+}
+
+/* 3. ANIMATION LOGIC */
+.rocket-btn:hover {
+    animation-name: sprite-x, sprite-y;
+    animation-duration: 0.15s, 2.1s; 
+    animation-timing-function: steps(5), steps(14);
+    
+    /* FIX #2: Negative delay fast-forwards animation by 1 frame (0.03s)
+       This ensures smooth continuity from the static state (Frame 2) 
+       without snapping back to Frame 1. 
+    */
+    animation-delay: -0.03s, -0.03s;
+
+    /* Stop exactly at virtual Frame 66 */
+    animation-iteration-count: 13.2, 0.9428; 
+    
+    animation-fill-mode: forwards;
+}
+
+/* 4. KEYFRAMES */
+@keyframes sprite-x {
+    from { background-position-x: 0px; }
+    to { background-position-x: -1000px; }
+}
+
+@keyframes sprite-y {
+    from { background-position-y: 0px; }
+    to { background-position-y: -2344px; }
+}
+`
+    }
+}
 ];
