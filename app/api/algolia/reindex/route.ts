@@ -1,4 +1,4 @@
-import { algoliaClient, ALGOLIA_INDEX_NAME } from "@/lib/algolia/client";
+import { getAlgoliaClient, ALGOLIA_INDEX_NAME } from "@/lib/algolia/client";
 import { effectsData } from "@/app/effects/data";
 
 export async function POST() {
@@ -11,7 +11,7 @@ export async function POST() {
     type: "effect",
   }));
 
-  await algoliaClient.saveObjects({
+  await getAlgoliaClient().saveObjects({
     indexName: ALGOLIA_INDEX_NAME,
     objects: records,
   });

@@ -54,6 +54,19 @@ Follow these steps to set up the project locally.
 -   Node.js 18+ installed
 -   npm, yarn, or pnpm
 
+### Environment Variables
+
+Create a `.env.local` file in the project root with the following variables:
+
+```env
+NEXT_PUBLIC_ALGOLIA_APP_ID=your_algolia_app_id
+NEXT_PUBLIC_ALGOLIA_SEARCH_KEY=your_algolia_search_key
+ALGOLIA_ADMIN_KEY=your_algolia_admin_key
+NEXT_PUBLIC_ALGOLIA_INDEX_NAME=your_algolia_index_name
+```
+
+> **Note:** `NEXT_PUBLIC_*` variables are inlined into the client-side bundle at **build time**. The `ALGOLIA_ADMIN_KEY` is a server-side secret used only at **runtime**.
+
 ### Interpretation
 
 1.  **Clone the repository**
@@ -84,12 +97,15 @@ You can also run this project using Docker.
 ### Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/) installed
+- `.env.local` file configured (see [Environment Variables](#environment-variables) above)
 
 ### Running with Docker Compose (Recommended)
 
+Use the `--env-file` flag so Docker Compose reads `.env.local` for build arguments and runtime variables.
+
 1.  **Build and run the container**
     ```bash
-    docker-compose up -d --build
+    docker compose --env-file .env.local up -d --build
     ```
 
 2.  **Access the application**
@@ -97,14 +113,18 @@ You can also run this project using Docker.
 
 ### Running with Docker CLI
 
-1.  **Build the image**
+1.  **Build the image** (pass `NEXT_PUBLIC_*` vars as build args)
     ```bash
-    docker build -t codophile .
+    docker build \
+      --build-arg NEXT_PUBLIC_ALGOLIA_APP_ID=your_algolia_app_id \
+      --build-arg NEXT_PUBLIC_ALGOLIA_SEARCH_KEY=your_algolia_search_key \
+      --build-arg NEXT_PUBLIC_ALGOLIA_INDEX_NAME=your_algolia_index_name \
+      -t codophile .
     ```
 
-2.  **Run the container**
+2.  **Run the container** (pass runtime env vars via `--env-file`)
     ```bash
-    docker run -p 3000:3000 codophile
+    docker run -p 3000:3000 --env-file .env.local codophile
     ```
 
 ## 🎮 How to Use

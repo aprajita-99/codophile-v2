@@ -25,6 +25,15 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+# NEXT_PUBLIC_* vars must be available at build time for Next.js to inline them
+ARG NEXT_PUBLIC_ALGOLIA_APP_ID
+ARG NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
+ARG NEXT_PUBLIC_ALGOLIA_INDEX_NAME
+
+ENV NEXT_PUBLIC_ALGOLIA_APP_ID=$NEXT_PUBLIC_ALGOLIA_APP_ID
+ENV NEXT_PUBLIC_ALGOLIA_SEARCH_KEY=$NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
+ENV NEXT_PUBLIC_ALGOLIA_INDEX_NAME=$NEXT_PUBLIC_ALGOLIA_INDEX_NAME
+
 RUN npm run build
 
 # Production image, copy all the files and run next
