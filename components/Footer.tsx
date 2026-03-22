@@ -101,8 +101,8 @@ export default function Footer() {
                                 </div>
                             </form>
                             <p className={`text-xs mt-2 transition-colors duration-300 ${status.type === 'error' ? 'text-red-400' :
-                                    status.type === 'success' ? 'text-green-400' :
-                                        'text-gray-500'
+                                status.type === 'success' ? 'text-green-400' :
+                                    'text-gray-500'
                                 }`}>
                                 {status.message}
                             </p>
