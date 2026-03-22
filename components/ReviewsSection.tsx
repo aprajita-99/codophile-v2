@@ -78,7 +78,7 @@ export default function ReviewsSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 mb-16 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-violet-400 text-sm font-medium mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-violet-400 text-sm font-medium mb-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -97,10 +97,10 @@ export default function ReviewsSection() {
           </svg>
           OUR REVIEWS
         </div>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6">
           Loved by devs worldwide
         </h2>
-        <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+        <p className="text-gray-500 dark:text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
           Codophile has transformed the way we build applications. The components are clean, customizable, and production-ready, saving us hours of repetitive coding.
         </p>
       </div>
@@ -108,7 +108,7 @@ export default function ReviewsSection() {
       {/* Marquee Container */}
       <div className="relative flex flex-col gap-6 w-full max-w-[100vw] overflow-hidden">
         {/* Left Fading Edge */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-[rgba(3,0,20,0.8)] to-transparent z-20 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-background to-transparent z-20 pointer-events-none" />
         
         {/* Row 1 - Left to Right */}
         <div className="flex w-max gap-6 hover:[animation-play-state:paused] animate-scroll-left">
@@ -116,19 +116,19 @@ export default function ReviewsSection() {
           {[...reviewData1, ...reviewData1].map((review, idx) => (
             <div
               key={`row1-${idx}`}
-              className="w-[350px] md:w-[400px] shrink-0 p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-violet-500/30 transition-colors"
+              className="w-[350px] md:w-[400px] shrink-0 p-6 rounded-2xl bg-foreground/[0.03] border border-foreground/10 hover:border-violet-500/30 transition-colors"
             >
-              <p className="text-gray-300 text-[15px] leading-relaxed mb-6 h-24">
+              <p className="text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed mb-6 h-24">
                 "{review.text}"
               </p>
               <div className="flex items-center gap-4">
                 <img
                   src={review.avatar}
                   alt={review.name}
-                  className="w-10 h-10 rounded-full bg-white/10 border border-white/20 p-1"
+                  className="w-10 h-10 rounded-full bg-foreground/10 border border-foreground/20 p-1"
                 />
                 <div className="flex flex-col">
-                  <span className="text-white font-semibold text-sm">{review.name}</span>
+                  <span className="text-foreground font-semibold text-sm">{review.name}</span>
                   <span className="text-gray-500 text-xs">{review.handle}</span>
                 </div>
               </div>
@@ -141,19 +141,19 @@ export default function ReviewsSection() {
           {[...reviewData2, ...reviewData2].map((review, idx) => (
             <div
               key={`row2-${idx}`}
-              className="w-[350px] md:w-[400px] shrink-0 p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-violet-500/30 transition-colors"
+              className="w-[350px] md:w-[400px] shrink-0 p-6 rounded-2xl bg-foreground/[0.03] border border-foreground/10 hover:border-violet-500/30 transition-colors"
             >
-              <p className="text-gray-300 text-[15px] leading-relaxed mb-6 h-24">
+              <p className="text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed mb-6 h-24">
                 "{review.text}"
               </p>
               <div className="flex items-center gap-4">
                 <img
                   src={review.avatar}
                   alt={review.name}
-                  className="w-10 h-10 rounded-full bg-white/10 border border-white/20 p-1"
+                  className="w-10 h-10 rounded-full bg-foreground/10 border border-foreground/20 p-1"
                 />
                 <div className="flex flex-col">
-                  <span className="text-white font-semibold text-sm">{review.name}</span>
+                  <span className="text-foreground font-semibold text-sm">{review.name}</span>
                   <span className="text-gray-500 text-xs">{review.handle}</span>
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function ReviewsSection() {
         </div>
         
         {/* Right Fading Edge */}
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-linear-to-l from-[rgba(3,0,20,0.8)] to-transparent z-20 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-linear-to-l from-background to-transparent z-20 pointer-events-none" />
       </div>
     </section>
   );

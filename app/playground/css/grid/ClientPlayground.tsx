@@ -138,7 +138,7 @@ export default function GridClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -150,24 +150,24 @@ export default function GridClient() {
                     className="w-full lg:w-96 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to CSS
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             CSS Grid Layout
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Master grid layouts by controlling grid templates, gaps, and item placement.
                         </p>
                     </div>
 
                     {/* Tab Switcher */}
-                    <div className="flex p-1 bg-white/5 rounded-xl border border-white/5">
+                    <div className="flex p-1 bg-foreground/5 rounded-xl border border-foreground/5">
                         <button
                             onClick={() => setActiveTab("container")}
                             className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 ${activeTab === "container"
                                 ? "bg-cyan-500/20 text-cyan-400 shadow-sm border border-cyan-500/20"
-                                : "text-gray-400 hover:text-white"
+                                : "text-gray-600 dark:text-gray-400 hover:text-foreground"
                                 }`}
                         >
                             <LayoutGrid className="w-4 h-4" /> Container
@@ -176,7 +176,7 @@ export default function GridClient() {
                             onClick={() => setActiveTab("items")}
                             className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 ${activeTab === "items"
                                 ? "bg-purple-500/20 text-purple-400 shadow-sm border border-purple-500/20"
-                                : "text-gray-400 hover:text-white"
+                                : "text-gray-600 dark:text-gray-400 hover:text-foreground"
                                 }`}
                         >
                             <BoxSelect className="w-4 h-4" /> Items
@@ -196,7 +196,7 @@ export default function GridClient() {
                                     />
                                     <div className="flex gap-2 flex-wrap">
                                         {['repeat(3, 1fr)', '1fr 2fr 1fr', 'repeat(auto-fit, minmax(100px, 1fr))', '100px 100px'].map(v => (
-                                            <button key={v} onClick={() => setGridTemplateColumns(v)} className="text-[10px] text-gray-500 hover:text-white bg-white/5 px-2 py-0.5 rounded border border-white/5 hover:border-white/20 transition-colors">{v}</button>
+                                            <button key={v} onClick={() => setGridTemplateColumns(v)} className="text-[10px] text-gray-500 hover:text-foreground bg-foreground/5 px-2 py-0.5 rounded border border-foreground/5 hover:border-white/20 transition-colors">{v}</button>
                                         ))}
                                     </div>
 
@@ -208,7 +208,7 @@ export default function GridClient() {
                                     />
                                     <div className="flex gap-2 flex-wrap">
                                         {['repeat(3, 100px)', 'auto auto', '100px 200px'].map(v => (
-                                            <button key={v} onClick={() => setGridTemplateRows(v)} className="text-[10px] text-gray-500 hover:text-white bg-white/5 px-2 py-0.5 rounded border border-white/5 hover:border-white/20 transition-colors">{v}</button>
+                                            <button key={v} onClick={() => setGridTemplateRows(v)} className="text-[10px] text-gray-500 hover:text-foreground bg-foreground/5 px-2 py-0.5 rounded border border-foreground/5 hover:border-white/20 transition-colors">{v}</button>
                                         ))}
                                     </div>
                                     <SliderControl label="Gap" value={gap} onChange={setGap} min={0} max={50} unit="px" />
@@ -254,7 +254,7 @@ export default function GridClient() {
                                             onClick={() => setActiveItemId(item.id)}
                                             className={`py-2 rounded-lg text-sm font-bold transition-all border ${activeItemId === item.id
                                                 ? "ring-2 ring-white scale-105 border-transparent"
-                                                : "opacity-60 hover:opacity-100 border-white/10"
+                                                : "opacity-60 hover:opacity-100 border-foreground/10"
                                                 }`}
                                             style={{ backgroundColor: item.backgroundColor, color: 'white' }}
                                         >
@@ -274,7 +274,7 @@ export default function GridClient() {
                                     </div>
                                     <div className="flex gap-2 mt-2 flex-wrap">
                                         {['auto', 'span 2', '1', '-1'].map(v => (
-                                            <button key={v} onClick={() => { updateItem("gridColumnStart", v); }} className="text-[10px] text-gray-500 hover:text-white bg-white/5 px-2 py-0.5 rounded border border-white/5 hover:border-white/20 transition-colors">Col: {v}</button>
+                                            <button key={v} onClick={() => { updateItem("gridColumnStart", v); }} className="text-[10px] text-gray-500 hover:text-foreground bg-foreground/5 px-2 py-0.5 rounded border border-foreground/5 hover:border-white/20 transition-colors">Col: {v}</button>
                                         ))}
                                     </div>
                                 </ControlGroup>
@@ -317,7 +317,7 @@ export default function GridClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -332,9 +332,9 @@ export default function GridClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex flex-col bg-[#1a1a1a]">
-                        <div className="absolute top-0 left-0 right-0 p-3 bg-white/5 border-b border-white/5 flex justify-between items-center z-10">
-                            <span className="text-xs font-mono text-gray-400">Grid Container Preview</span>
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex flex-col bg-[#1a1a1a]">
+                        <div className="absolute top-0 left-0 right-0 p-3 bg-foreground/5 border-b border-foreground/5 flex justify-between items-center z-10">
+                            <span className="text-xs font-mono text-gray-600 dark:text-gray-400">Grid Container Preview</span>
                             <div className="text-[10px] text-gray-500">
                                 {items.length} Items
                             </div>
@@ -361,7 +361,7 @@ export default function GridClient() {
                                     onClick={() => { setActiveTab("items"); setActiveItemId(item.id); }}
                                     className={`
                                         relative rounded-lg flex items-center justify-center p-4 cursor-pointer transition-all border-2
-                                        ${activeItemId === item.id && activeTab === "items" ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.3)] z-10" : "border-transparent border-white/5 hover:border-white/20"}
+                                        ${activeItemId === item.id && activeTab === "items" ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.3)] z-10" : "border-transparent border-foreground/5 hover:border-white/20"}
                                     `}
                                     style={{
                                         backgroundColor: item.backgroundColor,
@@ -374,16 +374,16 @@ export default function GridClient() {
                                         minHeight: "60px",
                                     }}
                                 >
-                                    <span className="text-white font-bold drop-shadow-md">{item.id}</span>
+                                    <span className="text-foreground font-bold drop-shadow-md">{item.id}</span>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
                                 {activeTab === "container" ? "Container CSS" : `Item ${activeItemId} CSS`}
                             </span>
                             <button
@@ -394,10 +394,10 @@ export default function GridClient() {
                                 {copied ? "Copied!" : "Copy CSS"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 max-h-40 overflow-y-auto custom-scrollbar whitespace-pre">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 max-h-40 overflow-y-auto custom-scrollbar whitespace-pre">
                             {activeTab === "container" ? (
                                 <div>
-                                    <div className="text-purple-400">.container <span className="text-white">{`{`}</span></div>
+                                    <div className="text-purple-400">.container <span className="text-foreground">{`{`}</span></div>
                                     <div className="pl-4 text-orange-300">display: <span className="text-cyan-300">grid</span>;</div>
                                     <div className="pl-4 text-orange-300">grid-template-columns: <span className="text-cyan-300">{gridTemplateColumns}</span>;</div>
                                     <div className="pl-4 text-orange-300">grid-template-rows: <span className="text-cyan-300">{gridTemplateRows}</span>;</div>
@@ -406,18 +406,18 @@ export default function GridClient() {
                                     <div className="pl-4 text-orange-300">align-items: <span className="text-cyan-300">{alignItems}</span>;</div>
                                     <div className="pl-4 text-orange-300">justify-content: <span className="text-cyan-300">{justifyContent}</span>;</div>
                                     <div className="pl-4 text-orange-300">align-content: <span className="text-cyan-300">{alignContent}</span>;</div>
-                                    <div className="text-white">{`}`}</div>
+                                    <div className="text-foreground">{`}`}</div>
                                 </div>
                             ) : (
                                 <div>
-                                    <div className="text-purple-400">.item-{activeItemId} <span className="text-white">{`{`}</span></div>
+                                    <div className="text-purple-400">.item-{activeItemId} <span className="text-foreground">{`{`}</span></div>
                                     <div className="pl-4 text-orange-300">grid-column-start: <span className="text-cyan-300">{activeItem.gridColumnStart}</span>;</div>
                                     <div className="pl-4 text-orange-300">grid-column-end: <span className="text-cyan-300">{activeItem.gridColumnEnd}</span>;</div>
                                     <div className="pl-4 text-orange-300">grid-row-start: <span className="text-cyan-300">{activeItem.gridRowStart}</span>;</div>
                                     <div className="pl-4 text-orange-300">grid-row-end: <span className="text-cyan-300">{activeItem.gridRowEnd}</span>;</div>
                                     <div className="pl-4 text-orange-300">justify-self: <span className="text-cyan-300">{activeItem.justifySelf}</span>;</div>
                                     <div className="pl-4 text-orange-300">align-self: <span className="text-cyan-300">{activeItem.alignSelf}</span>;</div>
-                                    <div className="text-white">{`}`}</div>
+                                    <div className="text-foreground">{`}`}</div>
                                 </div>
                             )}
                         </div>
@@ -433,8 +433,8 @@ export default function GridClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -446,7 +446,7 @@ function SliderControl({ label, value, onChange, min, max, step = 1, unit = "" }
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{value}{unit}</span>
             </div>
             <input
@@ -466,15 +466,15 @@ function SelectControl({ label, value, onChange, options, note }: any) {
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label} {note && <span className="text-gray-500 text-[10px]">{note}</span>}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label} {note && <span className="text-gray-500 text-[10px]">{note}</span>}</label>
             </div>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
+                className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
             >
                 {options.map((opt: string) => (
-                    <option key={opt} value={opt} className="bg-gray-900 text-white">
+                    <option key={opt} value={opt} className="bg-gray-900 text-foreground">
                         {opt}
                     </option>
                 ))}
@@ -487,14 +487,14 @@ function TextInputControl({ label, value, onChange, placeholder }: any) {
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
             </div>
             <input
                 type="text"
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder}
-                className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-cyan-500/50"
+                className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-cyan-500/50"
             />
         </div>
     );

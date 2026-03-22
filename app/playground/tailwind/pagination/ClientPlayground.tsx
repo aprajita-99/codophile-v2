@@ -53,14 +53,14 @@ export default function PaginationClient() {
     };
 
     const getLinkClasses = (isActive: boolean, isBreadcrumbItem: boolean = false) => {
-        const classes = ["block", "text-white", "no-underline"];
+        const classes = ["block", "text-foreground", "no-underline"];
 
         if (isBreadcrumbItem) {
             classes.push("flex", "items-center");
             if (isActive) {
                 classes.push(`text-${activeColor}-400`);
             } else {
-                classes.push("text-gray-400");
+                classes.push("text-gray-600 dark:text-gray-400");
                 if (hoverEffect) classes.push("hover:underline");
             }
             return classes.join(" ");
@@ -97,22 +97,22 @@ export default function PaginationClient() {
 
     const generateCode = () => {
         const containerClass = getContainerClasses();
-        const linkBaseClass = getLinkClasses(false, style === "breadcrumb").replace(/text-gray-400|hover:underline/g, "").trim(); // cleanse base link class for non-breadcrumb generic
+        const linkBaseClass = getLinkClasses(false, style === "breadcrumb").replace(/text-gray-600 dark:text-gray-400|hover:underline/g, "").trim(); // cleanse base link class for non-breadcrumb generic
 
         if (style === "breadcrumb") {
             const activeClass = `text-${activeColor}-400`;
-            const inactiveClass = `text-gray-400 ${hoverEffect ? "hover:underline" : ""}`;
+            const inactiveClass = `text-gray-600 dark:text-gray-400 ${hoverEffect ? "hover:underline" : ""}`;
 
             return `<nav aria-label="Breadcrumb">
   <ol className="${containerClass}">
     <li className="flex items-center">
-      <a href="#" className="${inactiveClass} hover:text-white transition-colors">Home</a>
+      <a href="#" className="${inactiveClass} hover:text-foreground transition-colors">Home</a>
       <svg className="w-4 h-4 mx-2 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
       </svg>
     </li>
     <li className="flex items-center">
-      <a href="#" className="${inactiveClass} hover:text-white transition-colors">Products</a>
+      <a href="#" className="${inactiveClass} hover:text-foreground transition-colors">Products</a>
       <svg className="w-4 h-4 mx-2 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
       </svg>
@@ -157,7 +157,7 @@ export default function PaginationClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -169,13 +169,13 @@ export default function PaginationClient() {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to Tailwind
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             Pagination
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Customize navigation links with Tailwind utility classes.
                         </p>
                     </div>
@@ -190,7 +190,7 @@ export default function PaginationClient() {
                                         onClick={() => setStyle(s as PaginationStyle)}
                                         className={`px-3 py-2 text-xs rounded-lg border transition-all capitalize ${style === s
                                             ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400'
-                                            : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
+                                            : 'bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400 hover:bg-white/10'
                                             }`}
                                     >
                                         {s}
@@ -202,7 +202,7 @@ export default function PaginationClient() {
                         <ControlGroup title="Size & Spacing">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="text-xs text-gray-300 block mb-2">Size</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300 block mb-2">Size</label>
                                     <div className="flex gap-2">
                                         {['sm', 'md', 'lg'].map((s) => (
                                             <button
@@ -210,7 +210,7 @@ export default function PaginationClient() {
                                                 onClick={() => setSize(s as Size)}
                                                 className={`flex-1 py-1.5 text-xs rounded border transition-all uppercase ${size === s
                                                     ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400'
-                                                    : 'bg-white/5 border-white/10 text-gray-400'
+                                                    : 'bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400'
                                                     }`}
                                             >
                                                 {s}
@@ -234,7 +234,7 @@ export default function PaginationClient() {
                         <ControlGroup title="Appearance">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="text-xs text-gray-300 block mb-2">Active Color</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300 block mb-2">Active Color</label>
                                     <div className="flex gap-2">
                                         {[
                                             { name: 'cyan', hex: '#06b6d4' },
@@ -256,12 +256,12 @@ export default function PaginationClient() {
                                 </div>
 
                                 <div className="flex items-center justify-between">
-                                    <label className="text-xs text-gray-300">Hover Effect</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300">Hover Effect</label>
                                     <Toggle checked={hoverEffect} onChange={setHoverEffect} />
                                 </div>
 
                                 <div className="flex items-center justify-between">
-                                    <label className="text-xs text-gray-300">Smooth Transition</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300">Smooth Transition</label>
                                     <Toggle checked={transition} onChange={setTransition} />
                                 </div>
                             </div>
@@ -275,7 +275,7 @@ export default function PaginationClient() {
                                         onClick={() => setAlignment(a as Alignment)}
                                         className={`flex-1 py-1.5 text-xs rounded border transition-all capitalize ${alignment === a
                                             ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400'
-                                            : 'bg-white/5 border-white/10 text-gray-400'
+                                            : 'bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400'
                                             }`}
                                     >
                                         {a}
@@ -288,7 +288,7 @@ export default function PaginationClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -303,7 +303,7 @@ export default function PaginationClient() {
                     className="flex-1 min-w-0 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex items-center justify-center bg-[#111] group">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex items-center justify-center bg-[#111] group">
                         {/* Grid Background */}
                         <div className="absolute inset-0 z-0">
                             <div className="absolute inset-0 bg-linear-to-br from-blue-900/10 via-transparent to-purple-900/10" />
@@ -316,13 +316,13 @@ export default function PaginationClient() {
                                 <nav aria-label="Breadcrumb">
                                     <ol className={getContainerClasses()}>
                                         <li className="flex items-center shrink-0">
-                                            <a href="#" className={`text-gray-400 hover:text-white transition-colors ${size === "sm" ? "text-sm" : size === "md" ? "text-base" : "text-lg"}`}>Home</a>
+                                            <a href="#" className={`text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors ${size === "sm" ? "text-sm" : size === "md" ? "text-base" : "text-lg"}`}>Home</a>
                                             <svg className="w-4 h-4 mx-2 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                             </svg>
                                         </li>
                                         <li className="flex items-center shrink-0">
-                                            <a href="#" className={`text-gray-400 hover:text-white transition-colors ${size === "sm" ? "text-sm" : size === "md" ? "text-base" : "text-lg"}`}>Products</a>
+                                            <a href="#" className={`text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors ${size === "sm" ? "text-sm" : size === "md" ? "text-base" : "text-lg"}`}>Products</a>
                                             <svg className="w-4 h-4 mx-2 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                             </svg>
@@ -359,9 +359,9 @@ export default function PaginationClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">JSX / HTML Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">JSX / HTML Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -370,7 +370,7 @@ export default function PaginationClient() {
                                 {copied ? "Copied!" : "Copy Code"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 max-h-64 custom-scrollbar whitespace-pre">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 max-h-64 custom-scrollbar whitespace-pre">
                             {code}
                         </div>
                     </div>
@@ -385,8 +385,8 @@ export default function PaginationClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -398,7 +398,7 @@ function SliderControl({ label, value, onChange, min, max, unit = "" }: any) {
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{value}{unit}</span>
             </div>
             <input

@@ -163,11 +163,11 @@ const categories = [
 
 export default function TailwindPlaygroundClient() {
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 relative overflow-hidden">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 relative overflow-hidden">
             <Header />
 
             {/* Dynamic Background */}
-            <div className="absolute inset-0 bg-[#030014] -z-10">
+            <div className="absolute inset-0 bg-background -z-10">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
                 <div className="absolute top-0 right-0 translate-y-20 -translate-x-10 blur-3xl opacity-20 w-96 h-96 bg-cyan-600 rounded-full" />
             </div>
@@ -175,13 +175,13 @@ export default function TailwindPlaygroundClient() {
             <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto relative z-10">
                 <div className="mb-16 flex flex-col md:flex-row justify-between items-start gap-8">
                     <div>
-                        <Link href="/playground" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6 text-sm group">
+                        <Link href="/playground" className="inline-flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-foreground transition-colors mb-6 text-sm group">
                             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Selection
                         </Link>
                         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
-                            Tailwind <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-teal-400 to-white">Playground</span>
+                            Tailwind <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-teal-400 to-foreground">Playground</span>
                         </h1>
-                        <p className="text-gray-400 text-lg max-w-2xl leading-relaxed">
+                        <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl leading-relaxed">
                             Rapidly prototype with Tailwind CSS utility classes.
                             Select a category to explore the available utilities visually.
                         </p>
@@ -212,11 +212,11 @@ export default function TailwindPlaygroundClient() {
                                     />
                                 </div>
 
-                                <h3 className="text-xl font-bold mb-3 text-gray-100 group-hover:text-white transition-colors">
+                                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-100 group-hover:text-foreground transition-colors">
                                     {item.title}
                                 </h3>
 
-                                <p className="text-gray-400 text-sm leading-relaxed">
+                                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                                     {item.description}
                                 </p>
                             </div>

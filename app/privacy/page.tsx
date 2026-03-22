@@ -12,7 +12,7 @@ const fadeIn = {
 
 export default function PrivacyPage() {
     return (
-        <main className="min-h-screen bg-[#030014] text-white selection:bg-indigo-500/30 overflow-hidden">
+        <main className="min-h-screen bg-background text-foreground selection:bg-indigo-500/30 overflow-hidden">
             <Header />
 
             <div className="relative pt-32 pb-20 px-6 max-w-4xl mx-auto relative z-10">

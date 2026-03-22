@@ -24,7 +24,7 @@ const staggerContainer = {
 
 export default function AboutPage() {
     return (
-        <main className="min-h-screen bg-[#030014] text-white selection:bg-indigo-500/30 overflow-hidden">
+        <main className="min-h-screen bg-background text-foreground selection:bg-indigo-500/30 overflow-hidden">
             <Header />
 
             <div className="relative pt-24 pb-20 px-6 max-w-7xl mx-auto">
@@ -40,24 +40,24 @@ export default function AboutPage() {
                         animate="visible"
                         variants={staggerContainer}
                     >
-                        <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-indigo-300 mb-6">
+                        <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-xs font-medium text-indigo-300 mb-6">
                             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
                             Reimagining Web Design
                         </motion.div>
                         <motion.h1 variants={fadeIn} className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                             We are <br />
-                            <span className="bg-clip-text text-transparent bg-linear-to-r from-white via-indigo-200 to-violet-400">
+                            <span className="bg-clip-text text-transparent bg-linear-to-r from-foreground via-indigo-200 to-violet-400">
                                 Codophile
                             </span>
                         </motion.h1>
-                        <motion.p variants={fadeIn} className="text-lg text-gray-400 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        <motion.p variants={fadeIn} className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
                             Transforming how developers design and build. We bridge the gap between creative vision and production code with our advanced visual playground.
                         </motion.p>
                         <motion.div variants={fadeIn} className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                            <button className="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+                            <button className="px-6 py-3 bg-foreground text-background font-semibold rounded-lg hover:opacity-90 transition-opacity">
                                 Join Our Journey
                             </button>
-                            <button className="px-6 py-3 bg-white/5 border border-white/10 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">
+                            <button className="px-6 py-3 bg-foreground/5 border border-foreground/10 text-foreground font-semibold rounded-lg hover:bg-foreground/10 transition-colors">
                                 View Career
                             </button>
                         </motion.div>
@@ -80,7 +80,7 @@ export default function AboutPage() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={staggerContainer}
-                        className="grid grid-cols-2 md:grid-cols-4 gap-8 border-y border-white/5 py-12"
+                        className="grid grid-cols-2 md:grid-cols-4 gap-8 border-y border-foreground/5 py-12"
                     >
                         {[
                             { label: "Designers", value: "4", icon: Users },
@@ -92,8 +92,8 @@ export default function AboutPage() {
                                 <div className="flex justify-center mb-4 text-indigo-400">
                                     <stat.icon size={24} />
                                 </div>
-                                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
-                                <div className="text-sm text-gray-500 uppercase tracking-wider">{stat.label}</div>
+                                <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">{stat.value}</div>
+                                <div className="text-sm text-gray-600 dark:text-gray-500 uppercase tracking-wider">{stat.label}</div>
                             </motion.div>
                         ))}
                     </motion.div>
@@ -122,13 +122,13 @@ export default function AboutPage() {
                             <div className="w-12 h-12 bg-orange-500/10 rounded-xl flex items-center justify-center text-orange-400 mb-6">
                                 <Target size={24} />
                             </div>
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Our Mission</h2>
-                            <p className="text-gray-400 text-lg leading-relaxed mb-6">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">Our Mission</h2>
+                            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
                                 To democratize high-quality web design. We believe everyone should have the power to create stunning interfaces without getting bogged down by the complexities of CSS syntax.
                             </p>
                             <ul className="space-y-4">
                                 {["Simplify CSS mastery", "Accelerate development workflows", "Foster a global design community"].map((item, i) => (
-                                    <li key={i} className="flex items-center gap-3 text-gray-300">
+                                    <li key={i} className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
                                         <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
                                         {item}
                                     </li>
@@ -149,8 +149,8 @@ export default function AboutPage() {
                             <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 mb-6">
                                 <Users size={24} />
                             </div>
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Visualizing the Future</h2>
-                            <p className="text-gray-400 text-lg leading-relaxed mb-6">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">Visualizing the Future</h2>
+                            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
                                 We envision a world where the barrier between a design idea and a live product is non-existent. Our community is at the heart of this revolution, constantly sharing, iterating, and improving.
                             </p>
                             <button className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-2 group">
@@ -172,12 +172,12 @@ export default function AboutPage() {
                 {/* Our Journey Timeline (Unstop Style) */}
                 <section className="mb-32">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Our Journey</h2>
-                        <p className="text-gray-400">From a simple idea to a global platform.</p>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Our Journey</h2>
+                        <p className="text-gray-600 dark:text-gray-400">From a simple idea to a global platform.</p>
                     </div>
 
                     <div className="relative max-w-3xl mx-auto">
-                        <div className="absolute left-1/2 -translate-x-1/2 h-full w-px bg-white/10" />
+                        <div className="absolute left-1/2 -translate-x-1/2 h-full w-px bg-foreground/10" />
 
                         {[
                             { year: "2023", title: "The Inception", desc: "It started as a first-year project—just a raw idea and a blank editor. We built a pure website from scratch, driven by curiosity and the thrill of creation." },
@@ -196,10 +196,10 @@ export default function AboutPage() {
                             >
                                 <div className={`w-[45%] ${idx % 2 === 0 ? 'text-right' : 'text-left'}`}>
                                     <div className="text-2xl font-bold text-indigo-400 mb-1">{item.year}</div>
-                                    <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                                    <p className="text-sm text-gray-400">{item.desc}</p>
+                                    <h3 className="text-xl font-semibold text-foreground mb-2">{item.title}</h3>
+                                    <p className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</p>
                                 </div>
-                                <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-500 border-4 border-[#030014] z-10 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
+                                <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-500 border-4 border-background z-10 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
                                 <div className="w-[45%]" />
                             </motion.div>
                         ))}
@@ -207,7 +207,7 @@ export default function AboutPage() {
                 </section>
 
                 <section className="mb-24">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white flex items-center justify-center gap-3">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground flex items-center justify-center gap-3">
                         <Users className="text-indigo-400" /> Meet the Creators
                     </h2>
 
@@ -225,11 +225,11 @@ export default function AboutPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="bg-white/5 border border-white/10 rounded-xl px-8 py-6 text-center hover:bg-white/10 transition-all group relative overflow-hidden min-w-[200px] flex-1 max-w-[250px]"
+                                className="bg-foreground/5 border border-foreground/10 rounded-xl px-8 py-6 text-center hover:bg-foreground/10 transition-all group relative overflow-hidden min-w-[200px] flex-1 max-w-[250px]"
                             >
                                 <div className={`absolute top-0 left-0 w-full h-0.5 bg-linear-to-r ${member.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300`} />
 
-                                <h3 className="text-lg font-bold text-white mb-1 group-hover:text-white/90 transition-colors">
+                                <h3 className="text-lg font-bold text-foreground mb-1 group-hover:opacity-90 transition-colors">
                                     {member.name}
                                 </h3>
                                 <p className={`text-[10px] font-bold uppercase tracking-widest ${member.roleColor}`}>
@@ -248,9 +248,9 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="relative bg-linear-to-br from-violet-900/20 to-indigo-900/20 border border-violet-500/20 rounded-2xl p-10 overflow-hidden"
                     >
-                        <div className="absolute inset-0 bg-[linear-gradient(#ffffff05_1px,transparent_1px),linear-gradient(to_right,#ffffff05_1px,transparent_1px)] -z-10" style={{ backgroundSize: "20px 20px" }} />
+                        <div className="absolute inset-0 bg-[linear-gradient(#8080801a_1px,transparent_1px),linear-gradient(to_right,#8080801a_1px,transparent_1px)] -z-10" style={{ backgroundSize: "20px 20px" }} />
 
-                        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white flex items-center gap-3">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground flex items-center gap-3">
                             <Rocket className="text-pink-500" /> What's Coming Next?
                         </h2>
 
@@ -261,8 +261,8 @@ export default function AboutPage() {
                                         <Palette size={24} />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-semibold text-white mb-2">Cool CSS Library</h3>
-                                        <p className="text-gray-400 leading-relaxed">
+                                        <h3 className="text-xl font-semibold text-foreground mb-2">Cool CSS Library</h3>
+                                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                                             We are about to release a massive library of cool CSS components based on particular themes.
                                             You'll be able to easily copy and integrate these stunning designs directly into your websites.
                                             Expect glassmorphism, neomorphism, and futuristic themes!
@@ -277,8 +277,8 @@ export default function AboutPage() {
                                         <Code size={24} />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-semibold text-white mb-2">More Generators</h3>
-                                        <p className="text-gray-400 leading-relaxed">
+                                        <h3 className="text-xl font-semibold text-foreground mb-2">More Generators</h3>
+                                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                                             Expanding our playground to include advanced animations, grid layouts, and interactive components.
                                         </p>
                                     </div>

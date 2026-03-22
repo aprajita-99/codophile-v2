@@ -22,7 +22,7 @@ export default function CoreCssSection() {
                         <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-cyan-400 mb-6">
                             Master the Art of <br /> Pure CSS
                         </h2>
-                        <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                        <p className="text-gray-500 dark:text-gray-400 text-lg leading-relaxed mb-8">
                             Dive deep into the cascade. Control every pixel with precision using
                             standard CSS properties. No abstractions, just pure styling power
                             for those who demand absolute control over their design implementation.
@@ -34,8 +34,8 @@ export default function CoreCssSection() {
                                     <Palette size={24} />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-semibold text-white mb-2">Css Variable Tokens</h3>
-                                    <p className="text-gray-400 text-sm">Define your design system using native CSS custom properties for dynamic theming.</p>
+                                    <h3 className="text-xl font-semibold text-foreground mb-2">Css Variable Tokens</h3>
+                                    <p className="text-gray-500 dark:text-gray-400 text-sm">Define your design system using native CSS custom properties for dynamic theming.</p>
                                 </div>
                             </div>
                         </div>

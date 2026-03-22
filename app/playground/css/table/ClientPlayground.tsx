@@ -105,7 +105,7 @@ th {
     ];
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -117,13 +117,13 @@ th {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to CSS
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             Table Styling
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Design responsive and stylish tables with CSS properties.
                         </p>
                     </div>
@@ -140,7 +140,7 @@ th {
                                 unit="%"
                             />
                             <div className="flex items-center justify-between">
-                                <label className="text-xs text-gray-300">Responsive Wrapper</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Responsive Wrapper</label>
                                 <button
                                     onClick={() => setIsResponsive(!isResponsive)}
                                     className={`w-10 h-5 rounded-full transition-colors relative ${isResponsive ? 'bg-cyan-500' : 'bg-gray-700'}`}
@@ -152,13 +152,13 @@ th {
 
                         <ControlGroup title="Borders">
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Collapse</label>
-                                <div className="flex bg-white/5 p-1 rounded-lg">
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Collapse</label>
+                                <div className="flex bg-foreground/5 p-1 rounded-lg">
                                     {["collapse", "separate"].map((mode) => (
                                         <button
                                             key={mode}
                                             onClick={() => setBorderCollapse(mode)}
-                                            className={`flex-1 py-1 text-xs rounded-md transition-all ${borderCollapse === mode ? 'bg-cyan-500/20 text-cyan-400' : 'text-gray-400 hover:text-white'}`}
+                                            className={`flex-1 py-1 text-xs rounded-md transition-all ${borderCollapse === mode ? 'bg-cyan-500/20 text-cyan-400' : 'text-gray-600 dark:text-gray-400 hover:text-foreground'}`}
                                         >
                                             {mode.charAt(0).toUpperCase() + mode.slice(1)}
                                         </button>
@@ -178,14 +178,14 @@ th {
                             )}
 
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Style</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Style</label>
                                 <select
                                     value={borderStyle}
                                     onChange={(e) => setBorderStyle(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
+                                    className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
                                 >
                                     {borderStyles.map(style => (
-                                        <option key={style} value={style} className="bg-gray-900 text-white">
+                                        <option key={style} value={style} className="bg-gray-900 text-foreground">
                                             {style.charAt(0).toUpperCase() + style.slice(1)}
                                         </option>
                                     ))}
@@ -215,13 +215,13 @@ th {
                             />
 
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Text Align</label>
-                                <div className="flex bg-white/5 p-1 rounded-lg">
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Text Align</label>
+                                <div className="flex bg-foreground/5 p-1 rounded-lg">
                                     {textAlignments.map((align) => (
                                         <button
                                             key={align}
                                             onClick={() => setTextAlign(align)}
-                                            className={`flex-1 py-1 text-xs rounded-md transition-all ${textAlign === align ? 'bg-cyan-500/20 text-cyan-400' : 'text-gray-400 hover:text-white'}`}
+                                            className={`flex-1 py-1 text-xs rounded-md transition-all ${textAlign === align ? 'bg-cyan-500/20 text-cyan-400' : 'text-gray-600 dark:text-gray-400 hover:text-foreground'}`}
                                         >
                                             {align.slice(0, 1).toUpperCase()}
                                         </button>
@@ -230,14 +230,14 @@ th {
                             </div>
 
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Vertical Align</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Vertical Align</label>
                                 <select
                                     value={verticalAlign}
                                     onChange={(e) => setVerticalAlign(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
+                                    className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
                                 >
                                     {verticalAlignments.map(align => (
-                                        <option key={align} value={align} className="bg-gray-900 text-white">
+                                        <option key={align} value={align} className="bg-gray-900 text-foreground">
                                             {align.charAt(0).toUpperCase() + align.slice(1)}
                                         </option>
                                     ))}
@@ -247,7 +247,7 @@ th {
 
                         <ControlGroup title="Styling & Colors">
                             <div className="flex items-center justify-between">
-                                <label className="text-xs text-gray-300">Zebra Striped</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Zebra Striped</label>
                                 <button
                                     onClick={() => setIsStriped(!isStriped)}
                                     className={`w-10 h-5 rounded-full transition-colors relative ${isStriped ? 'bg-cyan-500' : 'bg-gray-700'}`}
@@ -257,7 +257,7 @@ th {
                             </div>
 
                             <div className="flex items-center justify-between">
-                                <label className="text-xs text-gray-300">Hover Effect</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Hover Effect</label>
                                 <button
                                     onClick={() => setIsHoverable(!isHoverable)}
                                     className={`w-10 h-5 rounded-full transition-colors relative ${isHoverable ? 'bg-cyan-500' : 'bg-gray-700'}`}
@@ -273,7 +273,7 @@ th {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -288,7 +288,7 @@ th {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className={`flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex items-start justify-center bg-[#111] p-8 ${isResponsive ? 'overflow-x-auto' : ''}`}>
+                    <div className={`flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex items-start justify-center bg-[#111] p-8 ${isResponsive ? 'overflow-x-auto' : ''}`}>
                         {/* Background Grid */}
                         <div className="absolute inset-0 z-0 pointer-events-none">
                             <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 via-blue-500/5 to-pink-500/5" />
@@ -354,9 +354,9 @@ th {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">CSS Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">CSS Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -365,7 +365,7 @@ th {
                                 {copied ? "Copied!" : "Copy CSS"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 max-h-60 overflow-y-auto custom-scrollbar">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 max-h-60 overflow-y-auto custom-scrollbar">
                             <pre>{`/* Table Wrapper */
 ${isResponsive ? `.table-wrapper {
   overflow-x: auto;
@@ -409,8 +409,8 @@ tr:hover {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -422,7 +422,7 @@ function SliderControl({ label, value, onChange, min, max, step = 1, unit = "" }
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{value}{unit}</span>
             </div>
             <input
@@ -442,7 +442,7 @@ function ColorControl({ label, value, onChange }: any) {
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{value}</span>
             </div>
             <div className="flex items-center gap-2">

@@ -63,7 +63,7 @@ export default function ThreeDTransformsClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -75,13 +75,13 @@ export default function ThreeDTransformsClient() {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to CSS
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             3D Transforms
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Control perspective and rotate elements in 3D space.
                         </p>
                     </div>
@@ -92,7 +92,7 @@ export default function ThreeDTransformsClient() {
                             <SliderControl label="Perspective" value={perspective} onChange={setPerspective} min={0} max={1000} unit="px" />
 
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Perspective Origin</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Perspective Origin</label>
                                 <div className="grid grid-cols-2 gap-2">
                                     <SliderControl label="X" value={perspectiveOriginX} onChange={setPerspectiveOriginX} min={0} max={100} unit="%" />
                                     <SliderControl label="Y" value={perspectiveOriginY} onChange={setPerspectiveOriginY} min={0} max={100} unit="%" />
@@ -100,7 +100,7 @@ export default function ThreeDTransformsClient() {
                             </div>
 
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300 block">Transform Style</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300 block">Transform Style</label>
                                 <div className="flex gap-2 p-1 bg-black/20 rounded-lg">
                                     {['flat', 'preserve-3d'].map((style) => (
                                         <button
@@ -108,7 +108,7 @@ export default function ThreeDTransformsClient() {
                                             onClick={() => setTransformStyle(style as any)}
                                             className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-all ${transformStyle === style
                                                     ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/50"
-                                                    : "text-gray-400 hover:bg-white/5 border border-transparent"
+                                                    : "text-gray-600 dark:text-gray-400 hover:bg-foreground/5 border border-transparent"
                                                 }`}
                                         >
                                             {style}
@@ -120,28 +120,28 @@ export default function ThreeDTransformsClient() {
 
                         <ControlGroup title="Element Transform">
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Translate 3D</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Translate 3D</label>
                                 <SliderControl label="X" value={translateX} onChange={setTranslateX} min={-250} max={250} unit="px" />
                                 <SliderControl label="Y" value={translateY} onChange={setTranslateY} min={-250} max={250} unit="px" />
                                 <SliderControl label="Z" value={translateZ} onChange={setTranslateZ} min={-500} max={500} unit="px" />
                             </div>
 
                             <div className="space-y-1.5 pt-2">
-                                <label className="text-xs text-gray-300">Rotate 3D</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Rotate 3D</label>
                                 <SliderControl label="X" value={rotateX} onChange={setRotateX} min={-180} max={180} unit="deg" />
                                 <SliderControl label="Y" value={rotateY} onChange={setRotateY} min={-180} max={180} unit="deg" />
                                 <SliderControl label="Z" value={rotateZ} onChange={setRotateZ} min={-180} max={180} unit="deg" />
                             </div>
 
                             <div className="space-y-1.5 pt-2">
-                                <label className="text-xs text-gray-300">Scale 3D</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Scale 3D</label>
                                 <SliderControl label="X" value={scaleX} onChange={setScaleX} min={0.1} max={5} step={0.1} unit="" />
                                 <SliderControl label="Y" value={scaleY} onChange={setScaleY} min={0.1} max={5} step={0.1} unit="" />
                                 <SliderControl label="Z" value={scaleZ} onChange={setScaleZ} min={0.1} max={5} step={0.1} unit="" />
                             </div>
 
                             <div className="space-y-1.5 pt-2">
-                                <label className="text-xs text-gray-300">Transform Origin</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Transform Origin</label>
                                 <div className="grid grid-cols-2 gap-2">
                                     <SliderControl label="X" value={originX} onChange={setOriginX} min={0} max={100} unit="%" />
                                     <SliderControl label="Y" value={originY} onChange={setOriginY} min={0} max={100} unit="%" />
@@ -153,7 +153,7 @@ export default function ThreeDTransformsClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -168,7 +168,7 @@ export default function ThreeDTransformsClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[500px] rounded-2xl border border-white/10 relative overflow-hidden flex items-center justify-center bg-[#111] group">
+                    <div className="flex-1 min-h-[500px] rounded-2xl border border-foreground/10 relative overflow-hidden flex items-center justify-center bg-[#111] group">
 
                         {/* 3D Space Background */}
                         <div className="absolute inset-0 pointer-events-none">
@@ -194,7 +194,7 @@ export default function ThreeDTransformsClient() {
                                 backgroundColor: 'rgba(255, 255, 255, 0.02)'
                             }}
                         >
-                            <span className="absolute top-2 left-2 text-[10px] text-white/30 font-mono tracking-widest uppercase">Parent Container</span>
+                            <span className="absolute top-2 left-2 text-[10px] text-foreground/30 font-mono tracking-widest uppercase">Parent Container</span>
 
                             {/* The Child Element */}
                             <div
@@ -205,8 +205,8 @@ export default function ThreeDTransformsClient() {
                                 }}
                             >
                                 <div className="text-center">
-                                    <Box className="w-8 h-8 text-white mx-auto mb-1" />
-                                    <span className="text-white font-bold tracking-wider text-xs block">3D Object</span>
+                                    <Box className="w-8 h-8 text-foreground mx-auto mb-1" />
+                                    <span className="text-foreground font-bold tracking-wider text-xs block">3D Object</span>
                                 </div>
 
                                 {/* Face indicators to help visualize rotation */}
@@ -228,9 +228,9 @@ export default function ThreeDTransformsClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">CSS Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">CSS Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -239,8 +239,8 @@ export default function ThreeDTransformsClient() {
                                 {copied ? "Copied!" : "Copy CSS"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 max-h-40 overflow-y-auto custom-scrollbar">
-                            <div className="text-purple-400">.parent <span className="text-white">{`{`}</span></div>
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 max-h-40 overflow-y-auto custom-scrollbar">
+                            <div className="text-purple-400">.parent <span className="text-foreground">{`{`}</span></div>
                             <div className="pl-4 text-orange-300">
                                 perspective: <span className="text-cyan-300">{perspective}px</span>;
                             </div>
@@ -250,9 +250,9 @@ export default function ThreeDTransformsClient() {
                             <div className="pl-4 text-orange-300">
                                 transform-style: <span className="text-cyan-300">{transformStyle}</span>;
                             </div>
-                            <div className="text-white">{`}`}</div>
+                            <div className="text-foreground">{`}`}</div>
 
-                            <div className="text-purple-400 mt-4">.child <span className="text-white">{`{`}</span></div>
+                            <div className="text-purple-400 mt-4">.child <span className="text-foreground">{`{`}</span></div>
                             <div className="pl-4 text-orange-300">
                                 transform: <span className="text-cyan-300">
                                     translate3d({translateX}px, {translateY}px, {translateZ}px)
@@ -265,7 +265,7 @@ export default function ThreeDTransformsClient() {
                             <div className="pl-4 text-orange-300">
                                 transform-origin: <span className="text-cyan-300">{originX}% {originY}%</span>;
                             </div>
-                            <div className="text-white">{`}`}</div>
+                            <div className="text-foreground">{`}`}</div>
                         </div>
                     </div>
                 </motion.div>
@@ -279,8 +279,8 @@ export default function ThreeDTransformsClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -292,7 +292,7 @@ function SliderControl({ label, value, onChange, min, max, step = 1, unit = "" }
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{Math.round(value * 100) / 100}{unit}</span>
             </div>
             <input

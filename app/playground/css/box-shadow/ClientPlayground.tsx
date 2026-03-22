@@ -77,7 +77,7 @@ export default function BoxShadowClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -89,13 +89,13 @@ export default function BoxShadowClient() {
                     className="w-full lg:w-96 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to CSS
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             Box Shadow
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Add shadow effects around an element's frame. Support for multiple layers.
                         </p>
                     </div>
@@ -103,9 +103,9 @@ export default function BoxShadowClient() {
                     <div className="flex-1 overflow-y-auto pr-2 space-y-6 custom-scrollbar max-h-[600px] lg:max-h-[calc(100vh-250px)]">
 
                         {/* Layer Manager */}
-                        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
+                        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
                             <div className="flex items-center justify-between">
-                                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                                <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider flex items-center gap-2">
                                     <Layers className="w-3 h-3" /> Layers
                                 </h3>
                                 <div className="flex gap-2">
@@ -134,12 +134,12 @@ export default function BoxShadowClient() {
                                         onClick={() => setActiveLayerId(layer.id)}
                                         className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all w-full text-left border ${activeLayerId === layer.id
                                                 ? "bg-cyan-500/10 border-cyan-500/50 text-cyan-400"
-                                                : "bg-black/20 border-transparent text-gray-400 hover:bg-white/5"
+                                                : "bg-black/20 border-transparent text-gray-600 dark:text-gray-400 hover:bg-foreground/5"
                                             }`}
                                     >
                                         <div className="w-3 h-3 rounded-full border border-white/20" style={{ background: layer.color }} />
                                         Layer {index + 1}
-                                        {layer.inset && <span className="ml-auto text-[10px] uppercase bg-white/10 px-1.5 py-0.5 rounded text-white/50">Inset</span>}
+                                        {layer.inset && <span className="ml-auto text-[10px] uppercase bg-white/10 px-1.5 py-0.5 rounded text-foreground/50">Inset</span>}
                                     </button>
                                 ))}
                             </div>
@@ -175,7 +175,7 @@ export default function BoxShadowClient() {
                             {/* Color & Inset */}
                             <div className="grid grid-cols-2 gap-4 pt-2">
                                 <div className="space-y-1.5">
-                                    <label className="text-xs text-gray-300 block">Color</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300 block">Color</label>
                                     <div className="flex gap-2">
                                         <input
                                             type="color"
@@ -186,12 +186,12 @@ export default function BoxShadowClient() {
                                     </div>
                                 </div>
                                 <div className="space-y-1.5">
-                                    <label className="text-xs text-gray-300 block">Inset</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300 block">Inset</label>
                                     <button
                                         onClick={() => updateLayer("inset", !activeLayer.inset)}
                                         className={`w-full h-8 rounded-lg text-xs font-medium border transition-all ${activeLayer.inset
                                                 ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400"
-                                                : "bg-white/5 border-white/10 text-gray-400 hover:bg-white/10"
+                                                : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400 hover:bg-white/10"
                                             }`}
                                     >
                                         {activeLayer.inset ? "Inset On" : "Inset Off"}
@@ -204,7 +204,7 @@ export default function BoxShadowClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -219,7 +219,7 @@ export default function BoxShadowClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex items-center justify-center bg-[#f0f0f0] group">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex items-center justify-center bg-[#f0f0f0] group">
                         {/* Background Image / Pattern - Light background for shadows to pop */}
                         <div className="absolute inset-0 z-0">
                             <div className="absolute inset-0 bg-[#f8f9fa]" />
@@ -233,14 +233,14 @@ export default function BoxShadowClient() {
                                 boxShadow: boxShadowValue
                             }}
                         >
-                            <span className="text-gray-400 font-mono text-xs">Box Element</span>
+                            <span className="text-gray-600 dark:text-gray-400 font-mono text-xs">Box Element</span>
                         </div>
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">CSS Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">CSS Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -249,12 +249,12 @@ export default function BoxShadowClient() {
                                 {copied ? "Copied!" : "Copy CSS"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300">
-                            <div className="text-purple-400">.box-element <span className="text-white">{`{`}</span></div>
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300">
+                            <div className="text-purple-400">.box-element <span className="text-foreground">{`{`}</span></div>
                             <div className="pl-4">
                                 <span className="text-cyan-400">box-shadow</span>: <span className="text-orange-300">{boxShadowValue}</span>;
                             </div>
-                            <div className="text-white">{`}`}</div>
+                            <div className="text-foreground">{`}`}</div>
                         </div>
                     </div>
                 </motion.div>
@@ -268,8 +268,8 @@ export default function BoxShadowClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -281,7 +281,7 @@ function SliderControl({ label, value, onChange, min, max, step = 1, unit = "" }
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{value}{unit}</span>
             </div>
             <input

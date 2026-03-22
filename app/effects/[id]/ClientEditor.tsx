@@ -343,7 +343,7 @@ ${component}`;
 
     if (!effect) {
         return (
-            <div className="min-h-screen bg-[#030014] text-white flex items-center justify-center">
+            <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold mb-4">Effect Not Found</h1>
                     <Link href="/effects" className="text-pink-400 hover:underline">Back to Effects</Link>
@@ -353,7 +353,7 @@ ${component}`;
     }
 
     return (
-        <div className="h-dvh bg-[#030014] text-white font-sans flex flex-col overflow-hidden">
+        <div className="h-dvh bg-background text-foreground font-sans flex flex-col overflow-hidden">
             {/* Minimal Editor Strip */}
             <div className="h-6 bg-[#020202] border-b border-white/5 flex items-center justify-center shrink-0 z-50">
                 <span className="text-[10px] font-medium text-white/20 tracking-[0.2em] uppercase select-none">Codophile Editor</span>

@@ -17,7 +17,7 @@ export default function FeaturesBento() {
     return (
         <section className="py-20" id="features-bento">
             <div className="max-w-7xl w-full mx-auto px-6">
-                <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-12">
+                <h2 className="text-3xl md:text-5xl font-bold text-center text-foreground mb-12">
                     Everything you need to <br />
                     <span className="bg-clip-text text-transparent bg-linear-to-r from-purple-400 to-pink-600">
                         build faster

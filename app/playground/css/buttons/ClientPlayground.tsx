@@ -122,7 +122,7 @@ export default function ButtonsClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -134,19 +134,19 @@ export default function ButtonsClient() {
                     className="w-full lg:w-96 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to CSS
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             CSS Buttons
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Design beautiful buttons with custom styles, hover effects, and group layouts.
                         </p>
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex p-1 bg-white/5 rounded-lg border border-white/10">
+                    <div className="flex p-1 bg-foreground/5 rounded-lg border border-foreground/10">
                         {[
                             { id: "style", icon: Palette, label: "Style" },
                             { id: "hover", icon: MousePointer2, label: "Hover" },
@@ -158,7 +158,7 @@ export default function ButtonsClient() {
                                 onClick={() => setActiveTab(tab.id as any)}
                                 className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-medium rounded-md transition-all ${activeTab === tab.id
                                     ? "bg-cyan-500/10 text-cyan-400 shadow-sm ring-1 ring-cyan-500/50"
-                                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                                    : "text-gray-600 dark:text-gray-400 hover:text-foreground hover:bg-foreground/5"
                                     }`}
                             >
                                 <tab.icon className="w-3.5 h-3.5" />
@@ -174,12 +174,12 @@ export default function ButtonsClient() {
                             <div className="space-y-6">
                                 <ControlGroup title="Content">
                                     <div className="space-y-1.5">
-                                        <label className="text-xs text-gray-300">Button Text</label>
+                                        <label className="text-xs text-gray-700 dark:text-gray-300">Button Text</label>
                                         <input
                                             type="text"
                                             value={buttonText}
                                             onChange={(e) => setButtonText(e.target.value)}
-                                            className="w-full bg-black/20 border border-white/10 rounded-lg h-9 text-xs text-gray-300 px-3 focus:outline-none focus:border-cyan-500/50"
+                                            className="w-full bg-black/20 border border-foreground/10 rounded-lg h-9 text-xs text-gray-700 dark:text-gray-300 px-3 focus:outline-none focus:border-cyan-500/50"
                                         />
                                     </div>
                                 </ControlGroup>
@@ -225,11 +225,11 @@ export default function ButtonsClient() {
 
                                 <ControlGroup title="Cursor">
                                     <div className="space-y-2">
-                                        <label className="text-xs text-gray-300">Cursor Type</label>
+                                        <label className="text-xs text-gray-700 dark:text-gray-300">Cursor Type</label>
                                         <select
                                             value={cursor}
                                             onChange={(e) => setCursor(e.target.value)}
-                                            className="w-full bg-black/20 border border-white/10 rounded-lg h-9 text-xs text-gray-300 px-2 focus:outline-none focus:border-cyan-500/50"
+                                            className="w-full bg-black/20 border border-foreground/10 rounded-lg h-9 text-xs text-gray-700 dark:text-gray-300 px-2 focus:outline-none focus:border-cyan-500/50"
                                         >
                                             <option value="pointer">Pointer</option>
                                             <option value="default">Default</option>
@@ -245,8 +245,8 @@ export default function ButtonsClient() {
                         {/* SHADOW TAB */}
                         {activeTab === "shadow" && (
                             <div className="space-y-6">
-                                <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5">
-                                    <span className="text-sm font-medium text-gray-300">Enable Shadow</span>
+                                <div className="flex items-center justify-between p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+                                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Enable Shadow</span>
                                     <button
                                         onClick={() => setHasShadow(!hasShadow)}
                                         className={`w-11 h-6 rounded-full transition-colors relative ${hasShadow ? "bg-cyan-500" : "bg-white/10"}`}
@@ -272,8 +272,8 @@ export default function ButtonsClient() {
                         {/* GROUP TAB */}
                         {activeTab === "group" && (
                             <div className="space-y-6">
-                                <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5">
-                                    <span className="text-sm font-medium text-gray-300">Enable Group</span>
+                                <div className="flex items-center justify-between p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+                                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Enable Group</span>
                                     <button
                                         onClick={() => setIsGroup(!isGroup)}
                                         className={`w-11 h-6 rounded-full transition-colors relative ${isGroup ? "bg-cyan-500" : "bg-white/10"}`}
@@ -286,17 +286,17 @@ export default function ButtonsClient() {
                                     <ControlGroup title="Group Layout">
                                         <div className="space-y-3">
                                             <div className="space-y-2">
-                                                <label className="text-xs text-gray-300">Direction</label>
+                                                <label className="text-xs text-gray-700 dark:text-gray-300">Direction</label>
                                                 <div className="flex gap-2">
                                                     <button
                                                         onClick={() => setGroupDirection("row")}
-                                                        className={`flex-1 py-1.5 text-xs rounded border transition-colors ${groupDirection === "row" ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-gray-400"}`}
+                                                        className={`flex-1 py-1.5 text-xs rounded border transition-colors ${groupDirection === "row" ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400"}`}
                                                     >
                                                         Row
                                                     </button>
                                                     <button
                                                         onClick={() => setGroupDirection("column")}
-                                                        className={`flex-1 py-1.5 text-xs rounded border transition-colors ${groupDirection === "column" ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-gray-400"}`}
+                                                        className={`flex-1 py-1.5 text-xs rounded border transition-colors ${groupDirection === "column" ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400"}`}
                                                     >
                                                         Column
                                                     </button>
@@ -313,7 +313,7 @@ export default function ButtonsClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -328,7 +328,7 @@ export default function ButtonsClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex items-center justify-center bg-[#f0f0f0] group/preview">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex items-center justify-center bg-[#f0f0f0] group/preview">
                         {/* Background Pattern */}
                         <div className="absolute inset-0 z-0">
                             <div className="absolute inset-0 bg-[#f8f9fa]" />
@@ -363,9 +363,9 @@ export default function ButtonsClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">CSS Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">CSS Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -374,7 +374,7 @@ export default function ButtonsClient() {
                                 {copied ? "Copied!" : "Copy CSS"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300">
                             <pre>{generateCSS()}</pre>
                         </div>
                     </div>
@@ -404,8 +404,8 @@ function PreviewButton({ label, style, hoverStyle }: any) {
 
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -417,7 +417,7 @@ function SliderControl({ label, value, onChange, min, max, step = 1, unit = "" }
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{Math.round(value * 10) / 10}{unit}</span>
             </div>
             <input
@@ -436,7 +436,7 @@ function SliderControl({ label, value, onChange, min, max, step = 1, unit = "" }
 function ColorControl({ label, value, onChange }: any) {
     return (
         <div className="space-y-1.5">
-            <label className="text-xs text-gray-300 block">{label}</label>
+            <label className="text-xs text-gray-700 dark:text-gray-300 block">{label}</label>
             <div className="flex gap-2 items-center">
                 <input
                     type="color"
@@ -448,7 +448,7 @@ function ColorControl({ label, value, onChange }: any) {
                     type="text"
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
-                    className="flex-1 min-w-0 bg-transparent border border-white/10 rounded px-2 h-8 text-xs font-mono text-gray-300 focus:outline-none focus:border-cyan-500/50"
+                    className="flex-1 min-w-0 bg-transparent border border-foreground/10 rounded px-2 h-8 text-xs font-mono text-gray-700 dark:text-gray-300 focus:outline-none focus:border-cyan-500/50"
                 />
             </div>
         </div>

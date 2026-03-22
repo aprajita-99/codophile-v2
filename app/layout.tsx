@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SWRegister from "@/components/SWRegister";
 import Script from "next/script";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -124,46 +125,53 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        <SWRegister />
-        {children}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-E256QGMFZT" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SWRegister />
+          {children}
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-E256QGMFZT" strategy="afterInteractive" />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
 
-            gtag('config', 'G-E256QGMFZT');
-          `}
-        </Script>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              "name": "Codophile",
-              "url": "https://codophile.in",
-              "description": "Master CSS through real-time experimentation. Control properties visually, see instant changes, and generate production-ready CSS & Tailwind code.",
-              "applicationCategory": "DeveloperApplication",
-              "operatingSystem": "Any",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "author": {
-                "@type": "Organization",
-                "name": "Codophile Team",
-                "url": "https://codophile.in"
-              }
-            }),
-          }}
-        />
+              gtag('config', 'G-E256QGMFZT');
+            `}
+          </Script>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": "Codophile",
+                "url": "https://codophile.in",
+                "description": "Master CSS through real-time experimentation. Control properties visually, see instant changes, and generate production-ready CSS & Tailwind code.",
+                "applicationCategory": "DeveloperApplication",
+                "operatingSystem": "Any",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                },
+                "author": {
+                  "@type": "Organization",
+                  "name": "Codophile Team",
+                  "url": "https://codophile.in"
+                }
+              }),
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   );

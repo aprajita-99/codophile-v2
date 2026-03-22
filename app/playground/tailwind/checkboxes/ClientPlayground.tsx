@@ -124,7 +124,7 @@ export default function CheckboxesPlaygroundClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -136,13 +136,13 @@ export default function CheckboxesPlaygroundClient() {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to Tailwind
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-teal-400 to-green-400">
                             Checkboxes
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Accessible checkbox lists with detailed descriptions and layouts.
                         </p>
                     </div>
@@ -163,13 +163,13 @@ export default function CheckboxesPlaygroundClient() {
                                 options={["rounded", "rounded-full", "none"]}
                             />
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Accent Color</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Accent Color</label>
                                 <div className="grid grid-cols-4 gap-2">
                                     {Object.keys(colors).map((c) => (
                                         <button
                                             key={c}
                                             onClick={() => setColor(c)}
-                                            className={`h-8 w-full rounded-md border-2 transition-all ${color === c ? 'border-white scale-105' : 'border-transparent hover:border-white/50'} bg-${c}-600`}
+                                            className={`h-8 w-full rounded-md border-2 transition-all ${color === c ? 'border-white scale-105' : 'border-transparent hover:border-foreground/50'} bg-${c}-600`}
                                         />
                                     ))}
                                 </div>
@@ -178,7 +178,7 @@ export default function CheckboxesPlaygroundClient() {
 
                         <ControlGroup title="State">
                             <div className="flex items-center justify-between pt-2">
-                                <label className="text-xs text-gray-300">Interaction Disabled</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Interaction Disabled</label>
                                 <button
                                     onClick={() => setIsDisabled(!isDisabled)}
                                     className={`w-10 h-5 rounded-full transition-colors relative ${isDisabled ? 'bg-teal-500' : 'bg-gray-700'}`}
@@ -191,7 +191,7 @@ export default function CheckboxesPlaygroundClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -206,7 +206,7 @@ export default function CheckboxesPlaygroundClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex flex-col items-center justify-center bg-[#111] p-8">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex flex-col items-center justify-center bg-[#111] p-8">
                         {/* Background Grid */}
                         <div className="absolute inset-0 z-0 pointer-events-none">
                             <div className="absolute inset-0 bg-linear-to-br from-teal-500/5 via-green-500/5 to-emerald-500/5" />
@@ -214,7 +214,7 @@ export default function CheckboxesPlaygroundClient() {
                         </div>
 
                         {/* Interactive List */}
-                        <div className="relative z-10 w-full max-w-lg bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-white/10 shadow-2xl">
+                        <div className="relative z-10 w-full max-w-lg bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-foreground/10 shadow-2xl">
                             <fieldset disabled={isDisabled} className={isDisabled ? 'opacity-50' : ''}>
                                 <legend className="sr-only">Notifications</legend>
 
@@ -223,7 +223,7 @@ export default function CheckboxesPlaygroundClient() {
                                         {items.map((item) => (
                                             <div key={item.id} className="relative flex items-start py-4">
                                                 <div className="min-w-0 flex-1 text-sm leading-6">
-                                                    <label htmlFor={`item-${item.id}`} className="select-none font-medium text-white">
+                                                    <label htmlFor={`item-${item.id}`} className="select-none font-medium text-foreground">
                                                         {item.title}
                                                     </label>
                                                 </div>
@@ -256,11 +256,11 @@ export default function CheckboxesPlaygroundClient() {
                                                     />
                                                 </div>
                                                 <div className="ml-3 text-sm leading-6">
-                                                    <label htmlFor={`item-${item.id}`} className="font-medium text-white">
+                                                    <label htmlFor={`item-${item.id}`} className="font-medium text-foreground">
                                                         {item.title}
                                                     </label>
                                                     {style !== 'simple' && (
-                                                        <span id={`item-${item.id}-desc`} className={`${style === 'inline' ? 'pl-2' : 'block'} text-gray-400`}>
+                                                        <span id={`item-${item.id}-desc`} className={`${style === 'inline' ? 'pl-2' : 'block'} text-gray-600 dark:text-gray-400`}>
                                                             {style === 'inline' && <span className="sr-only">{item.title} </span>}
                                                             {item.desc}
                                                         </span>
@@ -275,9 +275,9 @@ export default function CheckboxesPlaygroundClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">HTML Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">HTML Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-teal-400 hover:text-teal-300 transition-colors"
@@ -286,7 +286,7 @@ export default function CheckboxesPlaygroundClient() {
                                 {copied ? "Copied!" : "Copy Code"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 max-h-60 overflow-y-auto custom-scrollbar">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 max-h-60 overflow-y-auto custom-scrollbar">
                             <pre className="whitespace-pre-wrap break-all">{generateCode().trim()}</pre>
                         </div>
                     </div>
@@ -301,8 +301,8 @@ export default function CheckboxesPlaygroundClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -313,14 +313,14 @@ function ControlGroup({ title, children }: { title: string, children: React.Reac
 function SelectControl({ label, value, onChange, options }: any) {
     return (
         <div className="space-y-1.5">
-            <label className="text-xs text-gray-300">{label}</label>
+            <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-teal-500/50 cursor-pointer"
+                className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-teal-500/50 cursor-pointer"
             >
                 {options.map((opt: string) => (
-                    <option key={opt} value={opt} className="bg-gray-900 text-white">
+                    <option key={opt} value={opt} className="bg-gray-900 text-foreground">
                         {opt.charAt(0).toUpperCase() + opt.slice(1)}
                     </option>
                 ))}

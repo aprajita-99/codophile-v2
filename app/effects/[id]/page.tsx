@@ -47,7 +47,7 @@ export default async function EffectPage(props: Props) {
 
     if (!effect || !(effect as any).isPublished) {
          return (
-             <div className="min-h-screen bg-[#030014] text-white flex items-center justify-center">
+             <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
                  <div className="text-center">
                      <h1 className="text-2xl font-bold mb-4">Effect Not Found</h1>
                      <a href="/effects" className="text-pink-400 hover:underline">Back to Effects</a>

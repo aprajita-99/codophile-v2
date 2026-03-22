@@ -37,7 +37,7 @@ export default function TooltipClient() {
         switch (theme) {
             case "light": return "bg-gray-100 text-gray-900 border border-gray-200 shadow-sm";
             case "cyan": return "bg-cyan-900/90 text-cyan-50 border border-cyan-700/50 backdrop-blur-sm shadow-cyan-900/20 shadow-lg";
-            default: return "bg-gray-900 text-white shadow-xl";
+            default: return "bg-gray-900 text-foreground shadow-xl";
         }
     };
 
@@ -89,7 +89,7 @@ export default function TooltipClient() {
     <div className="absolute ${getArrowPositionClasses()} ${getArrowColor()[position === 'top' ? 'top' : position === 'bottom' ? 'bottom' : position === 'left' ? 'left' : 'right']}"></div>` : '';
 
         return `<div className="group relative inline-block">
-  <button className="px-4 py-2 bg-white/10 rounded-lg text-white hover:bg-white/20 transition-colors">
+  <button className="px-4 py-2 bg-white/10 rounded-lg text-foreground hover:bg-white/20 transition-colors">
     Hover Me
   </button>
   
@@ -111,7 +111,7 @@ export default function TooltipClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -123,13 +123,13 @@ export default function TooltipClient() {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to Tailwind
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             Tooltip Utility
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Generate Tailwind utility classes for tooltips with proper positioning and visibility.
                         </p>
                     </div>
@@ -144,7 +144,7 @@ export default function TooltipClient() {
                                         onClick={() => setPosition(pos as any)}
                                         className={`px-3 py-2 text-sm rounded-lg border transition-all ${position === pos
                                             ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400'
-                                            : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
+                                            : 'bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400 hover:bg-white/10'
                                             }`}
                                     >
                                         {pos.charAt(0).toUpperCase() + pos.slice(1)}
@@ -161,7 +161,7 @@ export default function TooltipClient() {
                                         onClick={() => setTheme(t as any)}
                                         className={`px-2 py-2 text-xs rounded-lg border transition-all capitalize ${theme === t
                                             ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400'
-                                            : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
+                                            : 'bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400 hover:bg-white/10'
                                             }`}
                                     >
                                         {t}
@@ -173,13 +173,13 @@ export default function TooltipClient() {
                         <ControlGroup title="Size & Style">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="text-xs text-gray-300 block mb-2">Width</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300 block mb-2">Width</label>
                                     <div className="flex gap-2">
                                         {['auto', 'w-32', 'w-48', 'w-64'].map((w) => (
                                             <button
                                                 key={w}
                                                 onClick={() => setWidth(w as any)}
-                                                className={`flex-1 py-1.5 text-xs rounded border transition-all ${width === w ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-white/5 border-white/10 text-gray-400'
+                                                className={`flex-1 py-1.5 text-xs rounded border transition-all ${width === w ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400'
                                                     }`}
                                             >
                                                 {w.replace('w-', '')}
@@ -188,13 +188,13 @@ export default function TooltipClient() {
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="text-xs text-gray-300 block mb-2">Text Size</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300 block mb-2">Text Size</label>
                                     <div className="flex gap-2">
                                         {['xs', 'sm', 'base'].map((s) => (
                                             <button
                                                 key={s}
                                                 onClick={() => setTextSize(s as any)}
-                                                className={`flex-1 py-1.5 text-xs rounded border transition-all ${textSize === s ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-white/5 border-white/10 text-gray-400'
+                                                className={`flex-1 py-1.5 text-xs rounded border transition-all ${textSize === s ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400'
                                                     }`}
                                             >
                                                 {s}
@@ -203,13 +203,13 @@ export default function TooltipClient() {
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="text-xs text-gray-300 block mb-2">Rounding</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300 block mb-2">Rounding</label>
                                     <div className="flex gap-2">
                                         {['md', 'lg', 'xl'].map((r) => (
                                             <button
                                                 key={r}
                                                 onClick={() => setRounded(r as any)}
-                                                className={`flex-1 py-1.5 text-xs rounded border transition-all ${rounded === r ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-white/5 border-white/10 text-gray-400'
+                                                className={`flex-1 py-1.5 text-xs rounded border transition-all ${rounded === r ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400'
                                                     }`}
                                             >
                                                 {r}
@@ -222,7 +222,7 @@ export default function TooltipClient() {
 
                         <ControlGroup title="Options">
                             <div className="flex items-center justify-between pt-2">
-                                <label className="text-xs text-gray-300">Show Arrow</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Show Arrow</label>
                                 <button
                                     onClick={() => setShowArrow(!showArrow)}
                                     className={`w-10 h-5 rounded-full relative transition-colors ${showArrow ? 'bg-cyan-500' : 'bg-white/10'}`}
@@ -236,7 +236,7 @@ export default function TooltipClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -251,7 +251,7 @@ export default function TooltipClient() {
                     className="flex-1 flex flex-col gap-6 min-w-0"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex items-center justify-center bg-[#111] group-master">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex items-center justify-center bg-[#111] group-master">
                         {/* Grid Background */}
                         <div className="absolute inset-0 z-0">
                             <div className="absolute inset-0 bg-linear-to-br from-blue-900/10 via-transparent to-purple-900/10" />
@@ -260,7 +260,7 @@ export default function TooltipClient() {
 
                         {/* Interactive Element */}
                         <div className="group relative inline-block z-10">
-                            <button className="px-6 py-3 bg-white/10 border border-white/20 rounded-lg text-white hover:bg-white/20 transition-colors font-medium cursor-pointer">
+                            <button className="px-6 py-3 bg-white/10 border border-white/20 rounded-lg text-foreground hover:bg-white/20 transition-colors font-medium cursor-pointer">
                                 Hover Me
                             </button>
 
@@ -277,9 +277,9 @@ export default function TooltipClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">React / Tailwind Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">React / Tailwind Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -288,7 +288,7 @@ export default function TooltipClient() {
                                 {copied ? "Copied!" : "Copy Code"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 whitespace-pre">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 whitespace-pre">
                             {code}
                         </div>
                     </div>
@@ -303,8 +303,8 @@ export default function TooltipClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>

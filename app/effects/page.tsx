@@ -15,7 +15,7 @@ const ITEMS_PER_PAGE = 9;
 
 export default function EffectsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#030014] text-white flex items-center justify-center">Loading...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-background text-foreground flex items-center justify-center">Loading...</div>}>
       <EffectsContent />
     </Suspense>
   );
@@ -75,7 +75,7 @@ function EffectsContent() {
 
 
   return (
-    <div className="min-h-screen bg-[#030014] text-white selection:bg-pink-500/30 font-sans overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground selection:bg-pink-500/30 font-sans overflow-hidden">
       <Header />
 
       {/* Background Grid */}

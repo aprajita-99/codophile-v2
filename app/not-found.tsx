@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 
 export default function NotFound() {
     return (
-        <div className="min-h-screen bg-[#030014] text-white overflow-hidden relative font-sans selection:bg-cyan-500/30">
+        <div className="min-h-screen bg-background text-foreground overflow-hidden relative font-sans selection:bg-cyan-500/30">
             {/* Background Effects */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-0 left-0 w-full h-[500px] bg-purple-900/10 blur-[120px] rounded-full mix-blend-screen" />

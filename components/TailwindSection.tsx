@@ -46,7 +46,7 @@ export default function TailwindSection() {
                         <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-teal-300 mb-6">
                             Tailwind CSS <br /> Generation
                         </h2>
-                        <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                        <p className="text-gray-500 dark:text-gray-400 text-lg leading-relaxed mb-8">
                             Accelerate your workflow with utility-first CSS. Our engine intelligently generates
                             optimized Tailwind classes based on your design tokens, ensuring consistency and
                             reducing the bundle size of your final application.

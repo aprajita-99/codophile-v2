@@ -115,7 +115,7 @@ export default function SelectMenusPlaygroundClient() {
     <button type="button" class="${baseButton}" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
       ${buttonContent}
       <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <svg class="h-5 w-5 text-gray-600 dark:text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
       </span>
@@ -126,13 +126,13 @@ export default function SelectMenusPlaygroundClient() {
     -->
     <ul class="${baseList}" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3">
       <!--
-        Select option, manage "text-white bg-indigo-600" for active state and "text-gray-900 icon-invisible" for inactive state
+        Select option, manage "text-foreground bg-indigo-600" for active state and "text-gray-900 icon-invisible" for inactive state
       -->
       ${people.map(p => `
-      <li class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-indigo-600 hover:text-white dark:text-gray-100" id="listbox-option-${p.id}" role="option">
+      <li class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-indigo-600 hover:text-foreground dark:text-gray-100" id="listbox-option-${p.id}" role="option">
         ${optionContent(p)}
         ${p.id === selected.id ? `
-        <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 hover:text-white">
+        <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 hover:text-foreground">
           <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
           </svg>
@@ -150,7 +150,7 @@ export default function SelectMenusPlaygroundClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -162,13 +162,13 @@ export default function SelectMenusPlaygroundClient() {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to Tailwind
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-teal-400 to-green-400">
                             Select Menus
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Customizable dropdowns with avatars, status indicators, and more.
                         </p>
                     </div>
@@ -184,12 +184,12 @@ export default function SelectMenusPlaygroundClient() {
                             />
 
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Label Text</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Label Text</label>
                                 <input
                                     type="text"
                                     value={label}
                                     onChange={(e) => setLabel(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-teal-500/50"
+                                    className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-teal-500/50"
                                 />
                             </div>
                         </ControlGroup>
@@ -197,7 +197,7 @@ export default function SelectMenusPlaygroundClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -212,7 +212,7 @@ export default function SelectMenusPlaygroundClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex flex-col items-center justify-center bg-[#111] p-8">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex flex-col items-center justify-center bg-[#111] p-8">
                         {/* Background Grid */}
                         <div className="absolute inset-0 z-0 pointer-events-none">
                             <div className="absolute inset-0 bg-linear-to-br from-teal-500/5 via-green-500/5 to-emerald-500/5" />
@@ -221,13 +221,13 @@ export default function SelectMenusPlaygroundClient() {
 
                         {/* Interactive UI */}
                         <div className="relative z-10 w-full max-w-sm">
-                            <label className="block text-sm font-medium leading-6 text-gray-300 mb-2">
+                            <label className="block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300 mb-2">
                                 {label}
                             </label>
 
                             {style === 'native' ? (
                                 <select
-                                    className="block w-full rounded-md border-0 bg-white/5 py-1.5 pl-3 pr-10 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block w-full rounded-md border-0 bg-foreground/5 py-1.5 pl-3 pr-10 text-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     value={selected.name}
                                     onChange={(e) => setSelected(people.find(p => p.name === e.target.value) || people[0])}
                                 >
@@ -239,7 +239,7 @@ export default function SelectMenusPlaygroundClient() {
                                 <div className="relative mt-2" ref={dropdownRef}>
                                     <button
                                         type="button"
-                                        className="relative w-full cursor-default rounded-md bg-white/5 py-1.5 pl-3 pr-10 text-left text-white shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6 min-h-[36px]"
+                                        className="relative w-full cursor-default rounded-md bg-foreground/5 py-1.5 pl-3 pr-10 text-left text-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6 min-h-[36px]"
                                         aria-haspopup="listbox"
                                         aria-expanded={isOpen}
                                         onClick={() => setIsOpen(!isOpen)}
@@ -254,12 +254,12 @@ export default function SelectMenusPlaygroundClient() {
                                             <span className="flex flex-col">
                                                 <span className="block truncate">{selected.name}</span>
                                                 {style === 'secondary' && (
-                                                    <span className="text-gray-400 text-xs">{selected.description}</span>
+                                                    <span className="text-gray-600 dark:text-gray-400 text-xs">{selected.description}</span>
                                                 )}
                                             </span>
                                         </span>
                                         <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                                            <ChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                            <ChevronDown className="h-5 w-5 text-gray-600 dark:text-gray-400" aria-hidden="true" />
                                         </span>
                                     </button>
 
@@ -270,7 +270,7 @@ export default function SelectMenusPlaygroundClient() {
                                                 animate={{ opacity: 1, y: 0 }}
                                                 exit={{ opacity: 0, y: -10 }}
                                                 transition={{ duration: 0.1 }}
-                                                className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-gray-800 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border border-white/10"
+                                                className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-gray-800 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border border-foreground/10"
                                                 role="listbox"
                                             >
                                                 {people.map((person) => {
@@ -278,7 +278,7 @@ export default function SelectMenusPlaygroundClient() {
                                                     return (
                                                         <li
                                                             key={person.id}
-                                                            className={`relative cursor-default select-none py-2 pl-3 pr-9 ${isSelected ? 'bg-indigo-600 text-white' : 'text-gray-300 hover:bg-indigo-600/50 hover:text-white'}`}
+                                                            className={`relative cursor-default select-none py-2 pl-3 pr-9 ${isSelected ? 'bg-indigo-600 text-foreground' : 'text-gray-700 dark:text-gray-300 hover:bg-indigo-600/50 hover:text-foreground'}`}
                                                             role="option"
                                                             onClick={() => {
                                                                 setSelected(person);
@@ -303,7 +303,7 @@ export default function SelectMenusPlaygroundClient() {
                                                             </div>
 
                                                             {isSelected && (
-                                                                <span className={`absolute inset-y-0 right-0 flex items-center pr-4 ${isSelected ? 'text-white' : 'text-indigo-600'}`}>
+                                                                <span className={`absolute inset-y-0 right-0 flex items-center pr-4 ${isSelected ? 'text-foreground' : 'text-indigo-600'}`}>
                                                                     <Check className="h-5 w-5" aria-hidden="true" />
                                                                 </span>
                                                             )}
@@ -319,9 +319,9 @@ export default function SelectMenusPlaygroundClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">HTML Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">HTML Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-teal-400 hover:text-teal-300 transition-colors"
@@ -330,7 +330,7 @@ export default function SelectMenusPlaygroundClient() {
                                 {copied ? "Copied!" : "Copy Code"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 max-h-60 overflow-y-auto custom-scrollbar">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 max-h-60 overflow-y-auto custom-scrollbar">
                             <pre className="whitespace-pre-wrap break-all">{generateCode().trim()}</pre>
                         </div>
                     </div>
@@ -345,8 +345,8 @@ export default function SelectMenusPlaygroundClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -357,14 +357,14 @@ function ControlGroup({ title, children }: { title: string, children: React.Reac
 function SelectControl({ label, value, onChange, options }: any) {
     return (
         <div className="space-y-1.5">
-            <label className="text-xs text-gray-300">{label}</label>
+            <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-teal-500/50 cursor-pointer"
+                className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-teal-500/50 cursor-pointer"
             >
                 {options.map((opt: string) => (
-                    <option key={opt} value={opt} className="bg-gray-900 text-white">
+                    <option key={opt} value={opt} className="bg-gray-900 text-foreground">
                         {opt.charAt(0).toUpperCase() + opt.slice(1)}
                     </option>
                 ))}

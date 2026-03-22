@@ -147,7 +147,7 @@ export default function TogglesPlaygroundClient() {
                 // Standard Icon logic from Tailwind UI
                 iconCode = `
       <span class="${isChecked ? 'opacity-0 duration-100 ease-out' : 'opacity-100 duration-200 ease-in'} absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
-        <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
+        <svg class="h-3 w-3 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 12 12">
           <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </span>
@@ -226,7 +226,7 @@ export default function TogglesPlaygroundClient() {
                         {style === "icon" && (
                             <>
                                 <span className={`${isChecked ? 'opacity-0 duration-100 ease-out' : 'opacity-100 duration-200 ease-in'} absolute inset-0 flex h-full w-full items-center justify-center transition-opacity`}>
-                                    <XIcon className="h-3 w-3 text-gray-400" />
+                                    <XIcon className="h-3 w-3 text-gray-600 dark:text-gray-400" />
                                 </span>
                                 <span className={`${isChecked ? 'opacity-100 duration-200 ease-in' : 'opacity-0 duration-100 ease-out'} absolute inset-0 flex h-full w-full items-center justify-center transition-opacity`}>
                                     <CheckIcon className={`h-3 w-3 ${activeColor.replace('bg-', 'text-')}`} />
@@ -241,13 +241,13 @@ export default function TogglesPlaygroundClient() {
     }
 
     const Label = ({ text, position }: { text: string, position: 'left' | 'right' }) => (
-        <span className={`${position === 'left' ? 'mr-3' : 'ml-3'} text-sm font-medium text-gray-300`}>
+        <span className={`${position === 'left' ? 'mr-3' : 'ml-3'} text-sm font-medium text-gray-700 dark:text-gray-300`}>
             {text}
         </span>
     );
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -259,13 +259,13 @@ export default function TogglesPlaygroundClient() {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to Tailwind
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-teal-400 to-green-400">
                             Toggles
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Accessible switch components with various styles and states.
                         </p>
                     </div>
@@ -286,13 +286,13 @@ export default function TogglesPlaygroundClient() {
                                 options={["small", "medium", "large"]}
                             />
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Color</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Color</label>
                                 <div className="grid grid-cols-4 gap-2">
                                     {Object.keys(colors).map((c) => (
                                         <button
                                             key={c}
                                             onClick={() => setColor(c)}
-                                            className={`h-8 w-full rounded-md border-2 transition-all ${color === c ? 'border-white scale-105' : 'border-transparent hover:border-white/50'} ${colors[c]}`}
+                                            className={`h-8 w-full rounded-md border-2 transition-all ${color === c ? 'border-white scale-105' : 'border-transparent hover:border-foreground/50'} ${colors[c]}`}
                                         />
                                     ))}
                                 </div>
@@ -301,12 +301,12 @@ export default function TogglesPlaygroundClient() {
 
                         <ControlGroup title="Label & State">
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Label Text</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Label Text</label>
                                 <input
                                     type="text"
                                     value={label}
                                     onChange={(e) => setLabel(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-teal-500/50"
+                                    className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-teal-500/50"
                                 />
                             </div>
                             <SelectControl
@@ -317,7 +317,7 @@ export default function TogglesPlaygroundClient() {
                             />
 
                             <div className="flex items-center justify-between pt-2">
-                                <label className="text-xs text-gray-300">Interaction Disabled</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Interaction Disabled</label>
                                 <button
                                     onClick={() => setIsDisabled(!isDisabled)}
                                     className={`w-10 h-5 rounded-full transition-colors relative ${isDisabled ? 'bg-teal-500' : 'bg-gray-700'}`}
@@ -330,7 +330,7 @@ export default function TogglesPlaygroundClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -345,7 +345,7 @@ export default function TogglesPlaygroundClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex flex-col items-center justify-center bg-[#111] p-8">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex flex-col items-center justify-center bg-[#111] p-8">
                         {/* Background Grid */}
                         <div className="absolute inset-0 z-0 pointer-events-none">
                             <div className="absolute inset-0 bg-linear-to-br from-teal-500/5 via-green-500/5 to-emerald-500/5" />
@@ -363,9 +363,9 @@ export default function TogglesPlaygroundClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">HTML Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">HTML Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-teal-400 hover:text-teal-300 transition-colors"
@@ -374,7 +374,7 @@ export default function TogglesPlaygroundClient() {
                                 {copied ? "Copied!" : "Copy Code"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 max-h-60 overflow-y-auto custom-scrollbar">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 max-h-60 overflow-y-auto custom-scrollbar">
                             <pre className="whitespace-pre-wrap break-all">{generateCode().trim()}</pre>
                         </div>
                     </div>
@@ -389,8 +389,8 @@ export default function TogglesPlaygroundClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -401,14 +401,14 @@ function ControlGroup({ title, children }: { title: string, children: React.Reac
 function SelectControl({ label, value, onChange, options }: any) {
     return (
         <div className="space-y-1.5">
-            <label className="text-xs text-gray-300">{label}</label>
+            <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-teal-500/50 cursor-pointer"
+                className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-teal-500/50 cursor-pointer"
             >
                 {options.map((opt: string) => (
-                    <option key={opt} value={opt} className="bg-gray-900 text-white">
+                    <option key={opt} value={opt} className="bg-gray-900 text-foreground">
                         {opt.charAt(0).toUpperCase() + opt.slice(1)}
                     </option>
                 ))}

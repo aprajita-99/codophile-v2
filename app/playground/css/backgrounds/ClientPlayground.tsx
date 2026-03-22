@@ -89,7 +89,7 @@ export default function BackgroundClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -101,26 +101,26 @@ export default function BackgroundClient() {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to CSS
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             Backgrounds
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Master background colors, gradients, images, clipping, and blending.
                         </p>
                     </div>
 
                     {/* Tab Switcher */}
-                    <div className="flex p-1 bg-white/5 rounded-xl border border-white/5">
+                    <div className="flex p-1 bg-foreground/5 rounded-xl border border-foreground/5">
                         {["basics", "image", "advanced"].map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => { setActiveTab(tab as any); if (tab === 'image' || tab === 'advanced') setType('image'); else setType('color'); }}
                                 className={`flex-1 py-2 text-xs font-medium rounded-lg transition-all capitalize ${activeTab === tab
                                     ? "bg-cyan-500/20 text-cyan-400 shadow-sm border border-cyan-500/20"
-                                    : "text-gray-400 hover:text-white"
+                                    : "text-gray-600 dark:text-gray-400 hover:text-foreground"
                                     }`}
                             >
                                 {tab}
@@ -134,8 +134,8 @@ export default function BackgroundClient() {
                             <>
                                 <ControlGroup title="Background Type">
                                     <div className="flex gap-2">
-                                        <button onClick={() => setType("color")} className={`flex-1 py-1.5 text-xs rounded border ${type === 'color' ? 'border-cyan-500 text-cyan-400 bg-cyan-500/10' : 'border-white/10 text-gray-400'}`}>Solid Color</button>
-                                        <button onClick={() => setType("gradient")} className={`flex-1 py-1.5 text-xs rounded border ${type === 'gradient' ? 'border-cyan-500 text-cyan-400 bg-cyan-500/10' : 'border-white/10 text-gray-400'}`}>Gradient</button>
+                                        <button onClick={() => setType("color")} className={`flex-1 py-1.5 text-xs rounded border ${type === 'color' ? 'border-cyan-500 text-cyan-400 bg-cyan-500/10' : 'border-foreground/10 text-gray-600 dark:text-gray-400'}`}>Solid Color</button>
+                                        <button onClick={() => setType("gradient")} className={`flex-1 py-1.5 text-xs rounded border ${type === 'gradient' ? 'border-cyan-500 text-cyan-400 bg-cyan-500/10' : 'border-foreground/10 text-gray-600 dark:text-gray-400'}`}>Gradient</button>
                                     </div>
                                 </ControlGroup>
 
@@ -171,12 +171,12 @@ export default function BackgroundClient() {
                                         type="text"
                                         value={bgImage}
                                         onChange={(e) => setBgImage(e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg text-xs p-2 text-gray-300 outline-none focus:border-cyan-500"
+                                        className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-xs p-2 text-gray-700 dark:text-gray-300 outline-none focus:border-cyan-500"
                                     />
                                     <div className="flex gap-2 mt-2">
-                                        <button onClick={() => setBgImage("https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1000&q=80")} className="text-[10px] bg-white/5 hover:bg-white/10 px-2 py-1 rounded">Abstract</button>
-                                        <button onClick={() => setBgImage("https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1000&q=80")} className="text-[10px] bg-white/5 hover:bg-white/10 px-2 py-1 rounded">City</button>
-                                        <button onClick={() => setBgImage("https://images.unsplash.com/photo-1518531933037-91b2f5fe8e56?auto=format&fit=crop&w=1000&q=80")} className="text-[10px] bg-white/5 hover:bg-white/10 px-2 py-1 rounded">Space</button>
+                                        <button onClick={() => setBgImage("https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1000&q=80")} className="text-[10px] bg-foreground/5 hover:bg-white/10 px-2 py-1 rounded">Abstract</button>
+                                        <button onClick={() => setBgImage("https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1000&q=80")} className="text-[10px] bg-foreground/5 hover:bg-white/10 px-2 py-1 rounded">City</button>
+                                        <button onClick={() => setBgImage("https://images.unsplash.com/photo-1518531933037-91b2f5fe8e56?auto=format&fit=crop&w=1000&q=80")} className="text-[10px] bg-foreground/5 hover:bg-white/10 px-2 py-1 rounded">Space</button>
                                     </div>
                                 </ControlGroup>
 
@@ -192,7 +192,7 @@ export default function BackgroundClient() {
                         {activeTab === "advanced" && (
                             <>
                                 <ControlGroup title="Blend Mode">
-                                    <p className="text-[10px] text-gray-400 mb-2">Blends the image with the background color below.</p>
+                                    <p className="text-[10px] text-gray-600 dark:text-gray-400 mb-2">Blends the image with the background color below.</p>
                                     <ColorControl label="Back Layer Color" value={backgroundColor} onChange={setBackgroundColor} />
                                     <SelectControl
                                         label="Blend Mode"
@@ -213,7 +213,7 @@ export default function BackgroundClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -228,7 +228,7 @@ export default function BackgroundClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex items-center justify-center bg-[#111] p-8">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex items-center justify-center bg-[#111] p-8">
                         {/* Checkerboard for transparency */}
                         <div className="absolute inset-0 z-0 bg-[linear-gradient(45deg,#222_25%,transparent_25%,transparent_75%,#222_75%,#222),linear-gradient(45deg,#222_25%,transparent_25%,transparent_75%,#222_75%,#222)] bg-size-[20px_20px] bg-pos-[0_0,10px_10px]" />
 
@@ -237,7 +237,7 @@ export default function BackgroundClient() {
                             className={`
                                 relative z-10 w-full max-w-md h-64 md:h-80 border-[10px] border-dashed border-white/20 p-8
                                 transition-all duration-300 flex items-center justify-center
-                                ${bgClip === 'text' ? 'text-transparent text-6xl md:text-8xl font-black uppercase' : 'text-white text-lg font-medium'}
+                                ${bgClip === 'text' ? 'text-transparent text-6xl md:text-8xl font-black uppercase' : 'text-foreground text-lg font-medium'}
                             `}
                             style={{
                                 background: activeTab === 'basics' && type === 'color' ? backgroundColor : undefined,
@@ -260,9 +260,9 @@ export default function BackgroundClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">CSS Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">CSS Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -271,10 +271,10 @@ export default function BackgroundClient() {
                                 {copied ? "Copied!" : "Copy CSS"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 whitespace-pre">
-                            <div className="text-purple-400">.background-element <span className="text-white">{`{`}</span></div>
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 whitespace-pre">
+                            <div className="text-purple-400">.background-element <span className="text-foreground">{`{`}</span></div>
                             <div className="text-orange-300 pl-4">{cssOutput}</div>
-                            <div className="text-white">{`}`}</div>
+                            <div className="text-foreground">{`}`}</div>
                         </div>
                     </div>
                 </motion.div>
@@ -288,8 +288,8 @@ export default function BackgroundClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -300,14 +300,14 @@ function ControlGroup({ title, children }: { title: string, children: React.Reac
 function SelectControl({ label, value, onChange, options }: any) {
     return (
         <div className="space-y-1.5">
-            <label className="text-xs text-gray-300">{label}</label>
+            <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
+                className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
             >
                 {options.map((opt: string) => (
-                    <option key={opt} value={opt} className="bg-gray-900 text-white">
+                    <option key={opt} value={opt} className="bg-gray-900 text-foreground">
                         {opt}
                     </option>
                 ))}
@@ -320,7 +320,7 @@ function ColorControl({ label, value, onChange }: any) {
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{value}</span>
             </div>
             <div className="flex gap-2">
@@ -334,7 +334,7 @@ function ColorControl({ label, value, onChange }: any) {
                     type="text"
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
-                    className="flex-1 bg-white/5 border border-white/10 rounded-lg text-xs px-2 text-gray-300 outline-none focus:border-cyan-500/50"
+                    className="flex-1 bg-foreground/5 border border-foreground/10 rounded-lg text-xs px-2 text-gray-700 dark:text-gray-300 outline-none focus:border-cyan-500/50"
                 />
             </div>
         </div>

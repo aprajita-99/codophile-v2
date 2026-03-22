@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#030014] text-white selection:bg-indigo-500/30 relative">
+    <main className="min-h-screen bg-background text-foreground selection:bg-indigo-500/30 relative">
       {/* Global Dynamic Background */}
        <section className="sr-only">
         <h1>Visual CSS Playground, Tailwind CSS Generator & CSS Effects Library</h1>
@@ -23,7 +23,7 @@ export default function Home() {
           <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 blur-[120px] opacity-20 w-96 h-96 bg-purple-500 rounded-full" />
           <div className="absolute bottom-0 left-0 translate-y-12 -translate-x-12 blur-[120px] opacity-20 w-96 h-96 bg-indigo-500 rounded-full" />
           {/* subtle mask to fade out the grid radially at the very edges so it doesnt look too harsh */}
-          <div className="absolute inset-0 shadow-[inset_0_0_150px_100px_#030014]" />
+          <div className="absolute inset-0 dark:shadow-[inset_0_0_150px_100px_#030014]" />
       </div>
 
       <div className="relative z-10 w-full overflow-x-hidden">

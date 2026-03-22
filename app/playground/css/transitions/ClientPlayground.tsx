@@ -65,7 +65,7 @@ export default function TransitionsClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -77,13 +77,13 @@ export default function TransitionsClient() {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to CSS
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             Transitions
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Control the speed, curve, and delay of state changes.
                         </p>
                     </div>
@@ -97,7 +97,7 @@ export default function TransitionsClient() {
 
                         <ControlGroup title="Timing Function (Easing)">
                             <div className="space-y-2">
-                                <label className="text-xs text-gray-300">Curve Profile</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Curve Profile</label>
                                 <div className="grid grid-cols-2 gap-2">
                                     {['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out'].map((tf) => (
                                         <button
@@ -105,7 +105,7 @@ export default function TransitionsClient() {
                                             onClick={() => setTimingFunction(tf)}
                                             className={`py-1.5 px-2 text-xs rounded-md border transition-all ${timingFunction === tf
                                                     ? "bg-cyan-500/20 border-cyan-500 text-cyan-400"
-                                                    : "bg-white/5 border-transparent text-gray-400 hover:bg-white/10"
+                                                    : "bg-foreground/5 border-transparent text-gray-600 dark:text-gray-400 hover:bg-white/10"
                                                 }`}
                                         >
                                             {tf}
@@ -115,7 +115,7 @@ export default function TransitionsClient() {
                                         onClick={() => setTimingFunction("cubic-bezier(0.68, -0.55, 0.27, 1.55)")} // Custom bounce
                                         className={`py-1.5 px-2 text-xs rounded-md border transition-all ${timingFunction.startsWith("cubic")
                                                 ? "bg-cyan-500/20 border-cyan-500 text-cyan-400"
-                                                : "bg-white/5 border-transparent text-gray-400 hover:bg-white/10"
+                                                : "bg-foreground/5 border-transparent text-gray-600 dark:text-gray-400 hover:bg-white/10"
                                             }`}
                                     >
                                         Bounce (Custom)
@@ -128,11 +128,11 @@ export default function TransitionsClient() {
 
                         <ControlGroup title="Target Properties">
                             <div className="space-y-1.5">
-                                <label className="text-xs text-gray-300">Transition Property</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Transition Property</label>
                                 <select
                                     value={property}
                                     onChange={(e) => setProperty(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
+                                    className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
                                 >
                                     <option value="all" className="bg-gray-900">all</option>
                                     <option value="transform" className="bg-gray-900">transform</option>
@@ -154,7 +154,7 @@ export default function TransitionsClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -169,7 +169,7 @@ export default function TransitionsClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex flex-col bg-[#111]">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex flex-col bg-[#111]">
 
                         {/* Interactive Trigger Zone */}
                         <div
@@ -177,9 +177,9 @@ export default function TransitionsClient() {
                             onClick={() => setIsActive(!isActive)}
                         >
                             <div className="absolute inset-x-0 top-0 p-4 flex justify-between items-start pointer-events-none">
-                                <div className="bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-2">
-                                    {isActive ? <PlayCircle className="w-3 h-3 text-green-400" /> : <Clock className="w-3 h-3 text-gray-400" />}
-                                    <span className="text-xs text-gray-300 font-mono">
+                                <div className="bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-foreground/10 flex items-center gap-2">
+                                    {isActive ? <PlayCircle className="w-3 h-3 text-green-400" /> : <Clock className="w-3 h-3 text-gray-600 dark:text-gray-400" />}
+                                    <span className="text-xs text-gray-700 dark:text-gray-300 font-mono">
                                         State: {isActive ? "Active (B)" : "Inactive (A)"}
                                     </span>
                                 </div>
@@ -208,13 +208,13 @@ export default function TransitionsClient() {
                                     transitionDelay: `${delay}s`
                                 }}
                             >
-                                <Zap className={`w-8 h-8 text-white transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-50"}`} />
+                                <Zap className={`w-8 h-8 text-foreground transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-50"}`} />
                             </div>
 
                         </div>
 
                         {/* Timeline Visualization (Simple Bar) */}
-                        <div className="h-1 w-full bg-white/5 relative">
+                        <div className="h-1 w-full bg-foreground/5 relative">
                             {isActive && (
                                 <motion.div
                                     key={isActive ? "active" : "inactive"} // Reset animation on toggle
@@ -233,9 +233,9 @@ export default function TransitionsClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">CSS Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">CSS Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -244,16 +244,16 @@ export default function TransitionsClient() {
                                 {copied ? "Copied!" : "Copy CSS"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 whitespace-pre">
-                            <div className="text-purple-400">.transition-element <span className="text-white">{`{`}</span></div>
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 whitespace-pre">
+                            <div className="text-purple-400">.transition-element <span className="text-foreground">{`{`}</span></div>
                             <div className="pl-4 text-orange-300">transition-property: <span className="text-cyan-300">{property}</span>;</div>
                             <div className="pl-4 text-orange-300">transition-duration: <span className="text-cyan-300">{duration}s</span>;</div>
                             <div className="pl-4 text-orange-300">transition-timing-function: <span className="text-cyan-300">{timingFunction}</span>;</div>
                             <div className="pl-4 text-orange-300">transition-delay: <span className="text-cyan-300">{delay}s</span>;</div>
-                            <div className="text-white">{`
+                            <div className="text-foreground">{`
     /* changes to animate */`}</div>
                             <div className="pl-4 text-gray-500">/* ... new styles (e.g. :hover) ... */</div>
-                            <div className="text-white">{`}`}</div>
+                            <div className="text-foreground">{`}`}</div>
                         </div>
                     </div>
                 </motion.div>
@@ -267,8 +267,8 @@ export default function TransitionsClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -280,7 +280,7 @@ function SliderControl({ label, value, onChange, min, max, step = 1, unit = "" }
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{Math.round(value * 100) / 100}{unit}</span>
             </div>
             <input

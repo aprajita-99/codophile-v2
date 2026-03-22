@@ -162,7 +162,7 @@ export default function ButtonsClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -174,19 +174,19 @@ export default function ButtonsClient() {
                     className="w-full lg:w-96 shrink-0 flex flex-col gap-6 lg:sticky lg:top-24 max-h-none lg:max-h-[calc(100vh-120px)]"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to Tailwind
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             Tailwind Buttons
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Design Tailwind buttons using utility classes.
                         </p>
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex p-1 bg-white/5 rounded-lg border border-white/10">
+                    <div className="flex p-1 bg-foreground/5 rounded-lg border border-foreground/10">
                         {[
                             { id: "style", icon: Palette, label: "Style" },
                             { id: "hover", icon: MousePointer2, label: "Hover" },
@@ -198,7 +198,7 @@ export default function ButtonsClient() {
                                 onClick={() => setActiveTab(tab.id as any)}
                                 className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-medium rounded-md transition-all ${activeTab === tab.id
                                     ? "bg-cyan-500/10 text-cyan-400 shadow-sm ring-1 ring-cyan-500/50"
-                                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                                    : "text-gray-600 dark:text-gray-400 hover:text-foreground hover:bg-foreground/5"
                                     }`}
                             >
                                 <tab.icon className="w-3.5 h-3.5" />
@@ -214,12 +214,12 @@ export default function ButtonsClient() {
                             <div className="space-y-6">
                                 <ControlGroup title="Content">
                                     <div className="space-y-1.5">
-                                        <label className="text-xs text-gray-300">Button Text</label>
+                                        <label className="text-xs text-gray-700 dark:text-gray-300">Button Text</label>
                                         <input
                                             type="text"
                                             value={buttonText}
                                             onChange={(e) => setButtonText(e.target.value)}
-                                            className="w-full bg-black/20 border border-white/10 rounded-lg h-9 text-xs text-gray-300 px-3 focus:outline-none focus:border-cyan-500/50"
+                                            className="w-full bg-black/20 border border-foreground/10 rounded-lg h-9 text-xs text-gray-700 dark:text-gray-300 px-3 focus:outline-none focus:border-cyan-500/50"
                                         />
                                     </div>
                                 </ControlGroup>
@@ -238,13 +238,13 @@ export default function ButtonsClient() {
                                         <div className="flex gap-2">
                                             <button
                                                 onClick={() => { setTextStartColor("white"); setTextShade(""); }}
-                                                className={`px-3 py-1.5 text-xs rounded border transition-colors ${textStartColor === "white" ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-gray-400"}`}
+                                                className={`px-3 py-1.5 text-xs rounded border transition-colors ${textStartColor === "white" ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400"}`}
                                             >
                                                 White
                                             </button>
                                             <button
                                                 onClick={() => { setTextStartColor("black"); setTextShade(""); }}
-                                                className={`px-3 py-1.5 text-xs rounded border transition-colors ${textStartColor === "black" ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-gray-400"}`}
+                                                className={`px-3 py-1.5 text-xs rounded border transition-colors ${textStartColor === "black" ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400"}`}
                                             >
                                                 Black
                                             </button>
@@ -255,13 +255,13 @@ export default function ButtonsClient() {
                                 <ControlGroup title="Size & Shape">
                                     <div className="space-y-4">
                                         <div className="space-y-1.5">
-                                            <label className="text-xs text-gray-300">Padding</label>
+                                            <label className="text-xs text-gray-700 dark:text-gray-300">Padding</label>
                                             <div className="grid grid-cols-4 gap-2">
                                                 {PADDING_OPTIONS.map((opt) => (
                                                     <button
                                                         key={opt.label}
                                                         onClick={() => setPadding(opt)}
-                                                        className={`py-1.5 text-xs rounded border transition-colors ${padding.label === opt.label ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-gray-400"}`}
+                                                        className={`py-1.5 text-xs rounded border transition-colors ${padding.label === opt.label ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400"}`}
                                                     >
                                                         {opt.label}
                                                     </button>
@@ -270,13 +270,13 @@ export default function ButtonsClient() {
                                         </div>
 
                                         <div className="space-y-1.5">
-                                            <label className="text-xs text-gray-300">Rounded</label>
+                                            <label className="text-xs text-gray-700 dark:text-gray-300">Rounded</label>
                                             <div className="grid grid-cols-5 gap-2">
                                                 {ROUNDED_OPTIONS.map((opt) => (
                                                     <button
                                                         key={opt.label}
                                                         onClick={() => setRounded(opt)}
-                                                        className={`py-1.5 px-0 text-[10px] rounded border transition-colors truncate ${rounded.label === opt.label ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-gray-400"}`}
+                                                        className={`py-1.5 px-0 text-[10px] rounded border transition-colors truncate ${rounded.label === opt.label ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400"}`}
                                                         title={opt.label}
                                                     >
                                                         {opt.label}
@@ -306,7 +306,7 @@ export default function ButtonsClient() {
                                             <button
                                                 key={d}
                                                 onClick={() => setDuration(d)}
-                                                className={`py-1.5 text-xs rounded border transition-colors ${duration === d ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-gray-400"}`}
+                                                className={`py-1.5 text-xs rounded border transition-colors ${duration === d ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400"}`}
                                             >
                                                 {d.replace("duration-", "")}ms
                                             </button>
@@ -325,7 +325,7 @@ export default function ButtonsClient() {
                                             <button
                                                 key={opt.label}
                                                 onClick={() => setShadow(opt)}
-                                                className={`py-2 text-xs rounded border transition-colors ${shadow.label === opt.label ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-gray-400"}`}
+                                                className={`py-2 text-xs rounded border transition-colors ${shadow.label === opt.label ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400"}`}
                                             >
                                                 {opt.label}
                                             </button>
@@ -340,7 +340,7 @@ export default function ButtonsClient() {
                             <div className="space-y-6">
                                 <ControlGroup title="Button Group">
                                     <div className="flex items-center justify-between">
-                                        <span className="text-sm font-medium text-gray-300">Enable Group</span>
+                                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Enable Group</span>
                                         <button
                                             onClick={() => setIsGroup(!isGroup)}
                                             className={`w-11 h-6 rounded-full transition-colors relative ${isGroup ? "bg-cyan-500" : "bg-white/10"}`}
@@ -357,7 +357,7 @@ export default function ButtonsClient() {
                                                 <button
                                                     key={s}
                                                     onClick={() => setGroupSpace(s)}
-                                                    className={`py-1.5 text-xs rounded border transition-colors ${groupSpace === s ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-gray-400"}`}
+                                                    className={`py-1.5 text-xs rounded border transition-colors ${groupSpace === s ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-400" : "bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400"}`}
                                                 >
                                                     {s}
                                                 </button>
@@ -372,7 +372,7 @@ export default function ButtonsClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -387,7 +387,7 @@ export default function ButtonsClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex items-center justify-center bg-[#f0f0f0] group">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex items-center justify-center bg-[#f0f0f0] group">
                         {/* Background Pattern */}
                         <div className="absolute inset-0 z-0">
                             <div className="absolute inset-0 bg-[#f8f9fa]" />
@@ -412,9 +412,9 @@ export default function ButtonsClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">Tailwind HTML</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">Tailwind HTML</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -423,7 +423,7 @@ export default function ButtonsClient() {
                                 {copied ? "Copied!" : "Copy Code"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300">
                             <pre className="whitespace-pre-wrap break-all">{generateCode()}</pre>
                         </div>
                     </div>
@@ -438,8 +438,8 @@ export default function ButtonsClient() {
 // Helpers
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -451,7 +451,7 @@ function TailwindColorPicker({ selectedColor, selectedShade, onColorChange, onSh
     return (
         <div className="space-y-3">
             <div className="space-y-1.5">
-                <label className="text-xs text-gray-300">Color Family</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">Color Family</label>
                 <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto custom-scrollbar p-1">
                     {TAILWIND_COLORS.map((c) => (
                         <button
@@ -470,7 +470,7 @@ function TailwindColorPicker({ selectedColor, selectedShade, onColorChange, onSh
 
             <div className="space-y-1.5">
                 <div className="flex justify-between">
-                    <label className="text-xs text-gray-300">Shade</label>
+                    <label className="text-xs text-gray-700 dark:text-gray-300">Shade</label>
                     <span className="text-xs font-mono text-cyan-400">{selectedShade}</span>
                 </div>
 

@@ -106,7 +106,7 @@ export function GridClient() {
     };
 
     // Construct Class strings
-    const containerClasses = `grid ${gridCols} ${gridRows} ${gap} ${justifyItems} ${alignItems} ${justifyContent} ${alignContent} w-full h-full min-h-[300px] p-4 overflow-auto border border-white/10 rounded-lg`;
+    const containerClasses = `grid ${gridCols} ${gridRows} ${gap} ${justifyItems} ${alignItems} ${justifyContent} ${alignContent} w-full h-full min-h-[300px] p-4 overflow-auto border border-foreground/10 rounded-lg`;
 
     // Active item classes for display
     const itemClasses = activeItem ? `${activeItem.colStart} ${activeItem.colSpan} ${activeItem.rowStart} ${activeItem.rowSpan} ${activeItem.justifySelf} ${activeItem.alignSelf}` : "";
@@ -121,7 +121,7 @@ export function GridClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -133,24 +133,24 @@ export function GridClient() {
                     className="w-full lg:w-96 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/tailwind" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to Tailwind
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             Tailwind Grid Layout
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Master grid layouts using Tailwind utility classes.
                         </p>
                     </div>
 
                     {/* Tab Switcher */}
-                    <div className="flex p-1 bg-white/5 rounded-xl border border-white/5">
+                    <div className="flex p-1 bg-foreground/5 rounded-xl border border-foreground/5">
                         <button
                             onClick={() => setActiveTab("container")}
                             className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 ${activeTab === "container"
                                 ? "bg-cyan-500/20 text-cyan-400 shadow-sm border border-cyan-500/20"
-                                : "text-gray-400 hover:text-white"
+                                : "text-gray-600 dark:text-gray-400 hover:text-foreground"
                                 }`}
                         >
                             <LayoutGrid className="w-4 h-4" /> Container
@@ -159,7 +159,7 @@ export function GridClient() {
                             onClick={() => setActiveTab("items")}
                             className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2 ${activeTab === "items"
                                 ? "bg-purple-500/20 text-purple-400 shadow-sm border border-purple-500/20"
-                                : "text-gray-400 hover:text-white"
+                                : "text-gray-600 dark:text-gray-400 hover:text-foreground"
                                 }`}
                         >
                             <BoxSelect className="w-4 h-4" /> Items
@@ -233,7 +233,7 @@ export function GridClient() {
                                             // Since item.backgroundColor is a class string like 'bg-blue-500', we can apply it directly to className
                                             className={`${item.backgroundColor} py-2 rounded-lg text-sm font-bold transition-all border ${activeItemId === item.id
                                                 ? "ring-2 ring-white scale-105 border-transparent"
-                                                : "opacity-60 hover:opacity-100 border-white/10"
+                                                : "opacity-60 hover:opacity-100 border-foreground/10"
                                                 }`}
                                         >
                                             {item.id}
@@ -274,7 +274,7 @@ export function GridClient() {
                                         </ControlGroup>
                                     </>
                                 ) : (
-                                    <div className="p-4 text-center text-gray-400 bg-white/5 rounded-lg">
+                                    <div className="p-4 text-center text-gray-600 dark:text-gray-400 bg-foreground/5 rounded-lg">
                                         No item selected. Add an item or select one to edit.
                                     </div>
                                 )}
@@ -302,7 +302,7 @@ export function GridClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -317,9 +317,9 @@ export function GridClient() {
                     className="flex-1 flex flex-col gap-6 min-w-0"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex flex-col bg-[#1a1a1a]">
-                        <div className="absolute top-0 left-0 right-0 p-3 bg-white/5 border-b border-white/5 flex justify-between items-center z-10">
-                            <span className="text-xs font-mono text-gray-400">Grid Container Preview</span>
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex flex-col bg-[#1a1a1a]">
+                        <div className="absolute top-0 left-0 right-0 p-3 bg-foreground/5 border-b border-foreground/5 flex justify-between items-center z-10">
+                            <span className="text-xs font-mono text-gray-600 dark:text-gray-400">Grid Container Preview</span>
                             <div className="text-[10px] text-gray-500">
                                 {items.length} Items
                             </div>
@@ -339,20 +339,20 @@ export function GridClient() {
                                         ${item.backgroundColor} 
                                         ${item.colStart} ${item.colSpan} ${item.rowStart} ${item.rowSpan}
                                         ${item.justifySelf} ${item.alignSelf}
-                                        ${activeItemId === item.id && activeTab === "items" ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.3)] z-10" : "border-transparent border-white/5 hover:border-white/20"}
+                                        ${activeItemId === item.id && activeTab === "items" ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.3)] z-10" : "border-transparent border-foreground/5 hover:border-white/20"}
                                         min-h-[64px]
                                     `}
                                 >
-                                    <span className="text-white font-bold drop-shadow-md">{item.id}</span>
+                                    <span className="text-foreground font-bold drop-shadow-md">{item.id}</span>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
                                 {activeTab === "container" ? "Container Classes" : `Item ${activeItemId} Classes`}
                             </span>
                             <button
@@ -363,7 +363,7 @@ export function GridClient() {
                                 {copied ? "Copied!" : "Copy Code"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 max-h-40 overflow-y-auto custom-scrollbar whitespace-pre">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 max-h-40 overflow-y-auto custom-scrollbar whitespace-pre">
                             {activeTab === "container" ? (
                                 <div className="text-cyan-300">{containerClasses}</div>
                             ) : (
@@ -382,8 +382,8 @@ export function GridClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -395,15 +395,15 @@ function SelectControl({ label, value, onChange, options, note }: any) {
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label} {note && <span className="text-gray-500 text-[10px]">{note}</span>}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label} {note && <span className="text-gray-500 text-[10px]">{note}</span>}</label>
             </div>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
+                className="w-full bg-foreground/5 border border-foreground/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 p-2 outline-none focus:border-cyan-500/50 cursor-pointer"
             >
                 {options.map((opt: string) => (
-                    <option key={opt} value={opt} className="bg-gray-900 text-white">
+                    <option key={opt} value={opt} className="bg-gray-900 text-foreground">
                         {opt}
                     </option>
                 ))}

@@ -119,7 +119,7 @@ export default function TooltipClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#030014] text-white selection:bg-cyan-500/30 font-sans">
+        <div className="min-h-screen bg-background text-foreground selection:bg-cyan-500/30 font-sans">
             <Header />
 
             <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 min-h-[calc(100vh-100px)]">
@@ -131,13 +131,13 @@ export default function TooltipClient() {
                     className="w-full lg:w-80 shrink-0 flex flex-col gap-6"
                 >
                     <div className="space-y-2">
-                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                        <Link href="/playground/css" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-foreground transition-colors text-sm">
                             <ArrowLeft className="w-4 h-4" /> Back to CSS
                         </Link>
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
                             Tooltip Generator
                         </h1>
-                        <p className="text-gray-400 text-xs">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs">
                             Create custom CSS tooltips with positioning, arrows, and animations.
                         </p>
                     </div>
@@ -152,7 +152,7 @@ export default function TooltipClient() {
                                         onClick={() => setPosition(pos as any)}
                                         className={`px-3 py-2 text-sm rounded-lg border transition-all ${position === pos
                                                 ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400'
-                                                : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
+                                                : 'bg-foreground/5 border-foreground/10 text-gray-600 dark:text-gray-400 hover:bg-white/10'
                                             }`}
                                     >
                                         {pos.charAt(0).toUpperCase() + pos.slice(1)}
@@ -164,7 +164,7 @@ export default function TooltipClient() {
                         <ControlGroup title="Appearance">
                             <div className="space-y-3">
                                 <div>
-                                    <label className="text-xs text-gray-300 block mb-1">Background Color</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300 block mb-1">Background Color</label>
                                     <div className="flex gap-2">
                                         <input
                                             type="color"
@@ -176,12 +176,12 @@ export default function TooltipClient() {
                                             type="text"
                                             value={bgColor}
                                             onChange={(e) => setBgColor(e.target.value)}
-                                            className="flex-1 bg-white/5 border border-white/10 rounded px-2 text-xs text-gray-300 font-mono"
+                                            className="flex-1 bg-foreground/5 border border-foreground/10 rounded px-2 text-xs text-gray-700 dark:text-gray-300 font-mono"
                                         />
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="text-xs text-gray-300 block mb-1">Text Color</label>
+                                    <label className="text-xs text-gray-700 dark:text-gray-300 block mb-1">Text Color</label>
                                     <div className="flex gap-2">
                                         <input
                                             type="color"
@@ -193,7 +193,7 @@ export default function TooltipClient() {
                                             type="text"
                                             value={textColor}
                                             onChange={(e) => setTextColor(e.target.value)}
-                                            className="flex-1 bg-white/5 border border-white/10 rounded px-2 text-xs text-gray-300 font-mono"
+                                            className="flex-1 bg-foreground/5 border border-foreground/10 rounded px-2 text-xs text-gray-700 dark:text-gray-300 font-mono"
                                         />
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@ export default function TooltipClient() {
                         <ControlGroup title="Animation & Arrow">
                             <SliderControl label="Fade In Duration" value={fadeInDuration} onChange={setFadeInDuration} min={0} max={2} step={0.1} unit="s" />
                             <div className="flex items-center justify-between pt-2">
-                                <label className="text-xs text-gray-300">Show Arrow</label>
+                                <label className="text-xs text-gray-700 dark:text-gray-300">Show Arrow</label>
                                 <button
                                     onClick={() => setShowArrow(!showArrow)}
                                     className={`w-10 h-5 rounded-full relative transition-colors ${showArrow ? 'bg-cyan-500' : 'bg-white/10'}`}
@@ -223,7 +223,7 @@ export default function TooltipClient() {
 
                     <button
                         onClick={resetValues}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-300"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-foreground/5 border border-foreground/10 rounded-lg text-sm hover:bg-white/10 transition-colors text-gray-700 dark:text-gray-300"
                     >
                         <RefreshCw className="w-4 h-4" /> Reset All
                     </button>
@@ -238,7 +238,7 @@ export default function TooltipClient() {
                     className="flex-1 flex flex-col gap-6"
                 >
                     {/* Visual Preview */}
-                    <div className="flex-1 min-h-[400px] rounded-2xl border border-white/10 relative overflow-hidden flex items-center justify-center bg-[#111] group">
+                    <div className="flex-1 min-h-[400px] rounded-2xl border border-foreground/10 relative overflow-hidden flex items-center justify-center bg-[#111] group">
                         {/* Grid Background */}
                         <div className="absolute inset-0 z-0">
                             <div className="absolute inset-0 bg-linear-to-br from-blue-900/10 via-transparent to-purple-900/10" />
@@ -249,7 +249,7 @@ export default function TooltipClient() {
                         <style>{cssCode}</style>
 
                         {/* Interactive Element */}
-                        <div className="tooltip-container px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg transition-colors text-white font-medium">
+                        <div className="tooltip-container px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg transition-colors text-foreground font-medium">
                             Hover Me
                             <div className="tooltip-text">
                                 Tooltip Text
@@ -258,9 +258,9 @@ export default function TooltipClient() {
                     </div>
 
                     {/* Code Output */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-0 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
-                            <span className="text-xs font-medium text-gray-400">CSS Output</span>
+                    <div className="bg-[#0a0a0a] border border-foreground/10 rounded-xl p-0 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-foreground/5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">CSS Output</span>
                             <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -269,7 +269,7 @@ export default function TooltipClient() {
                                 {copied ? "Copied!" : "Copy CSS"}
                             </button>
                         </div>
-                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-300 whitespace-pre">
+                        <div className="p-4 font-mono text-sm overflow-x-auto text-gray-700 dark:text-gray-300 whitespace-pre">
                             {cssCode}
                         </div>
                     </div>
@@ -284,8 +284,8 @@ export default function TooltipClient() {
 // Reusable Components
 function ControlGroup({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{title}</h3>
+        <div className="space-y-3 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{title}</h3>
             <div className="space-y-4">
                 {children}
             </div>
@@ -297,7 +297,7 @@ function SliderControl({ label, value, onChange, min, max, step = 1, unit = "" }
     return (
         <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-300">{label}</label>
+                <label className="text-xs text-gray-700 dark:text-gray-300">{label}</label>
                 <span className="text-xs font-mono text-cyan-400">{Math.round(value * 100) / 100}{unit}</span>
             </div>
             <input
