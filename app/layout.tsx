@@ -26,46 +26,43 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://codophile.in"),
 
   title: {
-    default: "Codophile – Visual CSS Playground, Tailwind Generator & CSS Effects Library",
-    template: "%s | Codophile",
+  default: "CSS Animations, Effects & UI Components (Copy-Paste Code) | Codophile",
+  template: "%s | Codophile",
   },
 
+  
   description:
-    "Codophile is a visual CSS playground and Tailwind CSS generator with a library of cool CSS effects and animations. Design UI visually, generate code instantly, and copy CSS effects for modern web development.",
-
+  "Explore modern CSS animations, hover effects, and UI components with ready-to-use code. Build interfaces visually, generate Tailwind CSS instantly, and copy clean, production-ready designs with Codophile.",
   keywords: [
-    // Core tool keywords
-    "visual css playground online",
-    "tailwind css generator online",
-    "css playground with live preview",
-    "visual css editor online free",
-    "generate tailwind classes online",
+   
 
-    // Effects keywords 
-    "cool css effects with code",
-    "css animations examples",
-    "interactive css effects",
-    "css effects copy paste",
-    "modern css ui effects",
+  "css button hover effects",
+  "css animation examples",
+  "cool css effects",
+  "loading animation css",
+  "glassmorphism css",
+  "neon button css",
+  "css card hover effects",
 
-    // Long-tail keywords
-    "create css effects visually",
-    "tailwind css generator for developers",
-    "css playground for web designers",
-    "css effects library with code examples",
-    "generate css animations online free",
 
-    // Niche keywords
-    "css playground for beginners",
-    "tailwind css generator for designers",
-    "css effects generator online",
-    "visual css editor for web development",
-    "css playground with code export",
-    "visual css playground online free",
-    "tailwind css generator for beginners",
-    "css effects with code examples",
-    "css animation effects for websites",
-    "design ui and generate css automatically"
+  "tailwind css components",
+  "tailwind button design",
+  "tailwind card examples",
+  "tailwind ui templates free",
+
+
+  "css playground",
+  "css generator tool",
+  "visual css editor",
+  "tailwind generator",
+
+ 
+  "css glowing button hover effect code",
+  "glassmorphism login form css",
+  "css loader without javascript",
+  "neon button animation css",
+  "css animation copy paste code"
+
   ],
 
   authors: [{ name: "Codophile Team" }],
@@ -82,9 +79,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://codophile.in",
-    title: "Codophile – Visual CSS Playground & Tailwind Generator + CSS Effects",
-    description:
-      "Design UI visually, generate Tailwind CSS instantly, and explore a library of cool CSS effects with code. Perfect tool for developers and designers.",
+    
+  title: {
+  default: "CSS Animations, Effects & UI Components (Copy-Paste Code) | Codophile",
+  template: "%s | Codophile",
+  },
+
+  description:
+  "Explore CSS animations, hover effects, and UI components with ready-to-use code. Copy-paste modern CSS effects, build interfaces visually, and generate Tailwind CSS instantly with Codophile.",
     siteName: "Codophile",
     images: [
       {
@@ -98,9 +100,14 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Codophile – CSS Playground, Tailwind Generator & Effects Library",
-    description:
-      "Create UI visually, generate Tailwind CSS, and explore modern CSS effects with code.",
+    
+  title: {
+  default: "CSS Animations, Effects & UI Components (Copy-Paste Code) | Codophile",
+  template: "%s | Codophile",
+  },
+
+  description:
+  "Explore CSS animations, hover effects, and UI components with ready-to-use code. Copy-paste modern CSS effects, build interfaces visually, and generate Tailwind CSS instantly with Codophile.",
     creator: "@codophile",
     images: ["/og-image.png"],
   },
@@ -168,3 +175,6 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+

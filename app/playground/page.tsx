@@ -4,12 +4,12 @@ import PlaygroundClientPage from "./client-page";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Playground - Interactive CSS & Tailwind Learning | Codophile",
-        description: "Choose your playground: Master CSS properties or Tailwind utilities with visual, interactive controls. Real-time feedback for rapid learning.",
+        title: "CSS Playground Online (Live Editor) + Tailwind CSS Generator | Codophile",
+        description: "Use this CSS playground online with live preview to test styles instantly. Generate Tailwind CSS classes, experiment with layouts, and copy production-ready code.",
         keywords: ["css playground", "tailwind playground", "interactive css", "visual css editor", "tailwind learning"],
         openGraph: {
-            title: "Playground - Interactive CSS & Tailwind Learning",
-            description: "Choose your playground: Master CSS properties or Tailwind utilities with visual, interactive controls.",
+            title: "CSS Playground Online (Live Editor) + Tailwind CSS Generator | Codophile",
+            description: "Use this CSS playground online with live preview to test styles instantly. Generate Tailwind CSS classes, experiment with layouts, and copy production-ready code.",
             type: 'website',
             siteName: 'Codophile',
         },

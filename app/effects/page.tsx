@@ -10,12 +10,17 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { LivePreview } from "@/components/EffectsUI/LivePreview";
 import Mascot from "@/components/EffectsUI/Mascot";
 
-
 const ITEMS_PER_PAGE = 9;
 
 export default function EffectsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#030014] text-white flex items-center justify-center">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#030014] text-white flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
       <EffectsContent />
     </Suspense>
   );
@@ -27,10 +32,10 @@ function EffectsContent() {
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition(); // Using transition fixes the double-back-click bug
 
-  // 1. Single Source of Truth: Read directly from the URL. 
+  // 1. Single Source of Truth: Read directly from the URL.
   // Next.js will automatically re-render this component when the URL changes.
   const page = parseInt(searchParams.get("page") || "1", 10);
-  
+
   const [effects, setEffects] = React.useState<any[]>([]);
   const [totalPages, setTotalPages] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
@@ -40,20 +45,24 @@ function EffectsContent() {
     const fetchEffects = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/effects?page=${page}&limit=${ITEMS_PER_PAGE}`);
+        const res = await fetch(
+          `/api/effects?page=${page}&limit=${ITEMS_PER_PAGE}`,
+        );
         const data = await res.json();
         if (active) {
           setEffects(data.effects || []);
           setTotalPages(data.pagination?.totalPages || 1);
         }
       } catch (err) {
-        console.error('Failed to fetch effects:', err);
+        console.error("Failed to fetch effects:", err);
       } finally {
         if (active) setLoading(false);
       }
     };
     fetchEffects();
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, [page]);
 
   // 2. Navigation Handler
@@ -63,16 +72,15 @@ function EffectsContent() {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", newPage.toString());
 
-    // Wrapping in startTransition prevents the Suspense boundary from creating 
+    // Wrapping in startTransition prevents the Suspense boundary from creating
     // a duplicate history entry, which is what caused the double-click bug.
     startTransition(() => {
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     });
 
     // Smooth scroll to top of the grid
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
 
   return (
     <div className="min-h-screen bg-[#030014] text-white selection:bg-pink-500/30 font-sans overflow-hidden">
@@ -84,7 +92,6 @@ function EffectsContent() {
       </div>
 
       <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
-
         {/* Hero */}
         <div className="text-center mb-20">
           <motion.div
@@ -101,9 +108,9 @@ function EffectsContent() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-7xl font-bold tracking-tight mb-6 flex flex-nowrap justify-center items-center whitespace-nowrap"
           >
-            Cool CSS{" "}
+            Advanced UI Animations &{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 animate-gradient-x">
-              Effects
+              CSS Visual Effects
             </span>
           </motion.h1>
 
@@ -113,57 +120,83 @@ function EffectsContent() {
             transition={{ delay: 0.2 }}
             className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed"
           >
-            A curated collection of stunning visual effects, ready to copy-paste.
-            Explore, tweak, and implement modern UI magic.
+            Explore a collection of advanced CSS animations, interactive UI
+            effects, and modern components. Preview high-quality loading
+            animations, futuristic interfaces, and creative visual effects with
+            clean copy-paste code.
           </motion.p>
         </div>
-
         {/* Animated Grid */}
         <AnimatePresence mode="wait">
           {loading ? (
-             <motion.div 
-               key="loading"
-               initial={{ opacity: 0 }} 
-               animate={{ opacity: 1 }} 
-               exit={{ opacity: 0 }}
-               className="flex justify-center items-center py-20"
-             >
-               <div className="flex flex-col items-center gap-4 text-pink-400">
-                 <div className="w-8 h-8 rounded-full border-t-2 border-r-2 border-pink-400 animate-spin" />
-                 <span className="text-sm tracking-widest uppercase">Loading Magic...</span>
-               </div>
-             </motion.div>
+            <motion.div
+              key="loading"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex justify-center items-center py-20"
+            >
+              <div className="flex flex-col items-center gap-4 text-pink-400">
+                <div className="w-8 h-8 rounded-full border-t-2 border-r-2 border-pink-400 animate-spin" />
+                <span className="text-sm tracking-widest uppercase">
+                  Loading Magic...
+                </span>
+              </div>
+            </motion.div>
           ) : (
-             <motion.div
-               key={page}
-               initial={{ opacity: 0, y: 30 }}
-               animate={{ opacity: 1, y: 0 }}
-               exit={{ opacity: 0, y: -30 }}
-               transition={{ duration: 0.4 }}
-               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-             >
-               {effects.length > 0 ? (
-                 effects.map((effect: any, idx) => (
-                   <EffectCard key={effect._id || effect.id} effect={effect} index={idx} />
-                 ))
-               ) : (
-                 <div className="col-span-full py-20 text-center text-zinc-500">
-                   No effects found.
-                 </div>
-               )}
-             </motion.div>
+            <motion.div
+              key={page}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.4 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {effects.length > 0 ? (
+                effects.map((effect: any, idx) => (
+                  <EffectCard
+                    key={effect._id || effect.id}
+                    effect={effect}
+                    index={idx}
+                  />
+                ))
+              ) : (
+                <div className="col-span-full py-20 text-center text-zinc-500">
+                  No effects found.
+                </div>
+              )}
+            </motion.div>
           )}
         </AnimatePresence>
-
         {/* Orbital Pagination */}
         <ConstellationPagination
           totalPages={totalPages}
           currentPage={page}
           onChange={handlePageChange}
         />
+        <section className="mt-28 text-center space-y-6">
+          <h2 className="text-2xl md:text-3xl font-semibold">
+            Build Your Own CSS Animations
+          </h2>
 
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Use our visual CSS playground and Tailwind generator to create
+            custom animations, experiment with UI effects, and generate
+            production-ready code instantly.
+          </p>
+
+          <div className="flex justify-center gap-4 mt-6">
+            <Link href="/playground" className="text-pink-400 hover:underline">
+              Open Playground
+            </Link>
+            <Link href="/templates" className="text-pink-400 hover:underline">
+              Explore Templates
+            </Link>
+          </div>
+        </section>
+        ;
       </main>
-    {/* --- MASCOT COMPONENT --- */}
+      {/* --- MASCOT COMPONENT --- */}
       {/* h-0 ensures this container takes up absolutely ZERO vertical space in your layout */}
       <div className="relative w-full max-w-7xl mx-auto h-0 px-6">
         {/* absolute and bottom-0 anchor the mascot exactly to the footer line */}
@@ -185,7 +218,10 @@ function EffectCard({ effect, index }: { effect: any; index: number }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.08 }}
     >
-      <Link href={`/effects/${effect.id}`} className="group relative block h-full">
+      <Link
+        href={`/effects/${effect.id}`}
+        className="group relative block h-full"
+      >
         <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500" />
 
         <div className="relative h-full bg-[#0a0a0a]/50 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:border-pink-500/30 hover:-translate-y-1">
@@ -206,7 +242,7 @@ function EffectCard({ effect, index }: { effect: any; index: number }) {
               {effect.description}
             </p>
             <div className="mt-auto flex items-center text-sm font-medium text-pink-300 group-hover:gap-2 transition-all">
-              View Snippet <ArrowRight className="w-4 h-4 ml-1" />
+              View Animation <ArrowRight className="w-4 h-4 ml-1" />
             </div>
           </div>
         </div>
@@ -224,7 +260,6 @@ export function ConstellationPagination({
   currentPage: number;
   onChange: (p: number) => void;
 }) {
-
   const getPages = () => {
     const delta = 2;
     const range: number[] = [];
@@ -260,7 +295,6 @@ export function ConstellationPagination({
 
   return (
     <div className="relative mt-32 mb-16 flex justify-center items-center gap-6 md:gap-12">
-      
       {/* Previous Button - Removed cursor-not-allowed, added disabled:cursor-default */}
       <button
         onClick={() => onChange(currentPage - 1)}
@@ -278,7 +312,10 @@ export function ConstellationPagination({
         {visiblePages.map((page, index) => {
           if (page === "...") {
             return (
-              <div key={`dots-${index}`} className="text-gray-600 text-xl select-none px-1">
+              <div
+                key={`dots-${index}`}
+                className="text-gray-600 text-xl select-none px-1"
+              >
                 ⋯
               </div>
             );
@@ -295,21 +332,44 @@ export function ConstellationPagination({
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.9 }}
             >
-              <div className={`relative w-3.5 h-3.5 rounded-full transition-all duration-500 ease-out ${active ? "bg-pink-400 shadow-[0_0_15px_#22d3ee,0_0_30px_#22d3ee]" : "bg-white/20 group-hover:bg-white/70 shadow-none"}`}>
-                {active && <div className="absolute inset-0 rounded-full bg-white blur-[1px] opacity-50" />}
+              <div
+                className={`relative w-3.5 h-3.5 rounded-full transition-all duration-500 ease-out ${active ? "bg-pink-400 shadow-[0_0_15px_#22d3ee,0_0_30px_#22d3ee]" : "bg-white/20 group-hover:bg-white/70 shadow-none"}`}
+              >
+                {active && (
+                  <div className="absolute inset-0 rounded-full bg-white blur-[1px] opacity-50" />
+                )}
               </div>
-              
+
               {/* Preserved the animated glow from the original */}
               <AnimatePresence>
                 {active && (
                   <>
-                    <motion.div layoutId="activeGlow" className="absolute -inset-3 rounded-full bg-pink-500/20 blur-xl" transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
-                    <motion.div initial={{ scale: 0.5, opacity: 0.8 }} animate={{ scale: 2.5, opacity: 0 }} transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }} className="absolute inset-0 rounded-full bg-pink-400/40" />
+                    <motion.div
+                      layoutId="activeGlow"
+                      className="absolute -inset-3 rounded-full bg-pink-500/20 blur-xl"
+                      transition={{
+                        type: "spring",
+                        bounce: 0.2,
+                        duration: 0.6,
+                      }}
+                    />
+                    <motion.div
+                      initial={{ scale: 0.5, opacity: 0.8 }}
+                      animate={{ scale: 2.5, opacity: 0 }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                      }}
+                      className="absolute inset-0 rounded-full bg-pink-400/40"
+                    />
                   </>
                 )}
               </AnimatePresence>
 
-              <span className={`absolute top-8 font-mono text-[10px] tracking-[0.3em] transition-all duration-300 ${active ? "text-cyan-400 font-bold translate-y-1" : "text-gray-500 opacity-60"}`}>
+              <span
+                className={`absolute top-8 font-mono text-[10px] tracking-[0.3em] transition-all duration-300 ${active ? "text-cyan-400 font-bold translate-y-1" : "text-gray-500 opacity-60"}`}
+              >
                 {String(pageNum).padStart(2, "0")}
               </span>
             </motion.button>
@@ -326,7 +386,6 @@ export function ConstellationPagination({
         <span className="hidden sm:inline tracking-widest">NEXT</span>
         <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-disabled:translate-x-0" />
       </button>
-
     </div>
   );
 }

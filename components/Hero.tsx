@@ -59,9 +59,9 @@ export default function Hero() {
                         transition={{ duration: 0.5 }}
                     >
                         <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
-                            Design at the <br />
+                            CSS Animations, UI Components & Tailwind CSS Generator <br />
                             <span className="bg-clip-text text-transparent bg-linear-to-r from-violet-400 via-fuchsia-400 to-white animate-gradient-x">
-                                Speed of Thought
+                                Build & Copy Code Instantly
                             </span>
                         </h1>
                     </motion.div>
@@ -72,26 +72,12 @@ export default function Hero() {
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="text-lg text-gray-400 max-w-xl leading-relaxed"
                     >
-                        The comprehensive visual CSS editor for developers.
-                        Manipulate properties in real-time, inspect physics-based interactions,
-                        and export clean Tailwind code instantly.
+                        Explore modern CSS animations, hover effects, and UI components with copy-paste code.
+                        Use a powerful visual CSS playground and Tailwind CSS generator to design interfaces,
+                        experiment in real-time, and export production-ready code instantly.
                     </motion.p>
-                    <div className="sr-only">
-                    <h1>
-                        Visual CSS Playground, Tailwind CSS Generator & CSS Effects Library
-                    </h1>
-
-                    <p>
-                            Codophile is a visual CSS playground and Tailwind CSS generator that allows developers to design user interfaces
-                            in real-time, generate Tailwind CSS classes, and explore cool CSS effects with code.
-                            It includes a CSS editor with live preview, CSS playground tools, Tailwind generator features,
-                            and a collection of modern UI animations and effects for web development.
-                        
-                    </p>
-
-                    <h2>CSS Playground with Live Preview</h2>
-                    <h2>Tailwind CSS Generator Online</h2>
-                    <h2>Cool CSS Effects with Code Examples</h2>
+                    <div className="mt-4 text-xs text-gray-600 opacity-70">
+                        CSS animations • Tailwind generator • UI components • Copy-paste code
                     </div>
 
                     <motion.div
@@ -118,9 +104,9 @@ export default function Hero() {
                         className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-10 border-t border-white/5"
                     >
                         {[
-                            { label: "Zero Latency", value: "Real-time" },
-                            { label: "Export", value: "Tailwind/CSS" },
-                            { label: "Components", value: "500+" }
+                            { label: "Zero Latency", value: "Visual Editor" },
+                            { label: "TAILWIND & CSS", value: "Instant Export" },
+                            { label: "UI COMPONENTS", value: "500+" }
                         ].map((stat, i) => (
                             <div key={i} className="space-y-1">
                                 <div className="text-xl md:text-2xl font-bold text-white font-mono wrap-break-word">{stat.value}</div>
