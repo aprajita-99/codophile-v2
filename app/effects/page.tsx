@@ -134,14 +134,18 @@ function EffectsContent() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex justify-center items-center py-20"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
             >
-              <div className="flex flex-col items-center gap-4 text-pink-400">
-                <div className="w-8 h-8 rounded-full border-t-2 border-r-2 border-pink-400 animate-spin" />
-                <span className="text-sm tracking-widest uppercase">
-                  Loading Magic...
-                </span>
-              </div>
+              {[...Array(ITEMS_PER_PAGE)].map((_, i) => (
+                <motion.div
+                  key={`skeleton-${i}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <EffectSkeletonCard />
+                </motion.div>
+              ))}
             </motion.div>
           ) : (
             <motion.div
@@ -207,6 +211,22 @@ function EffectsContent() {
       </div>
 
       <Footer />
+    </div>
+  );
+}
+
+function EffectSkeletonCard() {
+  return (
+    <div className="relative h-full bg-[#0a0a0a]/50 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden flex flex-col animate-pulse min-h-[400px] w-full">
+      <div className="h-52 w-full bg-white/5" />
+      <div className="p-6 flex-1 flex flex-col border-t border-white/5 bg-[#0a0a0a]/80 gap-4">
+        <div className="h-7 bg-white/10 rounded w-3/4 mb-2" />
+        <div className="space-y-3 mb-6">
+          <div className="h-4 bg-white/5 rounded w-full" />
+          <div className="h-4 bg-white/5 rounded w-5/6" />
+        </div>
+        <div className="mt-auto h-5 bg-white/10 rounded w-1/3" />
+      </div>
     </div>
   );
 }
