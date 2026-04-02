@@ -58,7 +58,7 @@ export default function Hero() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
+                        <h1 className="text-3xl md:text-5xl font-bold leading-[1.1] tracking-tight">
                             CSS Animations, UI Components & Tailwind CSS Generator <br />
                             <span className="bg-clip-text text-transparent bg-linear-to-r from-violet-400 via-fuchsia-400 to-white animate-gradient-x">
                                 Build & Copy Code Instantly

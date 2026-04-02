@@ -103,16 +103,17 @@ function EffectsContent() {
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-7xl font-bold tracking-tight mb-6 flex flex-nowrap justify-center items-center whitespace-nowrap"
-          >
-            Advanced UI Animations &{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 animate-gradient-x">
-              CSS Visual Effects
-            </span>
-          </motion.h1>
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.1 }}
+  className="text-3xl md:text-5xl font-bold tracking-tight mb-6 flex flex-nowrap justify-center items-center whitespace-nowrap"
+>
+  Advanced UI Animations &
+  {/* Added ml-3 for margin-left */}
+  <span className="ml-3 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 animate-gradient-x">
+    CSS Visual Effects
+  </span>
+</motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
