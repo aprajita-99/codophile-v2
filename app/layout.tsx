@@ -139,6 +139,11 @@ export default function RootLayout({
         <NextTopLoader color="#a855f7" height={3} showSpinner={false} />
         <SWRegister />
         {children}
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3946412746626275"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-E256QGMFZT" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
